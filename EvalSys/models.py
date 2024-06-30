@@ -37,6 +37,7 @@ class TeacherTB(models.Model):
         return f'{self.LastName}, {self.FirstName} | {self.Department}'
 
 class EvaluationTB(models.Model):
+    UserID = models.ForeignKey(User, on_delete=models.CASCADE)
     TeacherID = models.ForeignKey(TeacherTB, on_delete=models.CASCADE)
     CourseID = models.ForeignKey(CourseTB, on_delete=models.CASCADE)
     Year = models.CharField(max_length=50, null=False, blank=False)
@@ -47,23 +48,34 @@ class EvaluationTB(models.Model):
     RetakeProf = models.BooleanField(null=False, blank=False)
     BigSkyUsageRate = models.IntegerField(null=False, blank=False)
     ProfAttendance = models.IntegerField(null=False, blank=False)
-    GradeReceived = models.IntegerField(null=True, blank=True)
+    GradeReceived = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
     DateAdded = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        unique_together = ('UserID', 'TeacherID', 'CourseID')
 
     def __str__(self):
         return f'{self.TeacherID.LastName} | {self.OverallProfRate}'
 
 # following are join tables
+
 class Evaluation_TagTB(models.Model):
     EvaluationID = models.ForeignKey(EvaluationTB, on_delete=models.CASCADE)
     TagID = models.ForeignKey(TagTB, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.pk}'
-
-class User_EvaluationTB(models.Model):
-    UserID = models.ForeignKey(User, on_delete=models.CASCADE)
-    EvaluationID = models.ForeignKey(EvaluationTB, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('EvaluationID', 'TagID')
 
     def __str__(self):
         return f'{self.pk}'
+
+class Teacher_CourseTB(models.Model):
+    TeacherID = models.ForeignKey(TeacherTB, on_delete=models.CASCADE)
+    CourseID = models.ForeignKey(CourseTB, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('TeacherID', 'CourseID')
+
+    def __str__(self):
+        return f'{self.TeacherID.LastName}, {self.TeacherID.FirstName} | {self.CourseID.CourseCode}'
+
