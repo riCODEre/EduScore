@@ -1,0 +1,33 @@
+{% extends 'temp_1.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-center mt-[100px]">
+        <div class="p-10 bg-white rounded-md border shadow-md">
+            <div class="flex justify-center">
+                <h1 class="mt-">Login</h1>
+            </div>
+            <div>
+                <form action="{% url 'UserLogin' %}" method="POST" class="space-y-3">
+                    {% csrf_token %}
+                    <div class="flex justify-between">
+                        <label for="username">Username</label>
+                        <input class="border pl-2 ml-4" type="email" name="username" id="username">
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="password">Password</label>
+                        <input class="border pl-2 ml-4" type="password" name="password" id="password">
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

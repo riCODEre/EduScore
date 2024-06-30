@@ -1,0 +1,60 @@
+{% extends 'temp_1.html' %}
+
+{% block title %}
+    Join Us!
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-center mt-[100px]">
+        <div class="p-10 bg-white rounded-md border shadow-md">
+            <div class="flex justify-center">
+                <h1 class="mt-">Register</h1>
+            </div>
+            <div>
+                <form action="{% url 'registerUser' %}" method="POST" class="space-y-3">
+                    {% csrf_token %}
+                    <div class="flex justify-between">
+                        <label for="firstname">First Name</label>
+                        <input class="border pl-2 ml-4" type="text" name="first_name" id="firstname">
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="lastname">Last Name</label>
+                        <input class="border pl-2 ml-4" type="text" name="last_name" id="lastname">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="Department">Department</label>
+                        <input class="border pl-2 ml-4" type="text" name="Department" id="Department">
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="BatchNumber">Batch Number</label>
+                        <input class="border pl-2 ml-4" type="number" name="BatchNumber" id="BatchNumber">
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="Gender">Gender: </label>
+                        <select class="border" id="Gender" name="Gender">
+                          <option value="female">Female</option>
+                          <option value="male">Male</option>
+                          <option value="other">Other</option>
+                          <option value="anonymous">Prefer Not To Say</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="username">Username</label>
+                        <input class="border pl-2 ml-4" type="email" name="username" id="username">
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="password">Password</label>
+                        <input class="border pl-2 ml-4" type="password" name="password" id="password">
+                    </div>
+                    <div class="flex justify-center">
+                        <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
