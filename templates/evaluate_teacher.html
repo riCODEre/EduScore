@@ -1,9 +1,122 @@
 {% extends 'temp_1.html' %}
 
 {% block title %}
-
+    Teacher: {{ t.LastName }}
 {% endblock %}
 
 {% block content %}
+    <div class="mt-[100px] ">
+        <div class="flex justify-center">
+            <h1>Teachers:</h1>
+        </div>
+        <p>{{ t.FirstName }}</p>
+        <p>{{ t.LastName }}</p>
+        <p>{{ t.Gender }}</p>
+        <p>{{ t.Department }}</p>
+        <p>{{ t.EmpStatus }}</p>
+    </div>
+
+    <div class="flex justify-center mt-[100px]">
+        <div class="p-10 bg-white rounded-md border shadow-md">
+            <div class="flex justify-center">
+                <h1 class="mt-">Evaluate</h1>
+            </div>
+            <div>
+                {% if forms.errors %}
+                    <div class="bg-red-700 text-white">
+                        {{ forms.errors }}
+                    </div>
+                {% endif %}
+                <form action="{% url 'EvaluateTeacher' t.pk %}" method="POST" class="space-y-3">
+                    {% csrf_token %}
+                    <input type="number" name="UserID" value="{{ user.id }}" class="hidden">
+                    <input type="number" name="TeacherID" value="{{ t.id }}" class="hidden">
+                    <div class="flex justify-between">
+                        <label for="CourseID">Course Taught: </label>
+                        <select class="border" id="CourseID" name="CourseID">
+                          {% for item in TC %}
+                          	<option value="{{ item.CourseID.id }}">{{ item.CourseID.CourseName }}</option>
+                          {% endfor %}
+                        </select>
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="Year">Year Taught: </label>
+                        <select class="border" id="Year" name="Year">
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                            <option value="MRP">MRP</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="Term">Term Taught: </label>
+                        <select class="border" id="Term" name="Term">
+                            <option value="1">1st Term</option>
+                            <option value="2">2nd Term</option>
+                            <option value="3">3rd Term</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="ClassModality">Class Modality: </label>
+                        <select class="border" id="ClassModality" name="ClassModality">
+                            <option value="Online">Online</option>
+                            <option value="F2F">F2F</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="OverallProfRate">Overall Prof Rate</label>
+                        <input type="range" min="1" step="1" max="10" value="5" class="slider" id="OverallProfRate" name="OverallProfRate">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="ProfDifficulty">Prof Difficulty</label>
+                        <input type="range" min="1" step="1" max="10" value="5" class="slider" id="ProfDifficulty" name="ProfDifficulty">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="RetakeProf">Retake Prof: </label>
+                        <select class="border" id="RetakeProf" name="RetakeProf">
+                            <option value="True">Yes</option>
+                            <option value="False">No</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="BigSkyUsageRate">BigSky Usage Rate</label>
+                        <input type="range" min="1" step="1" max="10" value="5" class="slider" id="BigSkyUsageRate" name="BigSkyUsageRate">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="ProfAttendance">Prof Attendance</label>
+                        <input type="range" min="1" step="1" max="10" value="5" class="slider" id="ProfAttendance" name="ProfAttendance">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="GradeReceived">Grade Received: </label>
+                        <select class="border" id="GradeReceived" name="GradeReceived">
+                            <option value="4.0">4.0</option>
+                            <option value="3.5">3.5</option>
+                            <option value="3.0">3.0</option>
+                            <option value="2.5">2.5</option>
+                            <option value="2.0">2.0</option>
+                            <option value="1.5">1.5</option>
+                            <option value="1.0">1.0</option>
+                            <option value="0.0">0.0</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

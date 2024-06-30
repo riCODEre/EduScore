@@ -7,4 +7,5 @@ admin.site.register(CourseTB)
 admin.site.register(TeacherTB)
 admin.site.register(EvaluationTB)
 admin.site.register(Evaluation_TagTB)
-admin.site.register(User_EvaluationTB)
+admin.site.register(Teacher_CourseTB)
+

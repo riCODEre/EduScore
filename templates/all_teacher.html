@@ -9,6 +9,13 @@
         <div class="flex justify-center">
             <h1>Teachers:</h1>
         </div>
-        z
+        {% for t in allTeachers %}
+            <p>{{ t.FirstName }}</p>
+            <p>{{ t.LastName }}</p>
+            <p>{{ t.Gender }}</p>
+            <p>{{ t.Department }}</p>
+            <p>{{ t.EmpStatus }}</p>
+            <a href="{% url 'EvaluateTeacher' t.pk %}">Go</a>
+        {% endfor %}
     </div>
 {% endblock %}
