@@ -1,0 +1,62 @@
+{% extends 'temp_2.html' %}
+
+{% block title %}
+	searchPage
+{% endblock %}
+
+{% block content %}
+
+<div class="flex justify-center mt-[130px]">
+    <div class="container mx-auto text-center p-4">
+        <div class="max-w-xl mx-auto">
+            <div class="text-3xl font-bold mb-4">EduScore</div>
+            <form method="get" action="" class="mb-4">
+                <div class="flex items-center justify-center">
+                    <input type="text" name="query" placeholder="Enter professor's name" class="w-full p-2 border border-gray-500 rounded">
+                    <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<div class="min-h-screen flex flex-col">-->
+<!--    <header class="bg-black text-white p-4">-->
+<!--        <div class="container mx-auto flex justify-between items-center">-->
+<!--            <div class="text-xl font-bold">EduScore Logo</div>-->
+<!--            <div class="flex space-x-4">-->
+<!--                <a href="#" class="px-4 py-2">Account Here something</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </header>-->
+
+<!--    <div class="flex-grow flex items-center justify-center">-->
+<!--        <div class="container mx-auto text-center p-4">-->
+<!--            <div class="max-w-xl mx-auto">-->
+<!--                <div class="text-3xl font-bold mb-4">EduScore</div>-->
+<!--                <form method="get" action="" class="mb-4">-->
+<!--                    <div class="flex items-center">-->
+<!--                        <input type="text" name="query" placeholder="Enter professor's name" class="w-full p-2 border border-gray-500 rounded">-->
+<!--                        <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded">Search</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <footer class="bg-black text-white p-5">-->
+<!--        <div class="container mx-auto text-center">-->
+<!--            <div class="mb-2">-->
+<!--                <a href="#" class="px-2">About</a>-->
+<!--                <a href="#" class="px-2">Contact</a>-->
+<!--                <a href="#" class="px-2">Privacy Policy</a>-->
+<!--                <a href="#" class="px-2">Terms of Service</a>-->
+<!--            </div>-->
+<!--            <div class="mb-2">-->
+<!--                <div>Contact us: info@eduscore.com</div>-->
+<!--            </div>-->
+<!--            <div>@ 2024 EduScore, LLC. All Rights Reserved </div>-->
+<!--        </div>-->
+<!--    </footer>-->
+<!--</div>-->
+{% endblock %}

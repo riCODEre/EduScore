@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
+def searchPage(request):
+    return render(request, 'searchPage.html')
+
 @login_required(login_url='UserLogin')
 def landing(request):
     return render(request, 'landing.html', {})
