@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='UserLogin')
 def landing(request):
-    return render(request, 'landing.html', {})
+    user = request.user
+    PastTeacher = EvaluationTB.objects.filter(UserID=user.id)
+    return render(request, 'landing.html', {'PastTeacher': PastTeacher})
 
 def registerUser(request):
     if request.method == "POST":
