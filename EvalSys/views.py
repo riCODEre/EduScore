@@ -5,10 +5,7 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
-def searchPage(request):
-    return render(request, 'searchPage.html')
 
-@login_required(login_url='UserLogin')
 def landing(request):
     user = request.user
     PastTeacher = EvaluationTB.objects.filter(UserID=user.id)
@@ -114,3 +111,9 @@ def EvaluateTags(request, EvalID):
             return render(request, 'eval_tags.html', {'TR': TagRecs, 'EvalID': EvalID})
     else:
         return render(request, 'eval_tags.html', {'TR': TagRecs, 'EvalID': EvalID})
+
+@login_required(login_url='UserLogin')
+def SearchProf(request):
+    user = request.user
+    PastTeacher = EvaluationTB.objects.filter(UserID=user.id)
+    return render(request, 'searchPage.html', {'PastTeacher': PastTeacher})
