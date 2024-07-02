@@ -71,12 +71,6 @@ def UserLogout(request):
     return redirect('landing')
 
 @login_required(login_url='UserLogin')
-def ReadAllTeachers(request):
-
-    allTeachers = TeacherTB.objects.all()
-    return render(request, 'all_teacher.html', {'allTeachers': allTeachers})
-
-@login_required(login_url='UserLogin')
 def EvaluateTeacher(request, teacher_id):
     user = request.user
     EvalRecs = EvaluationTB.objects.filter(TeacherID=teacher_id, UserID=user.id)
@@ -119,21 +113,24 @@ def EvaluateTags(request, EvalID):
 
 @login_required(login_url='UserLogin')
 def SearchProf(request):
-
     if request.method == "POST":
         form = SearchForm(request.POST)
         if form.is_valid():
             searchRec = request.POST['searchRec']
             typeRec = request.POST['typeRec']
             if typeRec == "LName":
-                TeacherRecs = TeacherTB.objects.filter(LastName__contains=searchRec)
-                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+                TeacherRecs = TeacherTB.objects.filter(LastName__icontains=searchRec)
+                return render(request, 'searchPage.html',
+                              {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
             elif typeRec == "Subject":
-                TeacherRecs = Teacher_CourseTB.objects.filter(CourseID__CourseName__contains=searchRec)
-                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+                TeacherRecs = (TeacherTB.objects.filter(teacher_coursetb__CourseID__CourseCode__icontains=searchRec)
+                               .distinct())
+                return render(request, 'searchPage.html',
+                              {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
             elif typeRec == "Department":
-                TeacherRecs = TeacherTB.objects.filter(Department__contains=searchRec)
-                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+                TeacherRecs = TeacherTB.objects.filter(Department__icontains=searchRec)
+                return render(request, 'searchPage.html',
+                              {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
     else:
         return render(request, 'searchPage.html')
 

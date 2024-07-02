@@ -17,9 +17,9 @@
                         <input type="text" id="searchRec" value="{{ search }}" name="searchRec" placeholder="Enter professor's name" class="w-full p-2 border border-gray-500 rounded-tl rounded-bl">
                         <label for="typeRec" class="hidden"></label>
                         <select name="typeRec" id="typeRec" class="w-min p-2 border border-1.5 border-gray-500 font-bold bg-green-700 text-white rounded-tr rounded-br">
-                            <option value="LName" selected>Last Name</option>
-                            <option value="Subject" selected>Subject</option>
-                            <option value="Department" selected>Department</option>
+                            <option value="LName" {% if type == "LName" %} selected {% endif %}>Last Name</option>
+                            <option value="Subject" {% if type == "Subject" %} selected {% endif %}>Subject</option>
+                            <option value="Department" {% if type == "Department" %} selected {% endif %}>Department</option>
                         </select>
                         <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded">Search</button>
                     </div>

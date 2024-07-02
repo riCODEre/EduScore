@@ -12,28 +12,28 @@
                 <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
             {% endif %}
             {% if showEdit == True %}
-                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="">Edit Evaluation</a>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Course</th>
+                        <th>Edit</th>
+                    </tr>
+                    {% for record in Evals %}
+                        <tr>
+                            <td>{{ record.id }}</td>
+                            <td>{{ record.CourseID.CourseCode }}</td>
+                            <td>
+                                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
             {% endif %}
 
         </div>
 
 
-        	<table>
-                <tr>
-                    <th>ID</th>
-                    <th>Course</th>
-                    <th>Edit</th>
-                </tr>
-                {% for record in Evals %}
-                    <tr>
-                        <td>{{ record.id }}</td>
-                        <td>{{ record.CourseID.CourseCode }}</td>
-                        <td>
-                            <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+
 
 
     </main>
