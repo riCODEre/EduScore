@@ -8,13 +8,16 @@
 	<div>
         <h1 class="flex justify-center">Landing Page</h1>
     </div>
-    <div class="flex justify-centeru">
-        <div class="mt-10 space-y-3">
-            {% for teacher in PastTeacher %}
-                <div class="bg-white">
-                    <h2>{{ teacher.TeacherID.LastName }}, {{ teacher.TeacherID.FirstName }}</h2>
-                </div>
-            {% endfor %}
+    <div>
+        <div class="flex justify-center">
+            <div class="mt-10 space-y-3 shadow-md">
+                {% for teacher in PastTeacher %}
+                    <div class="bg-white">
+                        <h2>{{ teacher.TeacherID.LastName }}, {{ teacher.TeacherID.FirstName }} | {{ teacher.CourseID.CourseCode }} | {{ teacher.OverallProfRate }}</h2>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
+
 {% endblock %}
