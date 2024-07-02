@@ -32,7 +32,7 @@
         <div class="mt-10 space-y-3 shadow-md">
             {% for teacher in SearchResults %}
                 <div class="bg-white">
-                    <a href="{% url 'EvaluateTeacher' teacher.id %}">
+                    <a href="{% url 'TeacherInfo' teacher.id %}">
                         {{ teacher.LastName }}, {{ teacher.FirstName }} | {{ teacher.Department }}
                     </a>
                 </div>

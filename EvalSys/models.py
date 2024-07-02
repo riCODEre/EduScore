@@ -67,7 +67,8 @@ class Evaluation_TagTB(models.Model):
         unique_together = ('EvaluationID', 'TagID')
 
     def __str__(self):
-        return f'{self.EvaluationID.TeacherID.LastName} | {self.TagID.TagName}'
+        return (f'{self.EvaluationID.UserID.username} | {self.EvaluationID.TeacherID.LastName} '
+                f'| {self.EvaluationID.CourseID.CourseCode} | {self.TagID.TagName}')
 
 class Teacher_CourseTB(models.Model):
     TeacherID = models.ForeignKey(TeacherTB, on_delete=models.CASCADE)

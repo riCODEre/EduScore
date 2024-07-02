@@ -10,5 +10,8 @@ urlpatterns = [
     path('eval_tag/<EvalID>', views.EvaluateTags, name='EvalTag'),
     path('login', views.UserLogin, name='UserLogin'),
     path('logout', views.UserLogout, name='UserLogout'),
-    path('search_prof', views.SearchProf, name='SearchProf')
+    path('search_prof', views.SearchProf, name='SearchProf'),
+    path('teacher/<teacher_id>', views.TeacherInfo, name='TeacherInfo'),
+    path('edit_eval/<evalID>', views.EditTeacherEval, name='EditEval'),
+    path('delete_eval/<evalID>', views.DeleteEval, name='DeleteEval')
 ]

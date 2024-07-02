@@ -8,28 +8,38 @@
 	<div class="flex justify-center mt-[100px]">
         <div class="p-10 bg-white rounded-md border shadow-md">
             <div class="flex justify-center">
-                <h1 class="mt-">Login</h1>
+                <h1 class="mt-">Tags</h1>
             </div>
             {% if forms.errors %}
                 <div class="bg-red-700 text-white">
                     {{ forms.errors }}
                 </div>
             {% endif %}
-            <div>
+            <div class="grid grid-cols-3 gap-1">
 
-                {% for tag in TR %}
+                {% for tag in hasEval %}
+                    <form action="{% url 'EvalTag' EvalID %}" method="POST" class="space-y-3">
+                        {% csrf_token %}
+                        <input type="number" value="{{ EvalID }}" class="hidden" name="EvaluationID">
+                        <input type="number" value="{{ tag.TagID.id }}" class="hidden" name="TagID">
+                        <div class="flex justify-center">
+                            <button class="bg-red-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagID.TagName }}</button>
+                        </div>
+                    </form>
+                {% endfor %}
+                {% for tag in noEval %}
                     <form action="{% url 'EvalTag' EvalID %}" method="POST" class="space-y-3">
                         {% csrf_token %}
                         <input type="number" value="{{ EvalID }}" class="hidden" name="EvaluationID">
                         <input type="number" value="{{ tag.id }}" class="hidden" name="TagID">
                         <div class="flex justify-center">
-                            <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">{{ tag.TagName }}</button>
+                            <button class="bg-green-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagName }}</button>
                         </div>
                     </form>
                 {% endfor %}
             </div>
             <div class="pt-20">
-                <a href="{% url 'landing' %}" class="bg-green-900 text-white px-4 py-2 rounded-xl">Submit</a>
+                <a href="{% url 'TeacherInfo' TeacherID %}" class="bg-green-900 text-white px-4 py-2 rounded-xl">Submit</a>
             </div>
         </div>
     </div>
