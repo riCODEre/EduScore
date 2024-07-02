@@ -49,3 +49,10 @@ class EvalTagForm(forms.ModelForm):
             "EvaluationID",
             "TagID"
         ]
+
+class SearchForm(forms.Form):
+    class Meta:
+        fields = [
+            "searchRec",
+            "typeRec"
+        ]

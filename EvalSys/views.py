@@ -114,6 +114,20 @@ def EvaluateTags(request, EvalID):
 
 @login_required(login_url='UserLogin')
 def SearchProf(request):
-    user = request.user
-    PastTeacher = EvaluationTB.objects.filter(UserID=user.id)
-    return render(request, 'searchPage.html', {'PastTeacher': PastTeacher})
+
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            searchRec = request.POST['searchRec']
+            typeRec = request.POST['typeRec']
+            if typeRec == "LName":
+                TeacherRecs = TeacherTB.objects.filter(LastName__contains=searchRec)
+                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+            elif typeRec == "Subject":
+                TeacherRecs = Teacher_CourseTB.objects.filter(CourseID__CourseName__contains=searchRec)
+                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+            elif typeRec == "Department":
+                TeacherRecs = TeacherTB.objects.filter(Department__contains=searchRec)
+                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+    else:
+        return render(request, 'searchPage.html')
