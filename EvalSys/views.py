@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 def landing(request):
     return render(request, 'landing.html')
 
+
 def registerUser(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -46,6 +47,7 @@ def registerUser(request):
     else:
         return render(request, 'registerUser.html')
 
+
 def UserLogin(request):
     if request.method == "POST":
         form = UserLoginForm(request.POST)
@@ -66,9 +68,11 @@ def UserLogin(request):
     else:
         return render(request, 'UserLogin.html', {})
 
+
 def UserLogout(request):
     logout(request)
     return redirect('landing')
+
 
 @login_required(login_url='UserLogin')
 def EvaluateTeacher(request, teacher_id):
@@ -89,27 +93,34 @@ def EvaluateTeacher(request, teacher_id):
     else:
         return render(request, 'evaluate_teacher.html', {'t': TeacherRec, 'TC': TCRecs, 'user': user})
 
+
 @login_required(login_url='UserLogin')
 def EvaluateTags(request, EvalID):
-    hasEval = Evaluation_TagTB.objects.filter(EvaluationID=EvalID)
-    noEval = TagTB.objects.filter(isHidden=False).exclude(id__in=Subquery(hasEval.values('TagID_id')))
-    if request.method == "POST":
-        form = EvalTagForm(request.POST)
-        EvalID = request.POST['EvaluationID']
-        TagID = request.POST['TagID']
-        try:
-            RecDel = Evaluation_TagTB.objects.get(EvaluationID=EvalID, TagID=TagID)
-            RecDel.delete()
-            return redirect('EvalTag', EvalID)
-        except:
-            pass
-        if form.is_valid():
-            form.save()
-            return redirect('EvalTag', EvalID)
+    user = request.user
+    UserID = EvaluationTB.objects.get(pk=EvalID).UserID.id
+    if user.id == UserID:
+        hasEval = Evaluation_TagTB.objects.filter(EvaluationID=EvalID)
+        noEval = TagTB.objects.filter(isHidden=False).exclude(id__in=Subquery(hasEval.values('TagID_id')))
+        if request.method == "POST":
+            form = EvalTagForm(request.POST)
+            EvalID = request.POST['EvaluationID']
+            TagID = request.POST['TagID']
+            try:
+                RecDel = Evaluation_TagTB.objects.get(EvaluationID=EvalID, TagID=TagID)
+                RecDel.delete()
+                return redirect('EvalTag', EvalID)
+            except:
+                pass
+            if form.is_valid():
+                form.save()
+                return redirect('EvalTag', EvalID)
+            else:
+                return redirect('EvalTag', EvalID)
         else:
-            return redirect('EvalTag', EvalID)
+            return render(request, 'eval_tags.html', {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID})
     else:
-        return render(request, 'eval_tags.html', {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID})
+        return redirect('SearchProf')
+
 
 @login_required(login_url='UserLogin')
 def SearchProf(request):
@@ -134,6 +145,7 @@ def SearchProf(request):
     else:
         return render(request, 'searchPage.html')
 
+
 @login_required(login_url='UserLogin')
 def TeacherInfo(request, teacher_id):
     user = request.user
@@ -146,50 +158,35 @@ def TeacherInfo(request, teacher_id):
     if len(EvalRecs) > 0: showEdit = True
     if len(TCourseRecs) != len(EvalRecs): showAdd = True
 
-
     return render(request, 'teacherInfo.html', {'prof': TeacherRec, 'Courses': TCourseRecs,
                                                 'Evals': EvalRecs, 'showAdd': showAdd, 'showEdit': showEdit})
 
-@login_required(login_url='UserLogin')
-def EvaluateTags(request, EvalID):
-    TeacherID = EvaluationTB.objects.get(pk=EvalID).TeacherID.id
-    hasEval = Evaluation_TagTB.objects.filter(EvaluationID=EvalID)
-    noEval = TagTB.objects.filter(isHidden=False).exclude(id__in=Subquery(hasEval.values('TagID_id')))
-    if request.method == "POST":
-        form = EvalTagForm(request.POST)
-        EvalID = request.POST['EvaluationID']
-        TagID = request.POST['TagID']
-        try:
-            RecDel = Evaluation_TagTB.objects.get(EvaluationID=EvalID, TagID=TagID)
-            RecDel.delete()
-            return redirect('EvalTag', EvalID)
-        except:
-            pass
-        if form.is_valid():
-            form.save()
-            return redirect('EvalTag', EvalID)
-        else:
-            return redirect('EvalTag', EvalID)
-    else:
-        return render(request, 'eval_tags.html',
-                      {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID, 'TeacherID': TeacherID})
 
 @login_required(login_url='UserLogin')
 def EditTeacherEval(request, evalID):
     EvalRec = EvaluationTB.objects.get(pk=evalID)
-    if request.method == 'POST':
-        form = TeacherEvalForm(request.POST or None, instance=EvalRec)
-        if form.is_valid():
-            form.save()
-            return redirect('EvalTag', EvalRec.id)
+    user = request.user
+    if user.id == EvalRec.UserID.id:
+        if request.method == 'POST':
+            form = TeacherEvalForm(request.POST or None, instance=EvalRec)
+            if form.is_valid():
+                form.save()
+                return redirect('EvalTag', EvalRec.id)
+            else:
+                return redirect('EditEval', EvalRec.id)
         else:
-            return redirect('EditEval', EvalRec.id)
+            return render(request, 'edit_eval.html', {'EvalRec': EvalRec})
     else:
-        return render(request, 'edit_eval.html', {'EvalRec': EvalRec})
+        return redirect('SearchProf')
+
 
 @login_required(login_url='UserLogin')
 def DeleteEval(request, evalID):
     EvalRec = EvaluationTB.objects.get(pk=evalID)
-    teacherID = EvalRec.TeacherID.id
-    EvalRec.delete()
-    return redirect('TeacherInfo', teacherID)
+    user = request.user
+    if user.id == EvalRec.UserID.id:
+        teacherID = EvalRec.TeacherID.id
+        EvalRec.delete()
+        return redirect('TeacherInfo', teacherID)
+    else:
+        return redirect('SearchProf')
