@@ -10,6 +10,11 @@
             <div class="flex justify-center">
                 <h1 class="mt-">Login</h1>
             </div>
+            {% if forms.errors %}
+                <div class="bg-red-700 text-white">
+                    {{ forms.errors }}
+                </div>
+            {% endif %}
             <div>
                 <form action="{% url 'UserLogin' %}" method="POST" class="space-y-3">
                     {% csrf_token %}

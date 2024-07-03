@@ -5,12 +5,11 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
-def searchPage(request):
-    return render(request, 'searchPage.html')
 
-@login_required(login_url='UserLogin')
 def landing(request):
-    return render(request, 'landing.html', {})
+    user = request.user
+    PastTeacher = EvaluationTB.objects.filter(UserID=user.id)
+    return render(request, 'landing.html', {'PastTeacher': PastTeacher})
 
 def registerUser(request):
     if request.method == "POST":
@@ -112,3 +111,23 @@ def EvaluateTags(request, EvalID):
             return render(request, 'eval_tags.html', {'TR': TagRecs, 'EvalID': EvalID})
     else:
         return render(request, 'eval_tags.html', {'TR': TagRecs, 'EvalID': EvalID})
+
+@login_required(login_url='UserLogin')
+def SearchProf(request):
+
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            searchRec = request.POST['searchRec']
+            typeRec = request.POST['typeRec']
+            if typeRec == "LName":
+                TeacherRecs = TeacherTB.objects.filter(LastName__contains=searchRec)
+                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+            elif typeRec == "Subject":
+                TeacherRecs = Teacher_CourseTB.objects.filter(CourseID__CourseName__contains=searchRec)
+                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+            elif typeRec == "Department":
+                TeacherRecs = TeacherTB.objects.filter(Department__contains=searchRec)
+                return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
+    else:
+        return render(request, 'searchPage.html')

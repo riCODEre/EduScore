@@ -6,19 +6,39 @@
 
 {% block content %}
 
-<div class="flex justify-center mt-[130px]">
-    <div class="container mx-auto text-center p-4">
-        <div class="max-w-xl mx-auto">
-            <div class="text-3xl font-bold mb-4">EduScore</div>
-            <form method="get" action="" class="mb-4">
-                <div class="flex items-center justify-center">
-                    <input type="text" name="query" placeholder="Enter professor's name" class="w-full p-2 border border-gray-500 rounded">
-                    <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded">Search</button>
-                </div>
-            </form>
+    <div class="flex justify-center mt-[130px]">
+        <div class="container mx-auto text-center p-4">
+            <div class="max-w-xl mx-auto">
+                <div class="text-3xl font-bold mb-4">EduScore</div>
+                <form method="POST" action="{% url 'SearchProf' %}" class="mb-4">
+                    {% csrf_token %}
+                    <div class="flex items-center justify-center">
+                        <label for="searchRec" class="hidden"></label>
+                        <input type="text" id="searchRec" value="{{ search }}" name="searchRec" placeholder="Enter professor's name" class="w-full p-2 border border-gray-500 rounded-tl rounded-bl">
+                        <label for="typeRec" class="hidden"></label>
+                        <select name="typeRec" id="typeRec" class="w-min p-2 border border-1.5 border-gray-500 font-bold bg-green-700 text-white rounded-tr rounded-br">
+                            <option value="LName" selected>Last Name</option>
+                            <option value="Subject" selected>Subject</option>
+                            <option value="Department" selected>Department</option>
+                        </select>
+                        <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded">Search</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="flex justify-center">
+        <div class="mt-10 space-y-3 shadow-md">
+            {% for teacher in SearchResults %}
+                <div class="bg-white">
+                    <a href="{% url 'EvaluateTeacher' teacher.id %}">
+                        {{ teacher.LastName }}, {{ teacher.FirstName }} | {{ teacher.Department }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 <!--<div class="min-h-screen flex flex-col">-->
 <!--    <header class="bg-black text-white p-4">-->
