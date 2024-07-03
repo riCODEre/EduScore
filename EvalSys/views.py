@@ -49,6 +49,7 @@ def registerUser(request):
 
 
 def UserLogin(request):
+    logout(request)
     if request.method == "POST":
         form = UserLoginForm(request.POST)
         if form.is_valid():
@@ -60,7 +61,7 @@ def UserLogin(request):
                 #add below update on lastlogin
                 user.last_login = datetime.today()
                 user.save()
-                return redirect('landing')
+                return redirect('SearchProf')
             else:
                 return render(request, 'UserLogin.html', {})
         else:
@@ -97,8 +98,8 @@ def EvaluateTeacher(request, teacher_id):
 @login_required(login_url='UserLogin')
 def EvaluateTags(request, EvalID):
     user = request.user
-    UserID = EvaluationTB.objects.get(pk=EvalID).UserID.id
-    if user.id == UserID:
+    EvalRec = EvaluationTB.objects.get(pk=EvalID)
+    if user.id == EvalRec.UserID.id:
         hasEval = Evaluation_TagTB.objects.filter(EvaluationID=EvalID)
         noEval = TagTB.objects.filter(isHidden=False).exclude(id__in=Subquery(hasEval.values('TagID_id')))
         if request.method == "POST":
@@ -117,7 +118,8 @@ def EvaluateTags(request, EvalID):
             else:
                 return redirect('EvalTag', EvalID)
         else:
-            return render(request, 'eval_tags.html', {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID})
+            return render(request, 'eval_tags.html',
+                          {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID, 'TeacherID': EvalRec.TeacherID.id})
     else:
         return redirect('SearchProf')
 

@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
 ROOT_URLCONF = 'EduScore.urls'
 
 TEMPLATES = [
@@ -123,3 +125,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Session settings
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+Minutes = 20
+SESSION_COOKIE_AGE = Minutes * 60  # converted to seconds.
+SESSION_TIMEOUT_REDIRECT = '/login'
