@@ -131,3 +131,6 @@ def SearchProf(request):
                 return render(request, 'searchPage.html', {'SearchResults': TeacherRecs, 'search': searchRec})
     else:
         return render(request, 'searchPage.html')
+
+def about(request):
+    return render(request, 'about.html')
