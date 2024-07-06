@@ -131,7 +131,9 @@ def SearchProf(request):
         if form.is_valid():
             searchRec = request.POST['searchRec']
             typeRec = request.POST['typeRec']
-            if typeRec == "LName":
+            if searchRec == '':
+                return render(request, 'searchPage.html', {'forms': form})
+            elif typeRec == "LName":
                 TeacherRecs = TeacherTB.objects.filter(LastName__icontains=searchRec)
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
@@ -140,8 +142,12 @@ def SearchProf(request):
                                .distinct())
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
-            elif typeRec == "Department":
+            elif typeRec == "School":
                 TeacherRecs = TeacherTB.objects.filter(Department__icontains=searchRec)
+                return render(request, 'searchPage.html',
+                              {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
+            elif typeRec == "FName":
+                TeacherRecs = TeacherTB.objects.filter(FirstName__icontains=searchRec)
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
     else:
