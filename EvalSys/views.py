@@ -14,16 +14,15 @@ def landing(request):
 def registerUser(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        password = request.POST['password']
+        # //another model
+        Department = request.POST['Department']
+        BatchNumber = request.POST['BatchNumber']
+        Gender = request.POST['Gender']
         if form.is_valid():
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            username = request.POST['username']
-            password = request.POST['password']
-            # //another model
-            Department = request.POST['Department']
-            BatchNumber = request.POST['BatchNumber']
-            Gender = request.POST['Gender']
-
             userCheck = authenticate(request, username=username, password=password)
             if userCheck is None:
                 user = User.objects.create_user(
@@ -43,7 +42,19 @@ def registerUser(request):
                 )
                 addUser.save()
                 return redirect('landing')
-            return render(request, 'registerUser.html')
+            else:
+                return render(request, 'registerUser.html', {'exists': "User already exists."})
+        else:
+            return render(request, 'registerUser.html', {
+                'forms': form,
+                'fname': first_name,
+                'lname': last_name,
+                'uname': username,
+                'pword': password,
+                'dept': Department,
+                'batch': BatchNumber,
+                'gender': Gender
+            })
     else:
         return render(request, 'registerUser.html')
 
@@ -63,9 +74,18 @@ def UserLogin(request):
                 user.save()
                 return redirect('SearchProf')
             else:
-                return render(request, 'UserLogin.html', {})
+                return render(request, 'UserLogin.html', {
+                    'uname': request.POST['username'],
+                    'pword': request.POST['password'],
+                    'forms': form,
+                    'exists': "User does not exist"
+                })
         else:
-            return render(request, 'UserLogin.html', {})
+            return render(request, 'UserLogin.html', {
+                'uname': request.POST['username'],
+                'pword': request.POST['password'],
+                'forms': form
+            })
     else:
         return render(request, 'UserLogin.html', {})
 
@@ -90,7 +110,23 @@ def EvaluateTeacher(request, teacher_id):
             EvalRec = EvaluationTB.objects.get(UserID=user.id, TeacherID=teacher_id, CourseID=request.POST['CourseID'])
             return redirect('EvalTag', EvalID=EvalRec.id)
         else:
-            return render(request, 'evaluate_teacher.html', {'t': TeacherRec, 'TC': TCRecs, 'forms': form})
+            return render(request, 'evaluate_teacher.html', {
+                't': TeacherRec,
+                'TC': TCRecs,
+                'forms': form,
+                'user': user.id,
+                'CourseID': request.POST['CourseID'],
+                'Year': request.POST['Year'],
+                'Term': request.POST['Term'],
+                'ClassModality': request.POST['ClassModality'],
+                'OverallProfRate': request.POST['OverallProfRate'],
+                'ProfDifficulty': request.POST['ProfDifficulty'],
+                'RetakeProf': request.POST['RetakeProf'],
+                'BigSkyUsageRate': request.POST['BigSkyUsageRate'],
+                'ProfAttendance': request.POST['ProfAttendance'],
+                'GradeReceived': request.POST['GradeReceived'],
+                'DateAdded': request.POST['DateAdded']
+            })
     else:
         return render(request, 'evaluate_teacher.html', {'t': TeacherRec, 'TC': TCRecs, 'user': user})
 
@@ -116,7 +152,9 @@ def EvaluateTags(request, EvalID):
                 form.save()
                 return redirect('EvalTag', EvalID)
             else:
-                return redirect('EvalTag', EvalID)
+                return render(request, 'eval_tags.html',
+                              {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID,
+                               'TeacherID': EvalRec.TeacherID.id, 'forms': form})
         else:
             return render(request, 'eval_tags.html',
                           {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID, 'TeacherID': EvalRec.TeacherID.id})
@@ -181,7 +219,7 @@ def EditTeacherEval(request, evalID):
                 form.save()
                 return redirect('EvalTag', EvalRec.id)
             else:
-                return redirect('EditEval', EvalRec.id)
+                return render(request, 'edit_eval.html', {'EvalRec': EvalRec, 'forms': form})
         else:
             return render(request, 'edit_eval.html', {'EvalRec': EvalRec})
     else:
