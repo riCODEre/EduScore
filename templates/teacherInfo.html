@@ -6,6 +6,17 @@
 
 {% block content %}
     <main>
+        {% if Mark == False %}
+            <div>
+                <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
+            </div>
+
+        {% else %}
+            <div>
+                <a href="{% url 'DelBM' prof.id %}">Remove Bookmark</a>
+            </div>
+        {% endif %}
+
         <div>
             <p>{{ prof.FirstName }} {{ prof.LastName }}</p>
             {% if showAdd == True or showAdd == None %}

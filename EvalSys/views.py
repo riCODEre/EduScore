@@ -6,24 +6,18 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
-
-def landing(request):
-    user = request.user
-    return render(request, 'landing.html', {'user': user})
-
 def registerUser(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        password = request.POST['password']
+        # //another model
+        Department = request.POST['Department']
+        BatchNumber = request.POST['BatchNumber']
+        Gender = request.POST['Gender']
         if form.is_valid():
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            username = request.POST['username']
-            password = request.POST['password']
-            # //another model
-            Department = request.POST['Department']
-            BatchNumber = request.POST['BatchNumber']
-            Gender = request.POST['Gender']
-
             userCheck = authenticate(request, username=username, password=password)
             if userCheck is None:
                 user = User.objects.create_user(
@@ -43,7 +37,19 @@ def registerUser(request):
                 )
                 addUser.save()
                 return redirect('landing')
-            return render(request, 'registerUser.html')
+            else:
+                return render(request, 'registerUser.html', {'exists': "User already exists."})
+        else:
+            return render(request, 'registerUser.html', {
+                'forms': form,
+                'fname': first_name,
+                'lname': last_name,
+                'uname': username,
+                'pword': password,
+                'dept': Department,
+                'batch': BatchNumber,
+                'gender': Gender
+            })
     else:
         return render(request, 'registerUser.html')
 
@@ -63,9 +69,18 @@ def UserLogin(request):
                 user.save()
                 return redirect('SearchProf')
             else:
-                return render(request, 'UserLogin.html', {})
+                return render(request, 'UserLogin.html', {
+                    'uname': request.POST['username'],
+                    'pword': request.POST['password'],
+                    'forms': form,
+                    'exists': "User does not exist"
+                })
         else:
-            return render(request, 'UserLogin.html', {})
+            return render(request, 'UserLogin.html', {
+                'uname': request.POST['username'],
+                'pword': request.POST['password'],
+                'forms': form
+            })
     else:
         return render(request, 'UserLogin.html', {})
 
@@ -90,7 +105,22 @@ def EvaluateTeacher(request, teacher_id):
             EvalRec = EvaluationTB.objects.get(UserID=user.id, TeacherID=teacher_id, CourseID=request.POST['CourseID'])
             return redirect('EvalTag', EvalID=EvalRec.id)
         else:
-            return render(request, 'evaluate_teacher.html', {'t': TeacherRec, 'TC': TCRecs, 'forms': form})
+            return render(request, 'evaluate_teacher.html', {
+                't': TeacherRec,
+                'TC': TCRecs,
+                'forms': form,
+                'user': user.id,
+                'CourseID': request.POST['CourseID'],
+                'Year': request.POST['Year'],
+                'Term': request.POST['Term'],
+                'ClassModality': request.POST['ClassModality'],
+                'OverallProfRate': request.POST['OverallProfRate'],
+                'ProfDifficulty': request.POST['ProfDifficulty'],
+                'RetakeProf': request.POST['RetakeProf'],
+                'BigSkyUsageRate': request.POST['BigSkyUsageRate'],
+                'ProfAttendance': request.POST['ProfAttendance'],
+                'GradeReceived': request.POST['GradeReceived']
+            })
     else:
         return render(request, 'evaluate_teacher.html', {'t': TeacherRec, 'TC': TCRecs, 'user': user})
 
@@ -116,7 +146,9 @@ def EvaluateTags(request, EvalID):
                 form.save()
                 return redirect('EvalTag', EvalID)
             else:
-                return redirect('EvalTag', EvalID)
+                return render(request, 'eval_tags.html',
+                              {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID,
+                               'TeacherID': EvalRec.TeacherID.id, 'forms': form})
         else:
             return render(request, 'eval_tags.html',
                           {'hasEval': hasEval, 'noEval': noEval, 'EvalID': EvalID, 'TeacherID': EvalRec.TeacherID.id})
@@ -124,14 +156,15 @@ def EvaluateTags(request, EvalID):
         return redirect('SearchProf')
 
 
-@login_required(login_url='UserLogin')
 def SearchProf(request):
     if request.method == "POST":
         form = SearchForm(request.POST)
         if form.is_valid():
             searchRec = request.POST['searchRec']
             typeRec = request.POST['typeRec']
-            if typeRec == "LName":
+            if searchRec == '':
+                return render(request, 'searchPage.html', {'forms': form})
+            elif typeRec == "LName":
                 TeacherRecs = TeacherTB.objects.filter(LastName__icontains=searchRec)
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
@@ -140,8 +173,12 @@ def SearchProf(request):
                                .distinct())
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
-            elif typeRec == "Department":
+            elif typeRec == "School":
                 TeacherRecs = TeacherTB.objects.filter(Department__icontains=searchRec)
+                return render(request, 'searchPage.html',
+                              {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
+            elif typeRec == "FName":
+                TeacherRecs = TeacherTB.objects.filter(FirstName__icontains=searchRec)
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
     else:
@@ -154,14 +191,24 @@ def TeacherInfo(request, teacher_id):
     TeacherRec = TeacherTB.objects.get(pk=teacher_id)
     TCourseRecs = Teacher_CourseTB.objects.filter(TeacherID=teacher_id)
     EvalRecs = EvaluationTB.objects.filter(TeacherID=teacher_id, UserID=user.id)
+    try:
+        Teacher_BookmarkTB.objects.get(TeacherID=teacher_id, UserID=user.id)
+        isMark = True
+    except:
+        isMark = False
     showAdd = False
     showEdit = False
 
     if len(EvalRecs) > 0: showEdit = True
     if len(TCourseRecs) != len(EvalRecs): showAdd = True
 
-    return render(request, 'teacherInfo.html', {'prof': TeacherRec, 'Courses': TCourseRecs,
-                                                'Evals': EvalRecs, 'showAdd': showAdd, 'showEdit': showEdit})
+    return render(request, 'teacherInfo.html', {
+        'prof': TeacherRec,
+        'Courses': TCourseRecs,
+        'Evals': EvalRecs,
+        'showAdd': showAdd,
+        'showEdit': showEdit,
+        'Mark': isMark})
 
 
 @login_required(login_url='UserLogin')
@@ -175,7 +222,7 @@ def EditTeacherEval(request, evalID):
                 form.save()
                 return redirect('EvalTag', EvalRec.id)
             else:
-                return redirect('EditEval', EvalRec.id)
+                return render(request, 'edit_eval.html', {'EvalRec': EvalRec, 'forms': form})
         else:
             return render(request, 'edit_eval.html', {'EvalRec': EvalRec})
     else:
@@ -192,3 +239,25 @@ def DeleteEval(request, evalID):
         return redirect('TeacherInfo', teacherID)
     else:
         return redirect('SearchProf')
+
+def showBookmark(request):
+    user = request.user
+    MarkedProf = Teacher_BookmarkTB.objects.filter(UserID=user.id)
+    return render(request, 'bookmark.html', {'ProfRecs': MarkedProf})
+
+
+def ProfPage_AddBookmark(request, ProfID):
+    user = request.user
+    TeachRec = TeacherTB.objects.get(pk=ProfID)
+    newBM = Teacher_BookmarkTB.objects.create(
+        UserID=user,
+        TeacherID=TeachRec
+    )
+    newBM.save()
+    return redirect(TeacherInfo, ProfID)
+
+def ProfPage_DelBookmark(request, ProfID):
+    user = request.user
+    BookMarkRec = Teacher_BookmarkTB.objects.get(UserID=user.id, TeacherID=ProfID)
+    BookMarkRec.delete()
+    return redirect(TeacherInfo, ProfID)

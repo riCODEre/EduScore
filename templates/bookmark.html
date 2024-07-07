@@ -1,0 +1,12 @@
+{% extends 'temp_2.html' %}
+
+{% block title %}
+	Bookmarks
+{% endblock %}
+
+{% block content %}
+    <div>Bookmarks</div>
+    {% for item in ProfRecs %}
+        <p>{{ item.TeacherID.LastName }}, {{ item.TeacherID.FirstName }}</p>
+    {% endfor %}
+{% endblock %}
