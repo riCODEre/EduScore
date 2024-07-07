@@ -161,7 +161,6 @@ def EvaluateTags(request, EvalID):
         return redirect('SearchProf')
 
 
-@login_required(login_url='UserLogin')
 def SearchProf(request):
     if request.method == "POST":
         form = SearchForm(request.POST)
