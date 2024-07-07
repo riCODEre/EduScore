@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -49,7 +50,7 @@ class EvaluationTB(models.Model):
     BigSkyUsageRate = models.IntegerField(null=False, blank=False)
     ProfAttendance = models.IntegerField(null=False, blank=False)
     GradeReceived = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    DateAdded = models.DateTimeField(default=datetime.now)
+    DateAdded = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = ('UserID', 'TeacherID', 'CourseID')
@@ -83,7 +84,7 @@ class Teacher_CourseTB(models.Model):
 class Teacher_BookmarkTB(models.Model):
     UserID = models.ForeignKey(User, on_delete=models.CASCADE)
     TeacherID = models.ForeignKey(TeacherTB, on_delete=models.CASCADE)
-    DateAdded = models.DateTimeField(default=datetime.now)
+    DateAdded = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = ('TeacherID', 'UserID')

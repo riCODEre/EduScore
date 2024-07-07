@@ -240,12 +240,13 @@ def DeleteEval(request, evalID):
     else:
         return redirect('SearchProf')
 
+@login_required(login_url='UserLogin')
 def showBookmark(request):
     user = request.user
     MarkedProf = Teacher_BookmarkTB.objects.filter(UserID=user.id)
     return render(request, 'bookmark.html', {'ProfRecs': MarkedProf})
 
-
+@login_required(login_url='UserLogin')
 def ProfPage_AddBookmark(request, ProfID):
     user = request.user
     TeachRec = TeacherTB.objects.get(pk=ProfID)
