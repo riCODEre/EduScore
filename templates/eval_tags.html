@@ -23,7 +23,7 @@
                         <input type="number" value="{{ EvalID }}" class="hidden" name="EvaluationID">
                         <input type="number" value="{{ tag.TagID.id }}" class="hidden" name="TagID">
                         <div class="flex justify-center">
-                            <button class="bg-red-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagID.TagName }}</button>
+                            <button class="bg-green-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagID.TagName }}</button>
                         </div>
                     </form>
                 {% endfor %}
@@ -33,7 +33,7 @@
                         <input type="number" value="{{ EvalID }}" class="hidden" name="EvaluationID">
                         <input type="number" value="{{ tag.id }}" class="hidden" name="TagID">
                         <div class="flex justify-center">
-                            <button class="bg-green-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagName }}</button>
+                            <button class="bg-red-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagName }}</button>
                         </div>
                     </form>
                 {% endfor %}
