@@ -124,8 +124,7 @@ def EvaluateTeacher(request, teacher_id):
                 'RetakeProf': request.POST['RetakeProf'],
                 'BigSkyUsageRate': request.POST['BigSkyUsageRate'],
                 'ProfAttendance': request.POST['ProfAttendance'],
-                'GradeReceived': request.POST['GradeReceived'],
-                'DateAdded': request.POST['DateAdded']
+                'GradeReceived': request.POST['GradeReceived']
             })
     else:
         return render(request, 'evaluate_teacher.html', {'t': TeacherRec, 'TC': TCRecs, 'user': user})
