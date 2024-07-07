@@ -6,11 +6,6 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
-
-def landing(request):
-    user = request.user
-    return render(request, 'landing.html', {'user': user})
-
 def registerUser(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
