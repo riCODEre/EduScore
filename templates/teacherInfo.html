@@ -6,19 +6,35 @@
 
 {% block content %}
     <main>
-        {% if Mark == False %}
-            <div>
-                <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
-            </div>
-
-        {% else %}
-            <div>
-                <a href="{% url 'DelBM' prof.id %}">Remove Bookmark</a>
-            </div>
-        {% endif %}
-
         <div>
-            <p>{{ prof.FirstName }} {{ prof.LastName }}</p>
+            <div class="flex justify-between space-x-3">
+                <p>{{ prof.FirstName }} {{ prof.LastName }}</p>
+                {% if Mark == False %}
+                    <div>
+                        <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
+                    </div>
+                {% else %}
+                    <div>
+                        <a href="{% url 'DelBM' prof.id %}">Remove Bookmark</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="space-y-[50px]">
+                {# Put here all the overall rating #}
+                <p>Overall: {{ AllEvalRecs.Average_Rate }}</p>
+                <p>Difficulty: {{ AllEvalRecs.Average_Difficulty }}</p>
+                <p>BigSky Usage: {{ AllEvalRecs.Average_BSUsage }}</p>
+                <p>Attendance: {{ AllEvalRecs.Average_Attendance }}</p>
+                <p>Grade Given: {{ AllEvalRecs.Average_Grades }}</p>
+                <p>Retake: {{ Average_Retake }}%</p>
+                <p>Total Evals Received: {{ TotalNumEvals }}</p>
+                {% for item in TopTagRecs %}
+                    <p>{{ item.TagID__TagName }}</p>
+
+                {% endfor %}
+
+
+            </div>
             {% if showAdd == True or showAdd == None %}
                 <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
             {% endif %}
