@@ -197,14 +197,24 @@ def TeacherInfo(request, teacher_id):
     TeacherRec = TeacherTB.objects.get(pk=teacher_id)
     TCourseRecs = Teacher_CourseTB.objects.filter(TeacherID=teacher_id)
     EvalRecs = EvaluationTB.objects.filter(TeacherID=teacher_id, UserID=user.id)
+    try:
+        Teacher_BookmarkTB.objects.get(TeacherID=teacher_id, UserID=user.id)
+        isMark = True
+    except:
+        isMark = False
     showAdd = False
     showEdit = False
 
     if len(EvalRecs) > 0: showEdit = True
     if len(TCourseRecs) != len(EvalRecs): showAdd = True
 
-    return render(request, 'teacherInfo.html', {'prof': TeacherRec, 'Courses': TCourseRecs,
-                                                'Evals': EvalRecs, 'showAdd': showAdd, 'showEdit': showEdit})
+    return render(request, 'teacherInfo.html', {
+        'prof': TeacherRec,
+        'Courses': TCourseRecs,
+        'Evals': EvalRecs,
+        'showAdd': showAdd,
+        'showEdit': showEdit,
+        'Mark': isMark})
 
 
 @login_required(login_url='UserLogin')
@@ -235,3 +245,25 @@ def DeleteEval(request, evalID):
         return redirect('TeacherInfo', teacherID)
     else:
         return redirect('SearchProf')
+
+def showBookmark(request):
+    user = request.user
+    MarkedProf = Teacher_BookmarkTB.objects.filter(UserID=user.id)
+    return render(request, 'bookmark.html', {'ProfRecs': MarkedProf})
+
+
+def ProfPage_AddBookmark(request, ProfID):
+    user = request.user
+    TeachRec = TeacherTB.objects.get(pk=ProfID)
+    newBM = Teacher_BookmarkTB.objects.create(
+        UserID=user,
+        TeacherID=TeachRec
+    )
+    newBM.save()
+    return redirect(TeacherInfo, ProfID)
+
+def ProfPage_DelBookmark(request, ProfID):
+    user = request.user
+    BookMarkRec = Teacher_BookmarkTB.objects.get(UserID=user.id, TeacherID=ProfID)
+    BookMarkRec.delete()
+    return redirect(TeacherInfo, ProfID)
