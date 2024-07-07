@@ -80,3 +80,15 @@ class Teacher_CourseTB(models.Model):
     def __str__(self):
         return f'{self.TeacherID.LastName}, {self.TeacherID.FirstName} | {self.CourseID.CourseCode}'
 
+class Teacher_BookmarkTB(models.Model):
+    UserID = models.ForeignKey(User, on_delete=models.CASCADE)
+    TeacherID = models.ForeignKey(TeacherTB, on_delete=models.CASCADE)
+    DateAdded = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        unique_together = ('TeacherID', 'UserID')
+
+    def __str__(self):
+        return f'{self.TeacherID.LastName}, {self.TeacherID.FirstName} | {self.UserID.last_name}'
+
+
