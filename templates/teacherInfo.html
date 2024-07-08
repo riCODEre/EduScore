@@ -5,63 +5,104 @@
 {% endblock %}
 
 {% block content %}
-    <main>
-        <div>
-            <div class="flex justify-between space-x-3">
-                <p>{{ prof.FirstName }} {{ prof.LastName }}</p>
-                {% if Mark == False %}
-                    <div>
-                        <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
-                    </div>
-                {% else %}
-                    <div>
-                        <a href="{% url 'DelBM' prof.id %}">Remove Bookmark</a>
-                    </div>
-                {% endif %}
-            </div>
-            <div class="space-y-[50px]">
-                {# Put here all the overall rating #}
-                <p>Overall: {{ AllEvalRecs.Average_Rate }}</p>
-                <p>Difficulty: {{ AllEvalRecs.Average_Difficulty }}</p>
-                <p>BigSky Usage: {{ AllEvalRecs.Average_BSUsage }}</p>
-                <p>Attendance: {{ AllEvalRecs.Average_Attendance }}</p>
-                <p>Grade Given: {{ AllEvalRecs.Average_Grades }}</p>
-                <p>Retake: {{ Average_Retake }}%</p>
-                <p>Total Evals Received: {{ TotalNumEvals }}</p>
-                {% for item in TopTagRecs %}
-                    <p>{{ item.TagID__TagName }}</p>
-
-                {% endfor %}
-
-
-            </div>
-            {% if showAdd == True or showAdd == None %}
-                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
+    <div>
+        <div class="flex justify-between space-x-3">
+            <p>{{ prof.FirstName }} {{ prof.LastName }}</p>
+            {% if Mark == False %}
+                <div>
+                    <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
+                </div>
+            {% else %}
+                <div>
+                    <a href="{% url 'DelBM' prof.id %}">Remove Bookmark</a>
+                </div>
             {% endif %}
-            {% if showEdit == True %}
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Course</th>
-                        <th>Edit</th>
-                    </tr>
-                    {% for record in Evals %}
-                        <tr>
-                            <td>{{ record.id }}</td>
-                            <td>{{ record.CourseID.CourseCode }}</td>
-                            <td>
-                                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% endif %}
+        </div>
+        <div class="space-y-[50px]">
+            {# Put here all the overall rating #}
+            <p>Overall: {{ AllEvalRecs.Average_Rate }}</p>
+            <p>Difficulty: {{ AllEvalRecs.Average_Difficulty }}</p>
+            <p>BigSky Usage: {{ AllEvalRecs.Average_BSUsage }}</p>
+            <p>Attendance: {{ AllEvalRecs.Average_Attendance }}</p>
+            <p>Grade Given: {{ AllEvalRecs.Average_Grades }}</p>
+            <p>Retake: {{ Average_Retake }}%</p>
+            <p>Total Evals Received: {{ TotalNumEvals }}</p>
+            {% for item in TopTagRecs %}
+                <p>{{ item.TagID__TagName }}</p>
+
+            {% endfor %}
+
 
         </div>
+        {% if showAdd == True or showAdd == None %}
+            <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
+        {% endif %}
+        {% if showEdit == True %}
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Course</th>
+                    <th>Edit</th>
+                </tr>
+                {% for record in Evals %}
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>{{ record.CourseID.CourseCode }}</td>
+                        <td>
+                            <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
 
+    </div>
+    <div>
+        <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
+            {% csrf_token %}
+            <select name="Type" id="Type">
+                <option value="Year">Year</option>
+                <option value="Term">Term</option>
+                <option value="ClassModality">Class Modality</option>
+                <option value="OverallProfRate">Overall Prof Rate</option>
+                <option value="ProfDifficulty">Prof Difficulty</option>
+                <option value="RetakeProf">Retake Prof</option>
+                <option value="BigSkyUsageRate">Big Sky Usage Rate</option>
+                <option value="ProfAttendance">Prof Attendance</option>
+                <option value="GradeReceived">Grade Received</option>
+                <option value="DateAdded">Date Added</option>
+            </select>
+            <select name="Arrange" id="Arrange">
+                <option value="Asc">Ascending</option>
+                <option value="Desc">Descending</option>
+            </select>
+            <button type="submit" class="bg-green-700 text-white">Submit</button>
+        </form>
+    </div>
+    <div class="">
+        {% for eval in AllStudentEvals %}
+            <div class="bg-white shadow-md m-3">
+                <p>Date Added: {{ eval.DateAdded }}</p>
+                <p class="font-bold">{{ eval.id }}</p>
+                <p>Overall Rate: {{ eval.OverallProfRate }}</p>
+                <p>Prof Difficulty: {{ eval.ProfDifficulty }}</p>
+                <p>Grade Received: {{ eval.GradeReceived }}</p>
+                <p>Course Code: {{ eval.CourseID.CourseCode }}</p>
+                <p>Year: {{eval.Year }}</p>
+                <p>Term: {{ eval.Term }}</p>
+                <p>Class Modality: {{ eval.ClassModality }}</p>
+                <p>Big Sky Usage Rate: {{ eval.BigSkyUsageRate }}</p>
+                <p>Prof Attendance: {{ eval.ProfAttendance }}</p>
+                <p>Retake Prof: {{ eval.RetakeProf }}</p>
+                <div class="flex justify-center">
+                   {% for tag in AllEvalTags %}
+                        {% if tag.EvaluationID.id == eval.id %}
+                            <p>{{ tag.TagID.TagName }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
 
-
-
-
-    </main>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

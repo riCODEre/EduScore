@@ -226,6 +226,79 @@ def TeacherInfo(request, teacher_id):
     AllTagsGotten = (Evaluation_TagTB.objects.filter(EvaluationID__TeacherID_id=teacher_id)
                      .values('TagID__TagName').annotate(count=Count('TagID__TagName')).order_by('-count')[:5])
 
+
+    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(UserID=user.id)
+    AllEvalTags = Evaluation_TagTB.objects.filter(EvaluationID__TeacherID=teacher_id).exclude(EvaluationID__UserID=user.id).order_by()
+
+    if request.method == "POST":
+        form = SortEvalsForm(request.POST)
+        if form.is_valid():
+            type = request.POST['Type']
+            arrange = request.POST['Arrange']
+            if arrange == "Asc":
+                if type == "Year":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("Year")
+                if type == "Term":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("Term")
+                if type == "ClassModality":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("ClassModality")
+                if type == "OverallProfRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("OverallProfRate")
+                if type == "ProfDifficulty":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("ProfDifficulty")
+                if type == "RetakeProf":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("RetakeProf")
+                if type == "BigSkyUsageRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("BigSkyUsageRate")
+                if type == "ProfAttendance":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("ProfAttendance")
+                if type == "GradeReceived":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("GradeReceived")
+                if type == "DateAdded":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("DateAdded")
+            if arrange == "Desc":
+                if type == "Year":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-Year")
+                if type == "Term":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-Term")
+                if type == "ClassModality":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-ClassModality")
+                if type == "OverallProfRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-OverallProfRate")
+                if type == "ProfDifficulty":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-ProfDifficulty")
+                if type == "RetakeProf":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-RetakeProf")
+                if type == "BigSkyUsageRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-BigSkyUsageRate")
+                if type == "ProfAttendance":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-ProfAttendance")
+                if type == "GradeReceived":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-GradeReceived")
+                if type == "DateAdded":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-DateAdded")
+
+
     return render(request, 'teacherInfo.html', {
         'prof': TeacherRec,
         'Courses': TCourseRecs,
@@ -236,7 +309,9 @@ def TeacherInfo(request, teacher_id):
         'AllEvalRecs': AllEvalRecs,
         'TotalNumEvals': TotalNumEvals,
         'Average_Retake': Average_Retake,
-        'TopTagRecs': AllTagsGotten})
+        'TopTagRecs': AllTagsGotten,
+        'AllStudentEvals': AllStudentEvals,
+        'AllEvalTags': AllEvalTags})
 
 
 @login_required(login_url='UserLogin')
