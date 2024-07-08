@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -49,7 +50,7 @@ class EvaluationTB(models.Model):
     BigSkyUsageRate = models.IntegerField(null=False, blank=False)
     ProfAttendance = models.IntegerField(null=False, blank=False)
     GradeReceived = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-    DateAdded = models.DateTimeField(default=datetime.now)
+    DateAdded = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = ('UserID', 'TeacherID', 'CourseID')
@@ -67,7 +68,8 @@ class Evaluation_TagTB(models.Model):
         unique_together = ('EvaluationID', 'TagID')
 
     def __str__(self):
-        return f'{self.pk}'
+        return (f'{self.EvaluationID.UserID.username} | {self.EvaluationID.TeacherID.LastName} '
+                f'| {self.EvaluationID.CourseID.CourseCode} | {self.TagID.TagName}')
 
 class Teacher_CourseTB(models.Model):
     TeacherID = models.ForeignKey(TeacherTB, on_delete=models.CASCADE)
@@ -78,4 +80,16 @@ class Teacher_CourseTB(models.Model):
 
     def __str__(self):
         return f'{self.TeacherID.LastName}, {self.TeacherID.FirstName} | {self.CourseID.CourseCode}'
+
+class Teacher_BookmarkTB(models.Model):
+    UserID = models.ForeignKey(User, on_delete=models.CASCADE)
+    TeacherID = models.ForeignKey(TeacherTB, on_delete=models.CASCADE)
+    DateAdded = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('TeacherID', 'UserID')
+
+    def __str__(self):
+        return f'{self.TeacherID.LastName}, {self.TeacherID.FirstName} | {self.UserID.last_name}'
+
 
