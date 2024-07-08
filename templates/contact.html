@@ -1,0 +1,50 @@
+{% extends 'temp_2.html' %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block content %}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <div style="background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), /* make bg darker */
+                url('https://upload.wikimedia.org/wikipedia/en/b/b2/CSB-Facade.JPG');
+                background-size: 100% 100%; /* stretch image better for mobile devices */
+                background-position: center;
+                background-attachment: fixed;
+                overflow: hidden;
+                height: 100vh;
+                width: 100%;
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                color: white; /* for text color */
+                font-family: 'Montserrat', sans-serif;">
+
+        <div class="flex items-center justify-center">
+            <!-- Vertical Line -->
+            <div class="flex items-center">
+                <div class="border-l-4 border-white h-[365px] mt-1 rounded"></div>
+
+                <!-- Text to the Right -->
+                <div class="absolute ml-9 mb-0">
+                    <p class="font-bold text-2xl">De La Salle-College of Saint</p>
+                    <p class="font-bold text-2xl">Benilde Office of Institutional</p>
+                    <p class="font-bold text-2xl">Effectiveness and Research</p>
+                    <p class="font-bold text-2xl">(OIER)</p>
+                    <br>
+                    <p class="font-extralight">Trunkline: +63 2 8230 5100</p>
+
+                    <!-- Map image -->
+                    <div style="margin-top: 10px; width: 360px; height: 180px; overflow: hidden;">
+                        <img style="display: block; width: 100%; height: 100%; object-fit: cover;"
+                             src="https://www.dlsu.edu.ph/wp-content/uploads/2023/05/Google-map.png"
+                             alt="Map Image">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
