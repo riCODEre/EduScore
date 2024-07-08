@@ -5,3 +5,4 @@ __pycache__/
 requirements.txt
 *.pyc
 /EduScore/__pycache__
+/EvalSys/migrations/__pycache__
