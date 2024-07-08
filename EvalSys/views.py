@@ -1,10 +1,12 @@
 from datetime import datetime
 
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import Subquery
+from django.db.models import Subquery, Avg, Count, Q
+from django.db.models.functions import Round
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.decorators import login_required
+
 
 def registerUser(request):
     if request.method == "POST":
@@ -64,7 +66,7 @@ def UserLogin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                #add below update on lastlogin
+                # add below update on lastlogin
                 user.last_login = datetime.today()
                 user.save()
                 return redirect('SearchProf')
@@ -102,6 +104,11 @@ def EvaluateTeacher(request, teacher_id):
         form = TeacherEvalForm(request.POST)
         if form.is_valid():
             form.save()
+            ProfBM = Teacher_BookmarkTB.objects.create(
+                UserID=user,
+                TeacherID=TeacherRec
+            )
+            ProfBM.save()
             EvalRec = EvaluationTB.objects.get(UserID=user.id, TeacherID=teacher_id, CourseID=request.POST['CourseID'])
             return redirect('EvalTag', EvalID=EvalRec.id)
         else:
@@ -202,13 +209,109 @@ def TeacherInfo(request, teacher_id):
     if len(EvalRecs) > 0: showEdit = True
     if len(TCourseRecs) != len(EvalRecs): showAdd = True
 
+    # Evaluation Rates
+    AllEvalRecs = EvaluationTB.objects.filter(TeacherID=teacher_id).aggregate(
+        Average_Rate=Round(Avg('OverallProfRate', default=0), 1),
+        Average_Difficulty=Round(Avg('ProfDifficulty', default=0), 1),
+        Average_BSUsage=Round(Avg('BigSkyUsageRate', default=0), 1),
+        Average_Attendance=Round(Avg('ProfAttendance', default=0), 1),
+        Average_Grades=Round(Avg('GradeReceived', default=0))
+    )
+    Average_Retake = 0
+    Total_WillRetake = EvaluationTB.objects.filter(TeacherID=teacher_id, RetakeProf=True).count()
+    TotalNumEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).count()
+    if TotalNumEvals > 0:
+        Average_Retake = round((Total_WillRetake/TotalNumEvals)*100)
+
+    AllTagsGotten = (Evaluation_TagTB.objects.filter(EvaluationID__TeacherID_id=teacher_id)
+                     .values('TagID__TagName').annotate(count=Count('TagID__TagName')).order_by('-count')[:5])
+
+
+    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(UserID=user.id)
+    AllEvalTags = Evaluation_TagTB.objects.filter(EvaluationID__TeacherID=teacher_id).exclude(EvaluationID__UserID=user.id).order_by()
+
+    if request.method == "POST":
+        form = SortEvalsForm(request.POST)
+        if form.is_valid():
+            type = request.POST['Type']
+            arrange = request.POST['Arrange']
+            if arrange == "Asc":
+                if type == "Year":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("Year")
+                if type == "Term":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("Term")
+                if type == "ClassModality":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("ClassModality")
+                if type == "OverallProfRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("OverallProfRate")
+                if type == "ProfDifficulty":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("ProfDifficulty")
+                if type == "RetakeProf":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("RetakeProf")
+                if type == "BigSkyUsageRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("BigSkyUsageRate")
+                if type == "ProfAttendance":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("ProfAttendance")
+                if type == "GradeReceived":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("GradeReceived")
+                if type == "DateAdded":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("DateAdded")
+            if arrange == "Desc":
+                if type == "Year":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-Year")
+                if type == "Term":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-Term")
+                if type == "ClassModality":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-ClassModality")
+                if type == "OverallProfRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-OverallProfRate")
+                if type == "ProfDifficulty":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-ProfDifficulty")
+                if type == "RetakeProf":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-RetakeProf")
+                if type == "BigSkyUsageRate":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-BigSkyUsageRate")
+                if type == "ProfAttendance":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-ProfAttendance")
+                if type == "GradeReceived":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-GradeReceived")
+                if type == "DateAdded":
+                    AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(
+                        UserID=user.id).order_by("-DateAdded")
+
+
     return render(request, 'teacherInfo.html', {
         'prof': TeacherRec,
         'Courses': TCourseRecs,
         'Evals': EvalRecs,
         'showAdd': showAdd,
         'showEdit': showEdit,
-        'Mark': isMark})
+        'Mark': isMark,
+        'AllEvalRecs': AllEvalRecs,
+        'TotalNumEvals': TotalNumEvals,
+        'Average_Retake': Average_Retake,
+        'TopTagRecs': AllTagsGotten,
+        'AllStudentEvals': AllStudentEvals,
+        'AllEvalTags': AllEvalTags})
 
 
 @login_required(login_url='UserLogin')
@@ -240,11 +343,13 @@ def DeleteEval(request, evalID):
     else:
         return redirect('SearchProf')
 
+
 @login_required(login_url='UserLogin')
 def showBookmark(request):
     user = request.user
     MarkedProf = Teacher_BookmarkTB.objects.filter(UserID=user.id)
     return render(request, 'bookmark.html', {'ProfRecs': MarkedProf})
+
 
 @login_required(login_url='UserLogin')
 def ProfPage_AddBookmark(request, ProfID):
@@ -256,6 +361,7 @@ def ProfPage_AddBookmark(request, ProfID):
     )
     newBM.save()
     return redirect(TeacherInfo, ProfID)
+
 
 def ProfPage_DelBookmark(request, ProfID):
     user = request.user

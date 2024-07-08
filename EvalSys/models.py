@@ -17,7 +17,7 @@ class TagTB(models.Model):
     isHidden = models.BooleanField(null=False, blank=False)
 
     def __str__(self):
-        return f'{self.TagName} | {self.isHidden}'
+        return f'{self.pk} | {self.TagName} | {self.isHidden}'
 
 class CourseTB(models.Model):
     CourseCode = models.CharField(unique=True, max_length=50, null=False, blank=False)
