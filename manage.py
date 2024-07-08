@@ -2,9 +2,10 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+sys.dont_write_bytecode = True
 
 def main():
+    sys.dont_write_bytecode = True
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'EduScore.settings')
     try:
