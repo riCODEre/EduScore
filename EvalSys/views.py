@@ -368,3 +368,6 @@ def ProfPage_DelBookmark(request, ProfID):
     BookMarkRec = Teacher_BookmarkTB.objects.get(UserID=user.id, TeacherID=ProfID)
     BookMarkRec.delete()
     return redirect(TeacherInfo, ProfID)
+
+def about(request):
+    return render(request, 'about.html')
