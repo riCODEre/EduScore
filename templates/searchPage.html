@@ -12,14 +12,22 @@
                 <div class="text-3xl font-bold mb-4">EduScore</div>
                 <form method="POST" action="{% url 'SearchProf' %}" class="mb-4">
                     {% csrf_token %}
+                    {% if forms.errors %}
+                        <div class="bg-red-700 text-white">
+                            {{ forms.errors }}
+                        </div>
+                    {% endif %}
                     <div class="flex items-center justify-center">
                         <label for="searchRec" class="hidden"></label>
-                        <input type="text" id="searchRec" value="{{ search }}" name="searchRec" placeholder="Enter professor's name" class="w-full p-2 border border-gray-500 rounded-tl rounded-bl">
-                        <label for="typeRec" class="hidden"></label>
-                        <select name="typeRec" id="typeRec" class="w-min p-2 border border-1.5 border-gray-500 font-bold bg-green-700 text-white rounded-tr rounded-br">
-                            <option value="LName" selected>Last Name</option>
-                            <option value="Subject" selected>Subject</option>
-                            <option value="Department" selected>Department</option>
+                        <input type="text" id="searchRec" value="{{ search }}" name="searchRec"
+                               placeholder="Enter professor's name"
+                               class="w-full p-2 border border-gray-500 rounded-tl rounded-bl" required>
+                        <label for="typeRec" hidden></label>
+                        <select name="typeRec" id="typeRec" class="w-min p-2 border border-1.5 border-gray-500 font-bold bg-green-700 text-white rounded-tr rounded-br" required>
+                            <option value="FName" {% if type == "FName" %} selected {% endif %}>First Name</option>
+                            <option value="LName" {% if type == "LName" %} selected {% endif %}>Last Name</option>
+                            <option value="Subject" {% if type == "Subject" %} selected {% endif %}>Subject</option>
+                            <option value="School" {% if type == "School" %} selected {% endif %}>School</option>
                         </select>
                         <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded">Search</button>
                     </div>
@@ -32,7 +40,7 @@
         <div class="mt-10 space-y-3 shadow-md">
             {% for teacher in SearchResults %}
                 <div class="bg-white">
-                    <a href="{% url 'EvaluateTeacher' teacher.id %}">
+                    <a href="{% url 'TeacherInfo' teacher.id %}">
                         {{ teacher.LastName }}, {{ teacher.FirstName }} | {{ teacher.Department }}
                     </a>
                 </div>

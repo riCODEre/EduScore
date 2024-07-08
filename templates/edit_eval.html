@@ -1,0 +1,124 @@
+{% extends 'temp_2.html' %}
+
+{% block title %}
+    Teacher: {{ EvalRec.TeacherID.LastName }}
+{% endblock %}
+
+{% block content %}
+    <div class="my-[50px] ">
+        <div class="flex justify-center">
+            <h1>Teachers:</h1>
+        </div>
+        <p>{{ EvalRec.TeacherID.FirstName }}</p>
+        <p>{{ EvalRec.TeacherID.LastName }}</p>
+        <p>{{ EvalRec.TeacherID.Gender }}</p>
+        <p>{{ EvalRec.TeacherID.Department }}</p>
+        <p>{{ EvalRec.TeacherID.EmpStatus }}</p>
+    </div>
+
+    <div class="flex justify-center mt-[70px]">
+        <div class="p-10 bg-white rounded-md border shadow-md">
+            <div class="flex justify-center">
+                <h1 class="mt-">Evaluate</h1>
+            </div>
+            <div>
+                {% if forms.errors %}
+                    <div class="bg-red-700 text-white">
+                        {{ forms.errors }}
+                    </div>
+                {% endif %}
+                <form action="{% url 'EditEval' EvalRec.id %}" method="POST" class="space-y-3">
+                    {% csrf_token %}
+                    <input type="number" name="UserID" value="{{ EvalRec.UserID.id }}" class="hidden">
+                    <input type="number" name="TeacherID" value="{{ EvalRec.TeacherID.id }}" class="hidden">
+                    <div class="flex justify-between hidden">
+                        <label for="CourseID">Course Taught: </label>
+                        <select class="border" id="CourseID" name="CourseID" >
+                          	<option value="{{ EvalRec.CourseID.id }}" selected>{{ EvalRec.CourseID.CourseCode }}</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between">
+                        <label for="Year">Year Taught: </label>
+                        <select class="border" id="Year" name="Year">
+                            <option value="1st Year" {% if EvalRec.Year == "1st Year" %} selected {% endif %}>1st Year</option>
+                            <option value="2nd Year" {% if EvalRec.Year == "2nd Year" %} selected {% endif %}>2nd Year</option>
+                            <option value="3rd Year" {% if EvalRec.Year == "3rd Year" %} selected {% endif %}>3rd Year</option>
+                            <option value="4th Year" {% if EvalRec.Year == "4th Year" %} selected {% endif %}>4th Year</option>
+                            <option value="MRP" {% if EvalRec.Year == "MRP" %} selected {% endif %}>MRP</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="Term">Term Taught: </label>
+                        <select class="border" id="Term" name="Term">
+                            <option value="1" {% if EvalRec.Term == "1st Term" %} selected {% endif %}>1st Term</option>
+                            <option value="2" {% if EvalRec.Term == "2nd Term" %} selected {% endif %}>2nd Term</option>
+                            <option value="3" {% if EvalRec.Term == "3rd Term" %} selected {% endif %}>3rd Term</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="ClassModality">Class Modality: </label>
+                        <select class="border" id="ClassModality" name="ClassModality">
+                            <option value="Online" {% if EvalRec.ClassModality == "Online" %} selected {% endif %}>Online</option>
+                            <option value="F2F" {% if EvalRec.ClassModality == "F2F" %} selected {% endif %}>F2F</option>
+                            <option value="Hybrid" {% if EvalRec.ClassModality == "Hybrid" %} selected {% endif %}>Hybrid</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="OverallProfRate">Overall Prof Rate</label>
+                        <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.OverallProfRate }}" class="slider" id="OverallProfRate" name="OverallProfRate">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="ProfDifficulty">Prof Difficulty</label>
+                        <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.ProfDifficultyP }}" class="slider" id="ProfDifficulty" name="ProfDifficulty">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="RetakeProf">Retake Prof: </label>
+                        <select class="border" id="RetakeProf" name="RetakeProf">
+                            <option value="True" {% if EvalRec.RetakeProf == True %} selected {% endif %}>Yes</option>
+                            <option value="False" {% if EvalRec.RetakeProf == False %} selected {% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="BigSkyUsageRate">BigSky Usage Rate</label>
+                        <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.BigSkyUsageRate }}" class="slider" id="BigSkyUsageRate" name="BigSkyUsageRate">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="ProfAttendance">Prof Attendance</label>
+                        <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.ProfAttendance }}" class="slider" id="ProfAttendance" name="ProfAttendance">
+                    </div>
+
+                    <div class="flex justify-between">
+                        <label for="GradeReceived">Grade Received: </label>
+                        <select class="border" id="GradeReceived" name="GradeReceived">
+                            <option value="4.0" {% if EvalRec.GradeReceived == 4.0 %} selected {% endif %}>4.0</option>
+                            <option value="3.5" {% if EvalRec.GradeReceived == 3.5 %} selected {% endif %}>3.5</option>
+                            <option value="3.0" {% if EvalRec.GradeReceived == 3.0 %} selected {% endif %}>3.0</option>
+                            <option value="2.5" {% if EvalRec.GradeReceived == 2.5 %} selected {% endif %}>2.5</option>
+                            <option value="2.0" {% if EvalRec.GradeReceived == 2.0 %} selected {% endif %}>2.0</option>
+                            <option value="1.5" {% if EvalRec.GradeReceived == 1.5 %} selected {% endif %}>1.5</option>
+                            <option value="1.0" {% if EvalRec.GradeReceived == 1.0 %} selected {% endif %}>1.0</option>
+                            <option value="0.0" {% if EvalRec.GradeReceived == 0.0 %} selected {% endif %}>0.0</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="flex justify-center mt-[10px] mb-[70px]">
+        <a href="{% url 'DeleteEval' EvalRec.id %}" class="bg-red-800 text-white px-4 py-2 rounded-xl">Delete</a>
+    </div>
+
+{% endblock %}
