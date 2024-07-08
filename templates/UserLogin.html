@@ -5,40 +5,56 @@
 {% endblock %}
 
 {% block content %}
-	<div class="flex justify-center mt-[100px]">
-        <div class="p-10 bg-white rounded-md border shadow-md">
-            <div class="flex justify-center">
-                <h1 class="mt-">Login</h1>
-            </div>
-            {% if forms.errors %}
-                <div class="bg-red-700 text-white">
-                    {{ forms.errors }}
+	<div class="flex justify-center max-h-screen"> {# will do max-h-screen on majority of the pages #}
+        <div class="p-6 max-w-md w-full">
+            <div class="">
+                <div class="text-center mt-5">
+                    <h1 class="text-4xl font-bold text-green-900 mb-2">Login</h1>
+                    <p class="text-lg mb-6">Sign in to continue</p>
                 </div>
-            {% endif %}
-            {% if exists is not None %}
-                <div class="bg-red-700 text-white">
-                {# shows when user already exists - an error #}
-                    {{ exists }}
+
+                {# error handlers #}
+                {% if forms.errors %}
+                    <div class="bg-red-700 text-white p-3 rounded-md mb-4"> {# made it bigger #}
+                        {{ forms.errors }}
+                    </div>
+                {% endif %}
+                {% if exists is not None %}
+                    <div class="bg-red-700 text-white p-3 rounded-md mb-4">
+                    {# shows when user already exists - an error #}
+                        {{ exists }}
+                    </div>
+                {% endif %}
+
+                <div>
+                    <form action="{% url 'UserLogin' %}" method="POST" class="space-y-3">
+
+                        {# inputs #}
+                        {% csrf_token %}
+                        <div class="">
+                            <label for="username" class="block text-gray-700 text-xs font-medium">EMAIL</label>
+                            <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="email" name="username" id="username" required>
+                        </div>
+                        <div class="">
+                            <label for="password" class="block text-gray-700 text-xs font-medium">PASSWORD</label>
+                            <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="password" name="password" id="password" required>
+                        </div>
+
+                        {# put this back if and only if we gonna have a password page ty! #}
+{#                        <div class="text-center">#}
+{#                            <a href="#" class="text-sm text-green-800">Forgot Password? <span class="underline">Click Here</span></a>#}
+{#                        </div>#}
+
+                        {# buttons #}
+                        <div class="flex justify-center">
+                            <button class="bg-green-800 text-white font-semibold px-36 py-1.5 rounded-xl" type="submit">Login</button>
+                        </div>
+                        <div class="flex justify-center">
+                            <a class="bg-green-800 text-white font-semibold px-28 py-1.5 rounded-xl text-center" href="{% url 'registerUser' %}">Register Now!</a>
+
+                        </div>
+                    </form>
                 </div>
-            {% endif %}
-            <div>
-                <form action="{% url 'UserLogin' %}" method="POST" class="space-y-3">
-                    {% csrf_token %}
-                    <div class="flex justify-between">
-                        <label for="username">Username</label>
-                        <input class="border pl-2 ml-4" type="email" name="username" id="username" required>
-                    </div>
-                    <div class="flex justify-between">
-                        <label for="password">Password</label>
-                        <input class="border pl-2 ml-4" type="password" name="password" id="password" required>
-                    </div>
-                    <div class="flex justify-center">
-                        <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">Submit</button>
-                    </div>
-                    <div class="flex justify-center">
-                        <a class="bg-green-900 text-white px-4 py-2 rounded-xl" href="{% url 'registerUser' %}">Register Now!</a>
-                    </div>
-                </form>
             </div>
         </div>
 
