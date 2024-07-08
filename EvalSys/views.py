@@ -109,9 +109,9 @@ def EvaluateTeacher(request, teacher_id):
                     UserID=user,
                     TeacherID=TeacherRec
                 )
+                ProfBM.save()
             except:
                 pass
-            ProfBM.save()
             EvalRec = EvaluationTB.objects.get(UserID=user.id, TeacherID=teacher_id, CourseID=request.POST['CourseID'])
             return redirect('EvalTag', EvalID=EvalRec.id)
         else:
@@ -214,17 +214,17 @@ def TeacherInfo(request, teacher_id):
 
     # Evaluation Rates
     AllEvalRecs = EvaluationTB.objects.filter(TeacherID=teacher_id).aggregate(
-        Average_Rate=Round(Avg('OverallProfRate', default=0), 1),
-        Average_Difficulty=Round(Avg('ProfDifficulty', default=0), 1),
-        Average_BSUsage=Round(Avg('BigSkyUsageRate', default=0), 1),
-        Average_Attendance=Round(Avg('ProfAttendance', default=0), 1),
+        Average_Rate=Round(Avg('OverallProfRate', default=0), 2),
+        Average_Difficulty=Round(Avg('ProfDifficulty', default=0), 2),
+        Average_BSUsage=Round(Avg('BigSkyUsageRate', default=0), 2),
+        Average_Attendance=Round(Avg('ProfAttendance', default=0), 2),
         Average_Grades=Round(Avg('GradeReceived', default=0))
     )
     Average_Retake = 0
     Total_WillRetake = EvaluationTB.objects.filter(TeacherID=teacher_id, RetakeProf=True).count()
     TotalNumEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).count()
     if TotalNumEvals > 0:
-        Average_Retake = round((Total_WillRetake/TotalNumEvals)*100)
+        Average_Retake = int((Total_WillRetake/TotalNumEvals)*100)
 
     AllTagsGotten = (Evaluation_TagTB.objects.filter(EvaluationID__TeacherID_id=teacher_id)
                      .values('TagID__TagName').annotate(count=Count('TagID__TagName')).order_by('-count')[:5])

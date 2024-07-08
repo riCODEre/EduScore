@@ -42,9 +42,24 @@
 
                         <div class="grid grid-cols-3 gap-4">
 
+{#                            <div class="">#}
+{#                                <label for="Department" class="block text-gray-700 text-xs font-medium">DEPARTMENT</label>#}
+{#                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="text" value="{{ dept }}" name="Department" id="Department" required>#}
+{#                            </div>#}
+
                             <div class="">
-                                <label for="Department" class="block text-gray-700 text-xs font-medium">DEPARTMENT</label>
-                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="text" value="{{ dept }}" name="Department" id="Department" required>
+                                <label for="Department" class="block text-gray-700 text-xs font-medium">SCHOOL/DEPARTMENT</label>
+                                <select class="border border-gray-300 p-2 mt-1 w-full rounded-md" id="Department" name="Department" required>
+                                    <option value="SACP" {% if dept == "SACP" %} selected {% endif %}>SACP</option>
+                                    <option value="SED" {% if dept == "SED" %} selected {% endif %}>SED</option>
+                                    <option value="SNMA" {% if dept == "SNMA" %} selected {% endif %}>SNMA</option>
+                                    <option value="SDEAS" {% if dept == "SDEAS" %} selected {% endif %}>SDEAS</option>
+                                    <option value="SHRIM" {% if dept == "SHRIM" %} selected {% endif %}>SHRIM</option>
+                                    <option value="SMIT" {% if dept == "SMIT" %} selected {% endif %}>SMIT</option>
+                                    <option value="SMIT-CDP" {% if dept == "SMIT-CDP" %} selected {% endif %}>SMIT-CDP</option>
+                                    <option value="SDG" {% if dept == "SDG" %} selected {% endif %}>SDG</option>
+                                    <option value="SMS" {% if dept == "SMS" %} selected {% endif %}>SMS</option>
+                                </select>
                             </div>
 
 
@@ -75,8 +90,8 @@
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <a class="bg-black text-white font-semibold px-30 py-1.5 rounded-xl text-center transition duration-300 hover:bg-gray-700" href="{% url 'UserLogin' %}">Back</a>
-                            <button class="bg-green-800 text-white font-semibold px-30 py-1.5 rounded-xl transition duration-300 hover:bg-green-600" type="submit">Submit</button>
+                            <a class="buttonBlack text-center px-30 py-1.5" href="{% url 'UserLogin' %}">Back</a>
+                            <button class="buttonGreen px-30 py-1.5" type="submit">Submit</button>
                         </div>
 
                     </form>

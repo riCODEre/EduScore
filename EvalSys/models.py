@@ -44,12 +44,12 @@ class EvaluationTB(models.Model):
     Year = models.CharField(max_length=50, null=False, blank=False)
     Term = models.IntegerField(null=False, blank=False)
     ClassModality = models.CharField(max_length=50, null=False, blank=False)
-    OverallProfRate = models.IntegerField(null=False, blank=False)
-    ProfDifficulty = models.IntegerField(null=False, blank=False)
+    OverallProfRate = models.FloatField(null=False, blank=False)
+    ProfDifficulty = models.FloatField(null=False, blank=False)
     RetakeProf = models.BooleanField(null=False, blank=False)
-    BigSkyUsageRate = models.IntegerField(null=False, blank=False)
-    ProfAttendance = models.IntegerField(null=False, blank=False)
-    GradeReceived = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    BigSkyUsageRate = models.FloatField(null=False, blank=False)
+    ProfAttendance = models.FloatField(null=False, blank=False)
+    GradeReceived = models.FloatField(null=True, blank=True)
     DateAdded = models.DateTimeField(default=timezone.now)
 
     class Meta:
