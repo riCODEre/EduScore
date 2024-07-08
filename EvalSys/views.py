@@ -229,7 +229,6 @@ def TeacherInfo(request, teacher_id):
     AllTagsGotten = (Evaluation_TagTB.objects.filter(EvaluationID__TeacherID_id=teacher_id)
                      .values('TagID__TagName').annotate(count=Count('TagID__TagName')).order_by('-count')[:5])
 
-
     AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(UserID=user.id)
     AllEvalTags = Evaluation_TagTB.objects.filter(EvaluationID__TeacherID=teacher_id).exclude(EvaluationID__UserID=user.id).order_by()
 
