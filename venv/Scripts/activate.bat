@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Ricodere\Desktop\Git Repo\ISPRMGT\EduScore\venv
+set VIRTUAL_ENV=E:\CSB_Programming\2023-24\3rd Term\ISPRMGT\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
