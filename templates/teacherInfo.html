@@ -1,0 +1,51 @@
+{% extends 'temp_2.html' %}
+
+{% block title %}
+	Teacher:
+{% endblock %}
+
+{% block content %}
+    <main>
+        {% if Mark == False %}
+            <div>
+                <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
+            </div>
+
+        {% else %}
+            <div>
+                <a href="{% url 'DelBM' prof.id %}">Remove Bookmark</a>
+            </div>
+        {% endif %}
+
+        <div>
+            <p>{{ prof.FirstName }} {{ prof.LastName }}</p>
+            {% if showAdd == True or showAdd == None %}
+                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
+            {% endif %}
+            {% if showEdit == True %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Course</th>
+                        <th>Edit</th>
+                    </tr>
+                    {% for record in Evals %}
+                        <tr>
+                            <td>{{ record.id }}</td>
+                            <td>{{ record.CourseID.CourseCode }}</td>
+                            <td>
+                                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+        </div>
+
+
+
+
+
+    </main>
+{% endblock %}
