@@ -3,3 +3,5 @@ requirements.txt
 __pycache__/
 *.pyc
 requirements.txt
+*.pyc
+/EduScore/__pycache__
