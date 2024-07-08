@@ -104,10 +104,13 @@ def EvaluateTeacher(request, teacher_id):
         form = TeacherEvalForm(request.POST)
         if form.is_valid():
             form.save()
-            ProfBM = Teacher_BookmarkTB.objects.create(
-                UserID=user,
-                TeacherID=TeacherRec
-            )
+            try:
+                ProfBM = Teacher_BookmarkTB.objects.create(
+                    UserID=user,
+                    TeacherID=TeacherRec
+                )
+            except:
+                pass
             ProfBM.save()
             EvalRec = EvaluationTB.objects.get(UserID=user.id, TeacherID=teacher_id, CourseID=request.POST['CourseID'])
             return redirect('EvalTag', EvalID=EvalRec.id)
@@ -116,7 +119,7 @@ def EvaluateTeacher(request, teacher_id):
                 't': TeacherRec,
                 'TC': TCRecs,
                 'forms': form,
-                'user': user.id,
+                'user': user,
                 'CourseID': request.POST['CourseID'],
                 'Year': request.POST['Year'],
                 'Term': request.POST['Term'],
@@ -225,7 +228,6 @@ def TeacherInfo(request, teacher_id):
 
     AllTagsGotten = (Evaluation_TagTB.objects.filter(EvaluationID__TeacherID_id=teacher_id)
                      .values('TagID__TagName').annotate(count=Count('TagID__TagName')).order_by('-count')[:5])
-
 
     AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(UserID=user.id)
     AllEvalTags = Evaluation_TagTB.objects.filter(EvaluationID__TeacherID=teacher_id).exclude(EvaluationID__UserID=user.id).order_by()
@@ -362,7 +364,7 @@ def ProfPage_AddBookmark(request, ProfID):
     newBM.save()
     return redirect(TeacherInfo, ProfID)
 
-
+@login_required(login_url='UserLogin')
 def ProfPage_DelBookmark(request, ProfID):
     user = request.user
     BookMarkRec = Teacher_BookmarkTB.objects.get(UserID=user.id, TeacherID=ProfID)
