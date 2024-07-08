@@ -56,3 +56,9 @@ class SearchForm(forms.Form):
             "searchRec",
             "typeRec"
         ]
+class SortEvalsForm(forms.Form):
+    class Meta:
+        fields = [
+            "Type",
+            "Arrange"
+        ]

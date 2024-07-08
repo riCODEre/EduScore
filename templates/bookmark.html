@@ -7,6 +7,7 @@
 {% block content %}
     <div>Bookmarks</div>
     {% for item in ProfRecs %}
-        <p>{{ item.TeacherID.LastName }}, {{ item.TeacherID.FirstName }}</p>
+        <a href="{% url 'TeacherInfo' item.TeacherID.id %}">{{ item.TeacherID.LastName }}, {{ item.TeacherID.FirstName }}</a>
+        <br>
     {% endfor %}
 {% endblock %}
