@@ -5,120 +5,154 @@
 {% endblock %}
 
 {% block content %}
-    <div class="mt-[100px] ">
-        <div class="flex justify-center">
-            <h1>Teachers:</h1>
-        </div>
-        <p>{{ t.FirstName }}</p>
-        <p>{{ t.LastName }}</p>
-        <p>{{ t.Gender }}</p>
-        <p>{{ t.Department }}</p>
-        <p>{{ t.EmpStatus }}</p>
-    </div>
+    <div class="mt-5 flex justify-center">
+        <div class="p-10 w-full max-w-5xl">
+{#            <div class="flex items-center mb-10">#}
+{#                <img class="w-24 h-24 rounded-full mr-6" src="#" alt="Placeholder Image">#}
+{#                <div>#}
+{#                    <h1 class="text-2xl font-semibold">{{ t.FirstName }} {{ t.LastName }}</h1>#}
+{#                    <p class="text-gray-700">{{ t.Gender }}</p>#}
+{#                    <p class="text-gray-700">{{ t.Department }}</p>#}
+{#                    <p class="text-gray-700">{{ t.EmpStatus }}</p>#}
+{#                </div>#}
+{#            </div>#}
 
-    <div class="flex justify-center mt-[100px]">
-        <div class="p-10 bg-white rounded-md border shadow-md">
-            <div class="flex justify-center">
-                <h1 class="mt-">Evaluate</h1>
+            <div class="grid grid-cols-6 gap-4 w-full">
+                <div class="col-span-5 flex flex-col">
+                    <div class="">
+                        <div>
+                            <h1 class="text-6xl font-bold text-green-900 mb-2">Rate Your Prof</h1>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6 mt-5">
+
+                        <div class="mb-2 col-span-3">
+                            <b>FACULTY NAME:</b> <span class="ml-2">{{ t.FirstName }} {{ t.LastName }}</span>
+                        </div>
+                        <div class="col-span-2 flex">
+                            <b>GENDER:</b> <span class="ml-2">{{ t.Gender }}</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6">
+                        <div class="mb-2 col-span-3">
+                            <b>DEPARTMENT:</b> <span class="ml-2">{{ t.Department }}</span>
+                        </div>
+                        <div class="col-span-2 flex">
+                            <b>STATUS:</b> <span class="ml-2">{{ t.EmpStatus }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end items-start">
+                    <img src="https://via.placeholder.com/150" class="w-36 h-36 rounded mt-2" alt="Placeholder Image">
+                </div>
             </div>
-            <div>
-                {% if forms.errors %}
-                    <div class="bg-red-700 text-white">
-                        {{ forms.errors }}
-                    </div>
-                {% endif %}
-                <form action="{% url 'EvaluateTeacher' t.pk %}" method="POST" class="space-y-3">
-                    {% csrf_token %}
-                    <input type="number" name="UserID" value="{{ user.id }}" class="hidden">
-                    <input type="number" name="TeacherID" value="{{ t.id }}" class="hidden">
-                    <div class="flex justify-between">
-                        <label for="CourseID">Course Taught: </label>
-                        <select class="border" id="CourseID" name="CourseID" required>
-                          {% for item in TC %}
-                          	<option value="{{ item.CourseID.id }}" {% if item.CourseID.id == CourseID %} selected {% endif %}>{{ item.CourseID.CourseName }}</option>
-                          {% endfor %}
-                        </select>
-                    </div>
-                    <div class="flex justify-between">
-                        <label for="Year">Year Taught: </label>
-                        <select class="border" id="Year" name="Year" required>
-                            <option value="1st Year" {% if Year == "1st Year" %} selected {% endif %}>1st Year</option>
-                            <option value="2nd Year" {% if Year == "2nd Year" %} selected {% endif %}>2nd Year</option>
-                            <option value="3rd Year" {% if Year == "3rd Year" %} selected {% endif %}>3rd Year</option>
-                            <option value="4th Year" {% if Year == "4th Year" %} selected {% endif %}>4th Year</option>
-                            <option value="MRP" {% if Year == "MRP" %} selected {% endif %}>MRP</option>
-                        </select>
-                    </div>
 
-                    <div class="flex justify-between">
-                        <label for="Term">Term Taught: </label>
-                        <select class="border" id="Term" name="Term" required>
-                            <option value="1" {% if Term == "1" %} selected {% endif %}>1st Term</option>
-                            <option value="2" {% if Term == "2" %} selected {% endif %}>2nd Term</option>
-                            <option value="3" {% if Term == "3" %} selected {% endif %}>3rd Term</option>
-                        </select>
-                    </div>
 
-                    <div class="flex justify-between">
-                        <label for="ClassModality">Class Modality: </label>
-                        <select class="border" id="ClassModality" name="ClassModality" required>
-                            <option value="Online" {% if ClassModality == "Online" %} selected {% endif %}>Online</option>
-                            <option value="F2F" {% if ClassModality == "F2F" %} selected {% endif %}>F2F</option>
-                            <option value="Hybrid" {% if ClassModality == "Hybrid" %} selected {% endif %}>Hybrid</option>
-                        </select>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <label for="OverallProfRate">Overall Prof Rate</label>
-                        <input type="range" min="0" step="1" max="4" value="{{ OverallProfRate }}"
-                               class="slider" id="OverallProfRate" name="OverallProfRate" required>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <label for="ProfDifficulty">Prof Difficulty</label>
-                        <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
-                               class="slider" id="ProfDifficulty" name="ProfDifficulty" required>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <label for="RetakeProf">Retake Prof: </label>
-                        <select class="border" id="RetakeProf" name="RetakeProf" required>
-                            <option value="True" {% if RetakeProf == "True" %} selected {% endif %}>Yes</option>
-                            <option value="False" {% if RetakeProf == "False" %} selected {% endif %}>No</option>
-                        </select>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <label for="BigSkyUsageRate">BigSky Usage Rate</label>
-                        <input type="range" min="0" step="0.5" max="4" value="{{ BigSkyUsageRate }}"
-                               class="slider" id="BigSkyUsageRate" name="BigSkyUsageRate" required>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <label for="ProfAttendance">Prof Attendance</label>
-                        <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
-                               class="slider" id="ProfAttendance" name="ProfAttendance" required>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <label for="GradeReceived">Grade Received: </label>
-                        <select class="border" id="GradeReceived" name="GradeReceived" required>
-                            <option value="4.0" {% if GradeReceived == "4.0" %} selected {% endif %}>4.0</option>
-                            <option value="3.5" {% if GradeReceived == "3.5" %} selected {% endif %}>3.5</option>
-                            <option value="3.0" {% if GradeReceived == "3.0" %} selected {% endif %}>3.0</option>
-                            <option value="2.5" {% if GradeReceived == "2.5" %} selected {% endif %}>2.5</option>
-                            <option value="2.0" {% if GradeReceived == "2.0" %} selected {% endif %}>2.0</option>
-                            <option value="1.5" {% if GradeReceived == "1.5" %} selected {% endif %}>1.5</option>
-                            <option value="1.0" {% if GradeReceived == "1.0" %} selected {% endif %}>1.0</option>
-                            <option value="0.0" {% if GradeReceived == "0.0" %} selected {% endif %}>0.0</option>
-                        </select>
-                    </div>
-
+            <div class="flex justify-center mt-[100px]">
+                <div class="p-10 bg-white rounded-md border shadow-md">
                     <div class="flex justify-center">
-                        <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">Submit</button>
+                        <h1 class="mt-">Evaluate</h1>
                     </div>
-                </form>
+                    <div>
+                        {% if forms.errors %}
+                            <div class="bg-red-700 text-white">
+                                {{ forms.errors }}
+                            </div>
+                        {% endif %}
+                        <form action="{% url 'EvaluateTeacher' t.pk %}" method="POST" class="space-y-3">
+                            {% csrf_token %}
+                            <input type="number" name="UserID" value="{{ user.id }}" class="hidden">
+                            <input type="number" name="TeacherID" value="{{ t.id }}" class="hidden">
+                            <div class="flex justify-between">
+                                <label for="CourseID">Course Taught: </label>
+                                <select class="border" id="CourseID" name="CourseID" required>
+                                  {% for item in TC %}
+                                    <option value="{{ item.CourseID.id }}" {% if item.CourseID.id == CourseID %} selected {% endif %}>{{ item.CourseID.CourseName }}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+                            <div class="flex justify-between">
+                                <label for="Year">Year Taught: </label>
+                                <select class="border" id="Year" name="Year" required>
+                                    <option value="1st Year" {% if Year == "1st Year" %} selected {% endif %}>1st Year</option>
+                                    <option value="2nd Year" {% if Year == "2nd Year" %} selected {% endif %}>2nd Year</option>
+                                    <option value="3rd Year" {% if Year == "3rd Year" %} selected {% endif %}>3rd Year</option>
+                                    <option value="4th Year" {% if Year == "4th Year" %} selected {% endif %}>4th Year</option>
+                                    <option value="MRP" {% if Year == "MRP" %} selected {% endif %}>MRP</option>
+                                </select>
+                            </div>
 
+                            <div class="flex justify-between">
+                                <label for="Term">Term Taught: </label>
+                                <select class="border" id="Term" name="Term" required>
+                                    <option value="1" {% if Term == "1" %} selected {% endif %}>1st Term</option>
+                                    <option value="2" {% if Term == "2" %} selected {% endif %}>2nd Term</option>
+                                    <option value="3" {% if Term == "3" %} selected {% endif %}>3rd Term</option>
+                                </select>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <label for="ClassModality">Class Modality: </label>
+                                <select class="border" id="ClassModality" name="ClassModality" required>
+                                    <option value="Online" {% if ClassModality == "Online" %} selected {% endif %}>Online</option>
+                                    <option value="F2F" {% if ClassModality == "F2F" %} selected {% endif %}>F2F</option>
+                                    <option value="Hybrid" {% if ClassModality == "Hybrid" %} selected {% endif %}>Hybrid</option>
+                                </select>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <label for="OverallProfRate">Overall Prof Rate</label>
+                                <input type="range" min="0" step="1" max="4" value="{{ OverallProfRate }}"
+                                       class="slider" id="OverallProfRate" name="OverallProfRate" required>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <label for="ProfDifficulty">Prof Difficulty</label>
+                                <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
+                                       class="slider" id="ProfDifficulty" name="ProfDifficulty" required>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <label for="RetakeProf">Retake Prof: </label>
+                                <select class="border" id="RetakeProf" name="RetakeProf" required>
+                                    <option value="True" {% if RetakeProf == "True" %} selected {% endif %}>Yes</option>
+                                    <option value="False" {% if RetakeProf == "False" %} selected {% endif %}>No</option>
+                                </select>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <label for="BigSkyUsageRate">BigSky Usage Rate</label>
+                                <input type="range" min="0" step="0.5" max="4" value="{{ BigSkyUsageRate }}"
+                                       class="slider" id="BigSkyUsageRate" name="BigSkyUsageRate" required>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <label for="ProfAttendance">Prof Attendance</label>
+                                <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
+                                       class="slider" id="ProfAttendance" name="ProfAttendance" required>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <label for="GradeReceived">Grade Received: </label>
+                                <select class="border" id="GradeReceived" name="GradeReceived" required>
+                                    <option value="4.0" {% if GradeReceived == "4.0" %} selected {% endif %}>4.0</option>
+                                    <option value="3.5" {% if GradeReceived == "3.5" %} selected {% endif %}>3.5</option>
+                                    <option value="3.0" {% if GradeReceived == "3.0" %} selected {% endif %}>3.0</option>
+                                    <option value="2.5" {% if GradeReceived == "2.5" %} selected {% endif %}>2.5</option>
+                                    <option value="2.0" {% if GradeReceived == "2.0" %} selected {% endif %}>2.0</option>
+                                    <option value="1.5" {% if GradeReceived == "1.5" %} selected {% endif %}>1.5</option>
+                                    <option value="1.0" {% if GradeReceived == "1.0" %} selected {% endif %}>1.0</option>
+                                    <option value="0.0" {% if GradeReceived == "0.0" %} selected {% endif %}>0.0</option>
+                                </select>
+                            </div>
+
+                            <div class="flex justify-center">
+                                <button class="bg-green-900 text-white px-4 py-2 rounded-xl" type="submit">Submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
