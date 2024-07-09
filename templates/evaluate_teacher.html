@@ -63,6 +63,8 @@
                             {% csrf_token %}
                             <input type="number" name="UserID" value="{{ user.id }}" class="hidden">
                             <input type="number" name="TeacherID" value="{{ t.id }}" class="hidden">
+
+                            {# Course Taught #}
                             <div class="flex justify-between">
                                 <label for="CourseID">1. &nbsp&nbsp Course Taught: </label>
                                 <select class="border ml-20 w-56" id="CourseID" name="CourseID" required>
@@ -71,6 +73,8 @@
                                   {% endfor %}
                                 </select>
                             </div>
+
+                            {# Year Taught #}
                             <div class="flex justify-between bg-green-100">
                                 <label for="Year">2. &nbsp&nbsp Year Taught: </label>
                                 <select class="border bg-green-100 w-56" id="Year" name="Year" required>
@@ -82,6 +86,7 @@
                                 </select>
                             </div>
 
+                            {# Term Taught #}
                             <div class="flex justify-between">
                                 <label for="Term">3. &nbsp&nbsp Term Taught: </label>
                                 <select class="border w-56" id="Term" name="Term" required>
@@ -91,6 +96,7 @@
                                 </select>
                             </div>
 
+                            {# Class Modality #}
                             <div class="flex justify-between bg-green-100">
                                 <label for="ClassModality">4. &nbsp&nbsp Class Modality: </label>
                                 <select class="border bg-green-100 w-56" id="ClassModality" name="ClassModality" required>
@@ -100,18 +106,36 @@
                                 </select>
                             </div>
 
+                            {# Overall Prof Rate #}
                             <div class="flex justify-between">
                                 <label for="OverallProfRate">5. &nbsp&nbsp Overall Prof Rate</label>
-                                <input type="range" min="0" step="1" max="4" value="{{ OverallProfRate }}"
-                                       class="slider w-56" id="OverallProfRate" name="OverallProfRate" required>
+                                <div class="relative"> {# relative lowers the number thingy #}
+
+                                    {# input slider #}
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ OverallProfRate }}"
+                                           class="slider w-56" id="OverallProfRate" name="OverallProfRate" data-value-id="sliderValueOverallProfRate" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueOverallProfRate" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
 
+                            {# Prof Difficulty #}
                             <div class="flex justify-between bg-green-100">
                                 <label for="ProfDifficulty">6. &nbsp&nbsp Prof Difficulty</label>
-                                <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
-                                       class="slider w-56" id="ProfDifficulty" name="ProfDifficulty" required>
+                                <div class="relative"> {# relative lowers the number thingy #}
+
+                                    {# input slider #}
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
+                                           class="slider w-56" name="ProfDifficulty" data-value-id="sliderValueProfDifficulty" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueProfDifficulty" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
 
+
+                            {# Retake Prof #}
                             <div class="flex justify-between">
                                 <label for="RetakeProf">7. &nbsp&nbsp Retake Prof: </label>
                                 <select class="border w-56" id="RetakeProf" name="RetakeProf" required>
@@ -120,16 +144,32 @@
                                 </select>
                             </div>
 
+                            {# Prof Difficulty #}
                             <div class="flex justify-between bg-green-100">
-                                <label for="BigSkyUsageRate">8. &nbsp&nbsp BigSky Usage Rate</label>
-                                <input type="range" min="0" step="0.5" max="4" value="{{ BigSkyUsageRate }}"
-                                       class="slider w-56" id="BigSkyUsageRate" name="BigSkyUsageRate" required>
+                                <label for="ProfDifficulty">6. &nbsp&nbsp BigSky Usage Rate</label>
+                                <div class="relative"> {# relative lowers the number thingy #}
+
+                                    {# input slider #}
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ BigSkyUsageRate }}"
+                                           class="slider w-56" name="BigSkyUsageRate" data-value-id="sliderValueBigSkyUsageRate" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueBigSkyUsageRate" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
 
+                            {# Prof Attendance #}
                             <div class="flex justify-between">
-                                <label for="ProfAttendance">9. &nbsp&nbsp Prof Attendance</label>
-                                <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
-                                       class="slider w-56" id="ProfAttendance" name="ProfAttendance" required>
+                                <label for="ProfAttendance">6. &nbsp&nbsp Prof Attendance</label>
+                                <div class="relative"> {# relative lowers the number thingy #}
+
+                                    {# input slider #}
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ ProfDifficulty }}"
+                                           class="slider w-56" name="ProfAttendance" data-value-id="sliderValueProfAttendance" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueProfAttendance" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
 
                             <div class="flex justify-between bg-green-100">
@@ -149,7 +189,38 @@
                             <div class="flex justify-center">
                                 <button class="bg-green-900 text-white px-4 py-2 rounded-xl mt-5" type="submit">Submit</button>
                             </div>
+
+
                         </form>
+
+                        {# script thingy #}
+                        <script>
+                            function updateSliderValue(slider) {
+                                const valueDisplay = document.getElementById(slider.dataset.valueId);
+                                valueDisplay.textContent = slider.value;
+                                const rect = slider.getBoundingClientRect();
+                                const offsetX = slider.value / slider.max * slider.offsetWidth;
+                                valueDisplay.style.left = `${offsetX}px`;
+                            }
+
+                            document.querySelectorAll('.slider').forEach(slider => {
+                                slider.addEventListener('input', function() {
+                                    updateSliderValue(this);
+                                });
+
+                                slider.addEventListener('mouseenter', function () {
+                                    const valueDisplay = document.getElementById(slider.dataset.valueId);
+                                    valueDisplay.classList.add('opacity-100');
+                                    valueDisplay.classList.remove('opacity-0');
+                                });
+
+                                slider.addEventListener('mouseleave', function () {
+                                    const valueDisplay = document.getElementById(slider.dataset.valueId);
+                                    valueDisplay.classList.add('opacity-0');
+                                    valueDisplay.classList.remove('opacity-100');
+                                });
+                            });
+                        </script>
 
                     </div>
                 </div>
