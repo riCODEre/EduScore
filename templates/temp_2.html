@@ -4,34 +4,37 @@
     <meta charset="UTF-8">
     <title>
         {% block title %}
-
         {% endblock %}
     </title>
-    {# sync tailwind in static, test, and remove before deploy#}
+    <!-- Sync Tailwind in static, test, and remove before deploy -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    {# place unique classes here dudes #}
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- Place unique classes here -->
     <style type="text/tailwindcss">
         @layer utilities {
             .headerFooter {
-                @apply transition duration-300 hover:underline px-4 py-2
+                @apply transition duration-300 hover:underline px-4 py-2;
             }
-            
+
             .buttonGreen {
-                @apply bg-green-800 text-white font-semibold rounded-xl transition duration-300 hover:bg-green-600
+                @apply bg-green-800 text-white font-semibold rounded-xl transition duration-300 hover:bg-green-600;
             }
 
             .buttonBlack {
-                @apply bg-black text-white font-semibold rounded-xl transition duration-300 hover:bg-gray-700
+                @apply bg-black text-white font-semibold rounded-xl transition duration-300 hover:bg-gray-700;
             }
 
             .buttonWhite {
-                @apply bg-white rounded-full text-green-900 transition duration-300 hover:bg-black hover:border-black hover:text-white
+                @apply bg-white rounded-full text-green-900 transition duration-300 hover:bg-black hover:border-black hover:text-white;
             }
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body class="bg-gray-50 min-h-screen flex flex-col" style="font-family: 'Montserrat', sans-serif;">
     <header class="bg-green-800 text-white p-3">
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-xl font-bold">
@@ -43,17 +46,15 @@
                     <a href="{% url 'Bookmark' %}" class="headerFooter">Bookmarks</a>
                 {% endif %}
                 <a href="{% url 'about' %}" class="headerFooter">About</a>
-                <a href="#" class="headerFooter">Contact</a>
+                <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'UserLogout' %}" class="">Logout</a>
+                    <a href="{% url 'UserLogout' %}" class="buttonWhite px-4 py-2">Logout</a>
                 {% else %}
                     <a href="{% url 'UserLogin' %}" class="buttonWhite px-4 py-2">Login</a>
                 {% endif %}
-
             </div>
         </div>
     </header>
-
 
     <main class="flex-grow">
         {% block content %}
@@ -64,7 +65,7 @@
         <div class="container mx-auto text-center">
             <div class="mb-2">
                 <a href="{% url 'about' %}" class="headerFooter">About</a>
-                <a href="#" class="headerFooter">Contact</a>
+                <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
                 <a href="#" class="headerFooter">Privacy Policy</a>
                 <a href="#" class="headerFooter">Terms of Service</a>
             </div>
