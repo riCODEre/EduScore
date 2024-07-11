@@ -28,7 +28,7 @@
 
                         <div class="mb-2 col-span-3">
                             <b>FACULTY NAME:</b> <span
-                                class="ml-2">{{ EvalRec.TeacherID.FirstName }} {{ t.LastName }}</span>
+                                class="ml-2">{{ EvalRec.TeacherID.FirstName }} {{ EvalRec.TeacherID.LastName }}</span>
                         </div>
                         <div class="col-span-2 flex">
                             <b>GENDER:</b> <span class="ml-2">{{ EvalRec.TeacherID.Gender }}</span>
@@ -140,15 +140,29 @@
                             {# 5. Overall Prof Rate #}
                             <div class="flex justify-between">
                                 <label for="OverallProfRate">4. &nbsp&nbsp Overall Prof Rate</label>
-                                <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.OverallProfRate }}"
-                                       class="slider w-56" id="OverallProfRate" name="OverallProfRate">
+                                <div class="relative"> {# relative lowers the number thingy #}
+
+                                    {# input slider #}
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.OverallProfRate }}"
+                                           class="slider w-56" id="OverallProfRate" name="OverallProfRate" data-value-id="sliderValueOverallProfRate" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueOverallProfRate" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
+
 
                             {# 6. Prof Difficulty #}
                             <div class="flex justify-between bg-green-100">
                                 <label for="ProfDifficulty">5. &nbsp&nbsp Prof Difficulty</label>
-                                <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.ProfDifficultyP }}"
-                                       class="slider w-56" id="ProfDifficulty" name="ProfDifficulty">
+                                <div class="relative"> {# relative lowers the number thingy #}
+
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.ProfDifficulty }}"
+                                       class="slider w-56" id="ProfDifficulty" name="ProfDifficulty" data-value-id="sliderValueProfDifficulty" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueProfDifficulty" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
 
                             {# 7. Retake Prof #}
@@ -165,15 +179,28 @@
                             {# 8. BigSky Usage Rate #}
                             <div class="flex justify-between bg-green-100">
                                 <label for="BigSkyUsageRate">7. &nbsp&nbsp BigSky Usage Rate</label>
-                                <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.BigSkyUsageRate }}"
-                                       class="slider w-56" id="BigSkyUsageRate" name="BigSkyUsageRate">
+                                <div class="relative"> {# relative lowers the number thingy #}
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.BigSkyUsageRate }}"
+                                       class="slider w-56" id="BigSkyUsageRate" name="BigSkyUsageRate" data-value-id="sliderValueBigSkyUsageRate" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueBigSkyUsageRate" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
+
 
                             {# 9. Prof Attendance #}
                             <div class="flex justify-between">
                                 <label for="ProfAttendance">8. &nbsp&nbsp Prof Attendance</label>
-                                <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.ProfAttendance }}"
-                                       class="slider w-56" id="ProfAttendance" name="ProfAttendance">
+
+                                <div class="relative"> {# relative lowers the number thingy #}
+
+                                    <input type="range" min="0" step="0.5" max="4" value="{{ EvalRec.ProfAttendance }}"
+                                       class="slider w-56" id="ProfAttendance" name="ProfAttendance" data-value-id="sliderValueProfAttendance" required>
+
+                                    {# slider number #}
+                                    <span id="sliderValueProfAttendance" class="absolute top-0 left-0 -mt-8 text-xs bg-gray-700 text-white px-2 py-1 rounded opacity-0 transition-opacity duration-300"></span>
+                                </div>
                             </div>
 
                             {# 10. Grade Received #}
