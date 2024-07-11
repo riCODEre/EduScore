@@ -5,41 +5,42 @@
 {% endblock %}
 
 {% block content %}
-	<div class="flex justify-center mt-[100px]">
-        <div class="p-10 bg-white rounded-md border shadow-md">
+	<div class="flex justify-center mt-12 mb-12">
+        <div class="p-9 bg-white rounded-md border shadow-md">
             <div class="flex justify-center">
-                <h1 class="mt-">Tags</h1>
+                <h1 class="text-2xl font-bold mb-4">Select Tags (optional)</h1>
             </div>
             {% if forms.errors %}
                 <div class="bg-red-700 text-white">
                     {{ forms.errors }}
                 </div>
             {% endif %}
-            <div class="grid grid-cols-3 gap-1">
+            <div class="grid grid-cols-3 gap-3">
 
                 {% for tag in hasEval %}
-                    <form action="{% url 'EvalTag' EvalID %}" method="POST" class="space-y-3">
+                    <form action="{% url 'EvalTag' EvalID %}" method="POST" class="space-y-0.5">
                         {% csrf_token %}
                         <input type="number" value="{{ EvalID }}" class="hidden" name="EvaluationID">
                         <input type="number" value="{{ tag.TagID.id }}" class="hidden" name="TagID">
                         <div class="flex justify-center">
-                            <button class="bg-green-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagID.TagName }}</button>
+                            <button class="bg-green-600 text-white text-sm px-1 py-2.5 rounded-xl w-[185px] whitespace-nowrap" type="submit">{{ tag.TagID.TagName }}</button>
                         </div>
                     </form>
                 {% endfor %}
                 {% for tag in noEval %}
-                    <form action="{% url 'EvalTag' EvalID %}" method="POST" class="space-y-3">
+                    <form action="{% url 'EvalTag' EvalID %}" method="POST" class="space-y-0.5">
                         {% csrf_token %}
                         <input type="number" value="{{ EvalID }}" class="hidden" name="EvaluationID">
                         <input type="number" value="{{ tag.id }}" class="hidden" name="TagID">
                         <div class="flex justify-center">
-                            <button class="bg-red-900 text-white px-4 py-2 rounded-xl w-full" type="submit">{{ tag.TagName }}</button>
+                            <button class="buttonTags px-1 py-2.5 rounded-xl w-[185px] whitespace-nowrap" type="submit">{{ tag.TagName }}</button>
                         </div>
                     </form>
                 {% endfor %}
             </div>
-            <div class="pt-20">
-                <a href="{% url 'TeacherInfo' TeacherID %}" class="bg-green-900 text-white px-4 py-2 rounded-xl">Submit</a>
+            <div class="flex justify-center pt-8">
+                 <a href="{% url 'EditEval' EvalID %}" class="buttonBlack text-center px-8 py-2 mt-0.5 mx-2">Back</a>
+                <a href="{% url 'TeacherInfo' TeacherID %}" class="buttonGreen text-white px-7 py-2 mt-0.5 mx-2 rounded-xl">Submit</a>
             </div>
         </div>
     </div>
