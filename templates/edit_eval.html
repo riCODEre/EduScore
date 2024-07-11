@@ -270,7 +270,6 @@
     {# DELETE MODAL #}
     <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
-            <span class="close-button absolute top-2 right-2 cursor-pointer text-gray-700" onclick="closeDeleteModal()">&times;</span>
             <p class="mb-4">Are you sure you want to delete?</p>
             <a id="deleteConfirmBtn" href="{% url 'DeleteEval' EvalRec.id %}" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Delete</a>
             <button onclick="closeDeleteModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
