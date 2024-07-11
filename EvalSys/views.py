@@ -376,3 +376,6 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+def PPolicy(request):
+    return render(request, 'PPolicy.html')

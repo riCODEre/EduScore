@@ -21,16 +21,16 @@
                         <label for="searchRec" class="hidden"></label>
                         <input type="text" id="searchRec" value="{{ search }}" name="searchRec"
                                placeholder="Enter professor's name"
-                               class="w-full p-2 border border-gray-500 rounded-tl rounded-bl" required>
+                               class="searchBar w-full p-2 border border-gray-500 rounded-tl rounded-bl" required>
                         <label for="typeRec" hidden></label>
-                        <select name="typeRec" id="typeRec" class="w-min p-2 border border-1.5 border-gray-500 font-bold bg-green-700 text-white rounded-tr rounded-br" required>
-                            <option value="FName" {% if type == "FName" %} selected {% endif %}>First Name</option>
-                            <option value="LName" {% if type == "LName" %} selected {% endif %}>Last Name</option>
-                            <option value="Subject" {% if type == "Subject" %} selected {% endif %}>Subject</option>
-                            <option value="School" {% if type == "School" %} selected {% endif %}>School</option>
+                        <select name="typeRec" id="typeRec" class="buttonGreen2 w-min p-2.5 outline-green-600 rounded-tr rounded-br" required>
+                            <option value="FName" class="bg-green-700" {% if type == "FName" %} selected {% endif %}>First Name</option>
+                            <option value="LName" class="bg-green-700" {% if type == "LName" %} selected {% endif %}>Last Name</option>
+                            <option value="Subject" class="bg-green-700" {% if type == "Subject" %} selected {% endif %}>Subject</option>
+                            <option value="School" class="bg-green-700" {% if type == "School" %} selected {% endif %}>School</option>
                         </select>
 {#                        <button type="submit" class="ml-2 bg-black text-white px-4 py-2 rounded">Search</button>#}
-                        <button type="submit" class="ml-2 buttonBlack px-4 py-2">Search</button>
+                        <button type="submit" class="ml-3 buttonBlack2 px-4 py-2">Search</button>
                     </div>
                 </form>
             </div>
@@ -38,9 +38,10 @@
     </div>
 
     <div class="flex justify-center">
-        <div class="mt-10 space-y-3 shadow-md max-w-xl w-full">
+        <div class="mt-10 -space-y-2.5 shadow-md max-w-xl w-full">
             {% for teacher in SearchResults %}
-                <div class="{% cycle 'bg-green-100' 'bg-transparent' %} p-2 rounded mb-2">
+{#                <div class="{% cycle 'bg-green-100 profResultsGreen' 'bg-transparent profResultsWhite' %} p-2 rounded mb-2">#}
+                <div class="bg-white profResultsGreenLight p-2 rounded mb-2 border border-gray-300">
                     <div class="text-center">
                         <a href="{% url 'TeacherInfo' teacher.id %}">
                             {{ teacher.LastName }}, {{ teacher.FirstName }} | {{ teacher.Department }} {{ teacher. }}

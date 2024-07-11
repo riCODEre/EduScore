@@ -9,18 +9,18 @@
         <h1 class="text-6xl font-bold text-green-900 mb-2">Rate Your Prof</h1>
         <h2 class="text-2xl font-semibold text-green-900 mb-4">Bookmarks</h2>
 
-        <h3 class="bg-transparent text-gray-700 p-2 text-xl font-semibold pl-1.5">Name</h3>
+        <h3 class="bg-transparent text-gray-700 p-2 text-xl font-semibold pl-1.5">Your Professors</h3>
         <div>
             {% for item in ProfRecs %}
-                <div class="{% cycle 'bg-green-100' 'bg-transparent' %} p-2 rounded mb-2 grid grid-cols-2">
+                <div class="{% cycle 'bg-green-100' 'bg-transparent ' %} p-2 rounded mb-2 grid grid-cols-2">
 {#                    <a href="{% url 'TeacherInfo' item.TeacherID.id %}" class="text-blue-600 hover:text-blue-800">#}
 {#                        {{ item.TeacherID.LastName }}, {{ item.TeacherID.FirstName }}#}
 {#                    </a>#}
                     <div class="text-black">
-                        {{ item.TeacherID.LastName }}, {{ item.TeacherID.FirstName }}
+                        {{ item.TeacherID.LastName }}, {{ item.TeacherID.FirstName }} | {{ item.TeacherID.Department }}
                     </div>
                     <div class="text-right pr-1.5">
-                        <a href="{% url 'TeacherInfo' item.TeacherID.id %}" class="text-blue-600 hover:text-blue-800 underline">
+                        <a href="{% url 'TeacherInfo' item.TeacherID.id %}" class="text-gray-600 transitionGreen500">
                             View Info
                         </a>
                     </div>
