@@ -41,12 +41,6 @@
                         </div>
 
                         <div class="grid grid-cols-3 gap-4">
-
-{#                            <div class="">#}
-{#                                <label for="Department" class="block text-gray-700 text-xs font-medium">DEPARTMENT</label>#}
-{#                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="text" value="{{ dept }}" name="Department" id="Department" required>#}
-{#                            </div>#}
-
                             <div class="">
                                 <label for="Department" class="block text-gray-700 text-xs font-medium">SCHOOL/DEPARTMENT</label>
                                 <select class="border border-gray-300 p-2 mt-1 w-full rounded-md" id="Department" name="Department" required>
@@ -90,15 +84,40 @@
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <a class="buttonBlack text-center px-30 py-1.5" href="{% url 'UserLogin' %}">Back</a>
-                            <button class="buttonGreen px-30 py-1.5" type="submit">Submit</button>
-                        </div>
 
+                            {# ORIGINAL #}
+                            <a href="{% url 'UserLogin' %}" class="buttonBlack text-center px-30 py-1.5" id="cancelButton">Back</a>
+                            <button class="buttonGreen px-30 py-1.5" type="submit" >Submit</button>
+                            
+                            {# supposedly should have the modal popup. IS NOT WORKING #}
+{#                            <a href="" class="buttonBlack text-center px-30 py-1.5" id="cancelButton">Back</a>#}
+{#                            <button class="buttonGreen px-30 py-1.5" type="submit" id="submitButton">Submit</button>#}
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
 
 
+    
+    {# not working for some reason DOULBLE CHECK #}
+    
+    {# SUBMIT MODAL #}
+    <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+            <p class="mb-4">Are you sure you want to submit?</p>
+            <button id="submitConfirmBtn" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+            <button onclick="closeSubmitModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
+        </div>
+    </div>
+
+    {# CANCEL MODAL #}
+    <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+            <p class="mb-4">Are you sure you want to cancel?</p>
+            <a id="cancelConfirmBtn" href="{% url 'UserLogin' %}" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Confirm</a>
+            <button onclick="closeCancelModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Close</button>
+        </div>
     </div>
 {% endblock %}
