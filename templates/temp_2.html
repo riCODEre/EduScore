@@ -98,18 +98,22 @@
             const offsetX = slider.value / slider.max * slider.offsetWidth;
             valueDisplay.style.left = `${offsetX}px`;
         }
-
+    
         document.querySelectorAll('.slider').forEach(slider => {
+            // Initial update
+            updateSliderValue(slider);
+    
             slider.addEventListener('input', function() {
                 updateSliderValue(this);
             });
-
+    
             slider.addEventListener('mouseenter', function () {
                 const valueDisplay = document.getElementById(slider.dataset.valueId);
                 valueDisplay.classList.add('opacity-100');
                 valueDisplay.classList.remove('opacity-0');
+                updateSliderValue(this);  // Ensure value is updated on hover
             });
-
+    
             slider.addEventListener('mouseleave', function () {
                 const valueDisplay = document.getElementById(slider.dataset.valueId);
                 valueDisplay.classList.add('opacity-0');
