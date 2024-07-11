@@ -236,12 +236,9 @@
                             </div>
 
                             <div class="flex justify-center">
-                                <a href="{% url 'TeacherInfo' EvalRec.TeacherID.id %}" class="buttonBlack text-center px-8 py-2 mt-5 mx-2">Cancel</a>
-                                <button class="buttonGreen text-white px-8 py-2 rounded-xl mt-5 mx-2"
-                                        type="submit">Submit
-                                </button>
-                                <a href="{% url 'DeleteEval' EvalRec.id %}"
-                                 class="buttonRed text-white px-8 py-2 rounded-xl mt-5 mx-2">Delete</a>
+                                <a href="#" class="buttonBlack text-center px-8 py-2 mt-5 mx-2" id="cancelButton">Cancel</a>
+                                <button class="buttonGreen text-white px-8 py-2 rounded-xl mt-5 mx-2" id="submitButton">Submit</button>
+                                <a href="#" class="buttonRed text-white px-8 py-2 rounded-xl mt-5 mx-2" id="deleteButton">Delete</a>
                             </div>
                         </form>
 
@@ -249,5 +246,36 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+
+    {# SUBMIT MODAL #}
+    <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+            <p class="mb-4">Are you sure you want to submit?</p>
+            <button id="submitConfirmBtn" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+            <button onclick="closeSubmitModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
+        </div>
+    </div>
+
+    {# CANCEL MODAL #}
+    <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+            <p class="mb-4">Are you sure you want to cancel?</p>
+            <a id="cancelConfirmBtn" href="{% url 'TeacherInfo' EvalRec.TeacherID.id %}" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Confirm</a>
+            <button onclick="closeCancelModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Close</button>
+        </div>
+    </div>
+    
+    {# DELETE MODAL #}
+    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+            <span class="close-button absolute top-2 right-2 cursor-pointer text-gray-700" onclick="closeDeleteModal()">&times;</span>
+            <p class="mb-4">Are you sure you want to delete?</p>
+            <a id="deleteConfirmBtn" href="{% url 'DeleteEval' EvalRec.id %}" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Delete</a>
+            <button onclick="closeDeleteModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
+        </div>
+    </div>
+    
 
 {% endblock %}
