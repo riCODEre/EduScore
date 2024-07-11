@@ -17,7 +17,7 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .headerFooter {
-                @apply transition duration-300 hover:underline px-4 py-2;
+                @apply transition duration-300 hover:text-green-300 px-4 py-2;
             }
 
             .profResultsGreen {
@@ -25,11 +25,19 @@
             }
 
             .profResultsGreenLight {
-                @apply transition duration-300 hover:drop-shadow-xl hover:border-gray-100 hover:bg-green-100 hover:border hover:border-gray-400;
+                @apply transition duration-300 hover:bg-green-100 hover:border hover:border-gray-300;
             }
 
             .buttonGreen {
                 @apply bg-green-800 text-white font-semibold rounded-xl transition duration-300 hover:bg-green-600;
+            }
+
+            .buttonGreen2 {
+                @apply bg-green-800 text-white font-semibold rounded-sm transition duration-300 hover:bg-green-600 outline outline-green-600;
+            }
+
+            .buttonGreen2 {
+                outline-width: 1px;
             }
             
             .buttonRed {
@@ -39,6 +47,11 @@
             .buttonBlack {
                 @apply bg-black text-white font-semibold rounded-xl transition duration-300 hover:bg-gray-700;
             }
+
+            .buttonBlack2 {
+                @apply bg-black text-white rounded-md duration-300 font-semibold hover:bg-gray-700;
+            }
+
 
             .buttonDropdown {
                 @apply outline outline-gray-100 rounded-sm transition duration-300 hover:outline-blue-400;
@@ -51,6 +64,15 @@
             .buttonWhite {
                 @apply bg-white rounded-full text-green-900 transition duration-300 hover:bg-black hover:border-black hover:text-white;
             }
+
+            .searchBar {
+                @apply outline outline-gray-100 hover:outline-black
+            }
+
+            .searchBar {
+                outline-width: 1px;
+            }
+
         }
     </style>
 </head>
