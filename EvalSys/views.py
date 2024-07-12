@@ -240,7 +240,8 @@ def TeacherInfo(request, teacher_id):
 
     AllStudentEvals = EvaluationTB.objects.filter(TeacherID=teacher_id).exclude(UserID=user.id)
     AllEvalTags = Evaluation_TagTB.objects.filter(EvaluationID__TeacherID=teacher_id).exclude(EvaluationID__UserID=user.id).order_by()
-
+    type = ""
+    arrange = ""
     if request.method == "POST":
         form = SortEvalsForm(request.POST)
         if form.is_valid():
@@ -322,7 +323,9 @@ def TeacherInfo(request, teacher_id):
         'Average_Retake': Average_Retake,
         'TopTagRecs': AllTagsGotten,
         'AllStudentEvals': AllStudentEvals,
-        'AllEvalTags': AllEvalTags})
+        'AllEvalTags': AllEvalTags,
+        'type': type,
+        'arrange': arrange})
 
 
 @login_required(login_url='UserLogin')
