@@ -250,7 +250,7 @@
     </div>
 
     {# SUBMIT MODAL #}
-    <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden fade-in">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
             <p class="mb-4">Are you sure you want to submit?</p>
             <a id="submitConfirmBtn" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer ">Submit</a>
@@ -261,7 +261,7 @@
 
     
     {# DELETE MODAL #}
-    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden fade-in">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
             <p class="mb-4">Are you sure you want to delete?</p>
             <a id="deleteConfirmBtn" href="{% url 'DeleteEval' EvalRec.id %}" class="buttonModal mb-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800">Delete</a>
@@ -270,7 +270,7 @@
     </div>
 
     {# CANCEL MODAL #}
-    <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden fade-in">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
             <p class="mb-4">Are you sure you want to cancel?</p>
             <a id="cancelConfirmBtn" href="{% url 'TeacherInfo' EvalRec.TeacherID.id %}" class="buttonModal mb-2 bg-blue-500 text-white px-4 py-2 hover:bg-blue-700">Confirm</a>
