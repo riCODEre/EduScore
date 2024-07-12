@@ -7,7 +7,6 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
-
 def registerUser(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -69,6 +68,8 @@ def UserLogin(request):
                 # add below update on lastlogin
                 user.last_login = datetime.today()
                 user.save()
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
                 return redirect('SearchProf')
             else:
                 return render(request, 'UserLogin.html', {
@@ -176,19 +177,27 @@ def SearchProf(request):
                 return render(request, 'searchPage.html', {'forms': form})
             elif typeRec == "LName":
                 TeacherRecs = TeacherTB.objects.filter(LastName__icontains=searchRec)
+                if not TeacherRecs.exists():
+                    return render(request, 'searchPage.html', {'forms': form, 'norecs': True})
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
             elif typeRec == "Subject":
                 TeacherRecs = (TeacherTB.objects.filter(teacher_coursetb__CourseID__CourseCode__icontains=searchRec)
                                .distinct())
+                if not TeacherRecs.exists():
+                    return render(request, 'searchPage.html', {'forms': form, 'norecs': True})
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
             elif typeRec == "School":
                 TeacherRecs = TeacherTB.objects.filter(Department__icontains=searchRec)
+                if not TeacherRecs.exists():
+                    return render(request, 'searchPage.html', {'forms': form, 'norecs': True})
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
             elif typeRec == "FName":
                 TeacherRecs = TeacherTB.objects.filter(FirstName__icontains=searchRec)
+                if not TeacherRecs.exists():
+                    return render(request, 'searchPage.html', {'forms': form, 'norecs': True})
                 return render(request, 'searchPage.html',
                               {'SearchResults': TeacherRecs, 'search': searchRec, 'type': typeRec})
     else:
