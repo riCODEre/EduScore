@@ -17,7 +17,11 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .headerFooter {
-                @apply transition duration-300 hover:text-green-300 px-4 py-2;
+                @apply transition-all duration-300 hover:text-lg hover:text-green-300 px-4 py-1.5;
+            }
+
+            .Footer {
+                @apply transition-all duration-300 hover:text-lg hover:text-green-300 px-4 py-0.5;
             }
 
             .transitionGreen500 {
@@ -70,7 +74,11 @@
             }
 
             .buttonWhite {
-                @apply bg-white rounded-full text-green-900 transition duration-300 hover:bg-black hover:border-black hover:text-white;
+                @apply outline outline-white rounded-full text-white transition duration-300 hover:bg-white hover:text-green-900;
+            }
+
+            .buttonWhite {
+                outline-width: 2px;
             }
 
             .searchBar {
