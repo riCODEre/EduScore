@@ -24,7 +24,7 @@
             .transitionGreen500 {
                 @apply transition duration-300 hover:text-green-500;
             }
-            
+
 
             .profResultsGreen {
                 @apply transition duration-300 hover:drop-shadow-xl hover:border-gray-100 hover:bg-green-900 hover:text-green-300;
@@ -45,7 +45,7 @@
             .buttonGreen2 {
                 outline-width: 1px;
             }
-            
+
             .buttonRed {
                 @apply bg-red-800 text-white font-semibold rounded-xl transition duration-300 hover:bg-red-600;
             }
@@ -95,170 +95,191 @@
                 outline-width: 1px;
             }
 
+            @keyframes pop-up {
+                0% {
+                    transform: scale(0.5);
+                    opacity: 0;
+                }
+                80% {
+                    transform: scale(1.05);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            .pop-up {
+                animation: pop-up 0.25s ease-out forwards;
+            }
+
+
         }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col" style="font-family: 'Montserrat', sans-serif;">
-    <header class="bg-green-800 text-white p-3">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="text-xl font-bold">
-                <a href="{% url 'landing' %}">EduScore Logo</a>
-            </div>
-            <div class="flex space-x-4">
-                <a href="{% url 'SearchProf' %}" class="headerFooter">Home</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'Bookmark' %}" class="headerFooter">Bookmarks</a>
-                {% endif %}
-                <a href="{% url 'about' %}" class="headerFooter">About</a>
-                <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
-                {% if user.is_authenticated %}
-                    <button id="logoutButton" class="buttonWhite px-4 py-2">Logout</button>
-                {% else %}
-                    <a href="{% url 'UserLogin' %}" class="buttonWhite px-4 py-2">Login</a>
-                {% endif %}
-            </div>
+<header class="bg-green-800 text-white p-3">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-xl font-bold">
+            <a href="{% url 'landing' %}">EduScore Logo</a>
         </div>
-    </header>
-
-    <main class="flex-grow">
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <footer class="bg-green-800 text-white p-3">
-        <div class="container mx-auto text-center">
-            <div class="mb-2">
-                <a href="{% url 'SearchProf' %}" class="headerFooter">Home</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'Bookmark' %}" class="headerFooter">Bookmarks</a>
-                {% endif %}
-                <a href="{% url 'about' %}" class="headerFooter">About</a>
-                <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
-                <a href="{% url 'PPolicy' %}" class="headerFooter">Privacy Policy</a>
-            </div>
-            <div class="mb-2">
-                <div>Contact us: info@eduscore.com</div>
-            </div>
-            <div>@ 2024 EduScore, LLC. All Rights Reserved</div>
-        </div>
-    </footer>
-    
-    
-    {# NOTE FOR MODALS: #}
-    {# 1. DO NOT USE TAILWIND UTILITY CLASSES it will not work as intended. JUST USE NORMAL TAILWIND CLASSES.  #}
-    {# 2. you can place the modals in the html modules they are needed in, BUT ALL SCRIPTS IN THE MAIN temp_2.html TEMPLATE #}
-    
-    {# logout modal popup #}
-    <div id="logoutModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-5 rounded-lg shadow-lg text-center">
-            <span class="close-button absolute top-2 right-2 cursor-pointer text-gray-700" onclick="closeLogoutModal()">&times;</span>
-            <p class="mb-4">Are you sure you want to logout?</p>
-            <a id="logoutConfirmBtn" class="buttonModal bg-blue-500 text-white rounded hover:bg-blue-700 hover:cursor-pointer mb-2 px-4 py-2">Logout</a>
-            <a onclick="closeLogoutModal()" class="buttonModal bg-gray-500 text-white rounded hover:bg-gray-700 hover:cursor-pointer px-4 py-2 ml-1">Cancel</a>
+        <div class="flex space-x-4">
+            <a href="{% url 'SearchProf' %}" class="headerFooter">Home</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'Bookmark' %}" class="headerFooter">Bookmarks</a>
+            {% endif %}
+            <a href="{% url 'about' %}" class="headerFooter">About</a>
+            <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
+            {% if user.is_authenticated %}
+                <button id="logoutButton" class="buttonWhite px-4 py-2">Logout</button>
+            {% else %}
+                <a href="{% url 'UserLogin' %}" class="buttonWhite px-4 py-2">Login</a>
+            {% endif %}
         </div>
     </div>
+</header>
+
+<main class="flex-grow">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="bg-green-800 text-white p-3">
+    <div class="container mx-auto text-center">
+        <div class="mb-2">
+            <a href="{% url 'SearchProf' %}" class="headerFooter">Home</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'Bookmark' %}" class="headerFooter">Bookmarks</a>
+            {% endif %}
+            <a href="{% url 'about' %}" class="headerFooter">About</a>
+            <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
+            <a href="{% url 'PPolicy' %}" class="headerFooter">Privacy Policy</a>
+        </div>
+        <div class="mb-2">
+            <div>Contact us: info@eduscore.com</div>
+        </div>
+        <div>@ 2024 EduScore, LLC. All Rights Reserved</div>
+    </div>
+</footer>
 
 
+{# NOTE FOR MODALS: #}
+{# 1. DO NOT USE TAILWIND UTILITY CLASSES it will not work as intended. JUST USE NORMAL TAILWIND CLASSES.  #}
+{# 2. you can place the modals in the html modules they are needed in, BUT ALL SCRIPTS IN THE MAIN temp_2.html TEMPLATE #}
 
-    {# script thingy #}
-    <script>
-        function updateSliderValue(slider) {
+{# logout modal popup #}
+<div id="logoutModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white p-5 rounded-lg shadow-lg text-center">
+        <span class="close-button absolute top-2 right-2 cursor-pointer text-gray-700" onclick="closeLogoutModal()">&times;</span>
+        <p class="mb-4">Are you sure you want to logout?</p>
+        <a id="logoutConfirmBtn"
+           class="buttonModal bg-blue-500 text-white rounded hover:bg-blue-700 hover:cursor-pointer mb-2 px-4 py-2">Logout</a>
+        <a onclick="closeLogoutModal()"
+           class="buttonModal bg-gray-500 text-white rounded hover:bg-gray-700 hover:cursor-pointer px-4 py-2 ml-1">Cancel</a>
+    </div>
+</div>
+
+
+{# script thingy #}
+<script>
+    function updateSliderValue(slider) {
+        const valueDisplay = document.getElementById(slider.dataset.valueId);
+        valueDisplay.textContent = slider.value;
+        const rect = slider.getBoundingClientRect();
+        const offsetX = slider.value / slider.max * slider.offsetWidth;
+        valueDisplay.style.left = `${offsetX}px`;
+    }
+
+    document.querySelectorAll('.slider').forEach(slider => {
+        // Initial update
+        updateSliderValue(slider);
+
+        slider.addEventListener('input', function () {
+            updateSliderValue(this);
+        });
+
+        slider.addEventListener('mouseenter', function () {
             const valueDisplay = document.getElementById(slider.dataset.valueId);
-            valueDisplay.textContent = slider.value;
-            const rect = slider.getBoundingClientRect();
-            const offsetX = slider.value / slider.max * slider.offsetWidth;
-            valueDisplay.style.left = `${offsetX}px`;
-        }
-
-        document.querySelectorAll('.slider').forEach(slider => {
-            // Initial update
-            updateSliderValue(slider);
-
-            slider.addEventListener('input', function() {
-                updateSliderValue(this);
-            });
-
-            slider.addEventListener('mouseenter', function () {
-                const valueDisplay = document.getElementById(slider.dataset.valueId);
-                valueDisplay.classList.add('opacity-100');
-                valueDisplay.classList.remove('opacity-0');
-                updateSliderValue(this);  // Ensure value is updated on hover
-            });
-
-            slider.addEventListener('mouseleave', function () {
-                const valueDisplay = document.getElementById(slider.dataset.valueId);
-                valueDisplay.classList.add('opacity-0');
-                valueDisplay.classList.remove('opacity-100');
-            });
+            valueDisplay.classList.add('opacity-100');
+            valueDisplay.classList.remove('opacity-0');
+            updateSliderValue(this);  // Ensure value is updated on hover
         });
 
-        {# FOR MODAL POPUP MESSAGE FOR LOGOUT #}
-        function openLogoutModal() {
-            document.getElementById('logoutModal').classList.remove('hidden');
-        }
-
-        function closeLogoutModal() {
-            document.getElementById('logoutModal').classList.add('hidden');
-        }
-
-        {# added measure #}
-        document.getElementById('logoutButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            openLogoutModal();
+        slider.addEventListener('mouseleave', function () {
+            const valueDisplay = document.getElementById(slider.dataset.valueId);
+            valueDisplay.classList.add('opacity-0');
+            valueDisplay.classList.remove('opacity-100');
         });
+    });
 
-        document.getElementById('logoutConfirmBtn').addEventListener('click', function() {
-            window.location.href = "{% url 'UserLogout' %}";
-        });
-        
-        {# SUBMIT POPUP MODAL #}
-        function openSubmitModal() {
-            document.getElementById('submitModal').classList.remove('hidden');
-        }
+    {# FOR MODAL POPUP MESSAGE FOR LOGOUT #}
 
-        function closeSubmitModal() {
-            document.getElementById('submitModal').classList.add('hidden');
-        }
+    function openLogoutModal() {
+        document.getElementById('logoutModal').classList.remove('hidden');
+    }
 
-        document.getElementById('submitButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            openSubmitModal();
-        });
+    function closeLogoutModal() {
+        document.getElementById('logoutModal').classList.add('hidden');
+    }
 
-        document.getElementById('submitConfirmBtn').addEventListener('click', function() {
-            document.querySelector('form').submit();
-        });
+    {# added measure #}
+    document.getElementById('logoutButton').addEventListener('click', function (event) {
+        event.preventDefault();
+        openLogoutModal();
+    });
 
-        {# CANCEL MODAL THING #}
-        document.getElementById('cancelButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            openCancelModal();
-        });
+    document.getElementById('logoutConfirmBtn').addEventListener('click', function () {
+        window.location.href = "{% url 'UserLogout' %}";
+    });
 
-        function openCancelModal() {
-            document.getElementById('cancelModal').classList.remove('hidden');
-        }
+    {# SUBMIT POPUP MODAL #}
 
-        function closeCancelModal() {
-            document.getElementById('cancelModal').classList.add('hidden');
-        }
+    function openSubmitModal() {
+        document.getElementById('submitModal').classList.remove('hidden');
+    }
 
-        
-        
-        
-        {# DELETE MODAL THING #}
-        document.getElementById('deleteButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            openDeleteModal();
-        });
+    function closeSubmitModal() {
+        document.getElementById('submitModal').classList.add('hidden');
+    }
 
-        function openDeleteModal() {
-            document.getElementById('deleteModal').classList.remove('hidden');
-        }
+    document.getElementById('submitButton').addEventListener('click', function (event) {
+        event.preventDefault();
+        openSubmitModal();
+    });
 
-        function closeDeleteModal() {
-            document.getElementById('deleteModal').classList.add('hidden');
-        }
-    </script>
+    document.getElementById('submitConfirmBtn').addEventListener('click', function () {
+        document.querySelector('form').submit();
+    });
+
+    {# CANCEL MODAL THING #}
+    document.getElementById('cancelButton').addEventListener('click', function (event) {
+        event.preventDefault();
+        openCancelModal();
+    });
+
+    function openCancelModal() {
+        document.getElementById('cancelModal').classList.remove('hidden');
+    }
+
+    function closeCancelModal() {
+        document.getElementById('cancelModal').classList.add('hidden');
+    }
+
+
+    {# DELETE MODAL THING #}
+    document.getElementById('deleteButton').addEventListener('click', function (event) {
+        event.preventDefault();
+        openDeleteModal();
+    });
+
+    function openDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+</script>
 </body>
 </html>
