@@ -61,20 +61,20 @@
         <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
             {% csrf_token %}
             <select name="Type" id="Type">
-                <option value="Year">Year</option>
-                <option value="Term">Term</option>
-                <option value="ClassModality">Class Modality</option>
-                <option value="OverallProfRate">Overall Prof Rate</option>
-                <option value="ProfDifficulty">Prof Difficulty</option>
-                <option value="RetakeProf">Retake Prof</option>
-                <option value="BigSkyUsageRate">Big Sky Usage Rate</option>
-                <option value="ProfAttendance">Prof Attendance</option>
-                <option value="GradeReceived">Grade Received</option>
-                <option value="DateAdded">Date Added</option>
+                <option value="Year" {% if type == "Year" %} selected {% endif %}>Year</option>
+                <option value="Term" {% if type == "Term" %} selected {% endif %}>Term</option>
+                <option value="ClassModality" {% if type == "ClassModality" %} selected {% endif %}>Class Modality</option>
+                <option value="OverallProfRate" {% if type == "OverallProfRate" %} selected {% endif %}>Overall Prof Rate</option>
+                <option value="ProfDifficulty" {% if type == "ProfDifficulty" %} selected {% endif %}>Prof Difficulty</option>
+                <option value="RetakeProf" {% if type == "RetakeProf" %} selected {% endif %}>Retake Prof</option>
+                <option value="BigSkyUsageRate" {% if type == "BigSkyUsageRate" %} selected {% endif %}>Big Sky Usage Rate</option>
+                <option value="ProfAttendance" {% if type == "ProfAttendance" %} selected {% endif %}>Prof Attendance</option>
+                <option value="GradeReceived" {% if type == "GradeReceived" %} selected {% endif %}>Grade Received</option>
+                <option value="DateAdded" {% if type == "DateAdded" %} selected {% endif %}>Date Added</option>
             </select>
             <select name="Arrange" id="Arrange">
-                <option value="Asc">Ascending</option>
-                <option value="Desc">Descending</option>
+                <option value="Asc" {% if arrange == "Asc" %} selected {% endif %}>Ascending</option>
+                <option value="Desc" {% if arrange == "Desc" %} selected {% endif %}>Descending</option>
             </select>
             <button type="submit" class="bg-green-700 text-white">Submit</button>
         </form>
