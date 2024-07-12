@@ -107,13 +107,13 @@
                             <div class="flex justify-between">
                                 <label for="Term">2. &nbsp&nbsp Term Taught: </label>
                                 <select class="buttonDropdown border w-56" id="Term" name="Term">
-                                    <option value="1" {% if EvalRec.Term == "1st Term" %} selected {% endif %}>1st
+                                    <option value="1" {% if EvalRec.Term == 1 %} selected {% endif %}>1st
                                         Term
                                     </option>
-                                    <option value="2" {% if EvalRec.Term == "2nd Term" %} selected {% endif %}>2nd
+                                    <option value="2" {% if EvalRec.Term == 2 %} selected {% endif %}>2nd
                                         Term
                                     </option>
-                                    <option value="3" {% if EvalRec.Term == "3rd Term" %} selected {% endif %}>3rd
+                                    <option value="3" {% if EvalRec.Term == 3 %} selected {% endif %}>3rd
                                         Term
                                     </option>
                                 </select>
