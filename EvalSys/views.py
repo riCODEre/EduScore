@@ -14,8 +14,6 @@ def registerUser(request):
         last_name = request.POST['last_name']
         username = request.POST['username']
         password = request.POST['password']
-        if password == '':
-            passwordTest = "passwordError"
         # //another model
         Department = request.POST['Department']
         BatchNumber = request.POST['BatchNumber']
@@ -37,31 +35,20 @@ def registerUser(request):
                         'fname': first_name,
                         'lname': last_name,
                         'uname': username,
+                        'pword': password,
                         'dept': Department,
-                        'gender': Gender,
-                        'password': passwordTest
+                        'batch': BatchNumber,
+                        'gender': Gender
                     })
 
                 user.save()
 
-                try:
-                    addUser = AddUserTB.objects.create(
-                        eval_user=user,
-                        Department=Department,
-                        BatchNumber=BatchNumber,
-                        Gender=Gender
-                    )
-                except Exception as e:
-                    return render(request, 'registerUser.html', {
-                        'forms': e,
-                        'fname': first_name,
-                        'lname': last_name,
-                        'uname': username,
-                        'dept': Department,
-                        'gender': Gender,
-                        'password': passwordTest
-                    })
-
+                addUser = AddUserTB.objects.create(
+                    eval_user=user,
+                    Department=Department,
+                    BatchNumber=BatchNumber,
+                    Gender=Gender
+                )
                 addUser.save()
                 return redirect('landing')
             else:
@@ -72,9 +59,10 @@ def registerUser(request):
                 'fname': first_name,
                 'lname': last_name,
                 'uname': username,
+                'pword': password,
                 'dept': Department,
-                'gender': Gender,
-                'password': passwordTest
+                'batch': BatchNumber,
+                'gender': Gender
             })
     else:
         return render(request, 'registerUser.html')

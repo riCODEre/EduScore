@@ -204,21 +204,10 @@
     <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
             <p class="mb-4">Are you sure you want to submit?</p>
-            <a id="submitConfirmBtn" onclick="openTagsModal()" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer">Submit</a>
+            <a id="submitConfirmBtn" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer">Submit</a>
             <a onclick="closeSubmitModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">Cancel</a>
         </div>
     </div>
-
-    {# SUBMIT MODAL #}
-    <div id="tagsModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
-            <p class="mb-4">Evaluation saved! Do you </p>
-            <a href="{% url 'EvalTag' Eval.id %}" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer">Yes</a>
-{#            <a href="#" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer">Yes</a>#}
-            <a onclick="closeSubmitModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">No</a>
-        </div>
-    </div>
-
 
 
     {# CANCEL MODAL #}
