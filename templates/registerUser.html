@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<div class="flex justify-center">
+    <div class="flex justify-center">
         <div class="p-6 max-w-4xl w-full">
             <div class="">
                 <div class="text-center">
@@ -17,40 +17,48 @@
                 <div>
                     <form action="{% url 'registerUser' %}" method="POST" class="space-y-3">
                         {% csrf_token %}
-                        {% if forms.errors %}
+                        {% if forms %}
                             <div class="bg-red-700 text-white p-3 rounded-md mb-4">
-                                {{ forms.errors }}
+                                {{ forms }}
                             </div>
                         {% endif %}
+                    
                         {% if exists is not None %}
                             <div class="bg-red-700 text-white p-3 rounded-md mb-4">
-                            {# shows when user already exists - an error #}
+                                {# shows when user already exists - an error #}
                                 {{ exists }}
                             </div>
                         {% endif %}
+                    
+                        
 
                         <div class="grid grid-cols-2 gap-4">
                             <div class="">
-                                <label for="firstname" class="block text-gray-700 text-xs font-medium">FIRST NAME</label>
-                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="text" value="{{ fname }}" name="first_name" id="firstname">
+                                <label for="firstname" class="block text-gray-700 text-xs font-medium">FIRST
+                                    NAME</label>
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="text"
+                                       value="{{ fname }}" name="first_name" id="firstname">
                             </div>
                             <div class="">
                                 <label for="lastname" class="block text-gray-700 text-xs font-medium">LAST NAME</label>
-                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="text" value="{{ lname }}" name="last_name" id="lastname">
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="text"
+                                       value="{{ lname }}" name="last_name" id="lastname">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-3 gap-4">
                             <div class="">
                                 <label for="Department" class="block text-gray-700 text-xs font-medium">SCHOOL/DEPARTMENT</label>
-                                <select class="border border-gray-300 p-2 mt-1 w-full rounded-md" id="Department" name="Department" required>
+                                <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar"
+                                        id="Department" name="Department" >
                                     <option value="SACP" {% if dept == "SACP" %} selected {% endif %}>SACP</option>
                                     <option value="SED" {% if dept == "SED" %} selected {% endif %}>SED</option>
                                     <option value="SNMA" {% if dept == "SNMA" %} selected {% endif %}>SNMA</option>
                                     <option value="SDEAS" {% if dept == "SDEAS" %} selected {% endif %}>SDEAS</option>
                                     <option value="SHRIM" {% if dept == "SHRIM" %} selected {% endif %}>SHRIM</option>
                                     <option value="SMIT" {% if dept == "SMIT" %} selected {% endif %}>SMIT</option>
-                                    <option value="SMIT-CDP" {% if dept == "SMIT-CDP" %} selected {% endif %}>SMIT-CDP</option>
+                                    <option value="SMIT-CDP" {% if dept == "SMIT-CDP" %} selected {% endif %}>SMIT-CDP
+                                    </option>
                                     <option value="SDG" {% if dept == "SDG" %} selected {% endif %}>SDG</option>
                                     <option value="SMS" {% if dept == "SMS" %} selected {% endif %}>SMS</option>
                                 </select>
@@ -58,16 +66,22 @@
 
 
                             <div class="">
-                                <label for="BatchNumber" class="block text-gray-700 text-xs font-medium">BATCH NUMBER</label>
-                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="number" value="{{ batch }}" name="BatchNumber" id="BatchNumber" required>
+                                <label for="BatchNumber" class="block text-gray-700 text-xs font-medium">BATCH
+                                    NUMBER</label>
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="number"
+                                       value="{{ batch }}" name="BatchNumber" id="BatchNumber" >
                             </div>
                             <div class="">
                                 <label for="Gender" class="block text-gray-700 text-xs font-medium">GENDER: </label>
-                                <select class="border border-gray-300 p-2 mt-1 w-full rounded-md" id="Gender" name="Gender" required>
-                                  <option value="female" {% if gender == "female" %} selected {% endif %}>Female</option>
-                                  <option value="male" {% if gender == "male" %} selected {% endif %}>Male</option>
-                                  <option value="other" {% if gender == "other" %} selected {% endif %}>Other</option>
-                                  <option value="anonymous" {% if gender == "anonymous" %} selected {% endif %}>Prefer Not To Say</option>
+                                <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" id="Gender"
+                                        name="Gender" >
+                                    <option value="female" {% if gender == "female" %} selected {% endif %}>Female
+                                    </option>
+                                    <option value="male" {% if gender == "male" %} selected {% endif %}>Male</option>
+                                    <option value="other" {% if gender == "other" %} selected {% endif %}>Other</option>
+                                    <option value="anonymous" {% if gender == "anonymous" %} selected {% endif %}>Prefer
+                                        Not To Say
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -75,23 +89,45 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="">
                                 <label for="username" class="block text-gray-700 text-xs font-medium">USERNAME</label>
-                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="email" value="{{ uname }}" name="username" id="username" required>
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="email"
+                                       value="{{ uname }}" name="username" id="username" >
                             </div>
                             <div class="">
                                 <label for="password" class="block text-gray-700 text-xs font-medium">PASSWORD</label>
-                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md" type="password" value="{{ pword }}" name="password" id="password" required>
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar"
+                                       type="password" name="password" id="password" >
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
 
                             {# ORIGINAL #}
-                            <a href="{% url 'UserLogin' %}" class="buttonBlack text-center px-30 py-1.5" id="cancelButton">Back</a>
-                            <button class="buttonGreen px-30 py-1.5" type="submit" >Submit</button>
+                            <a href="#" class="buttonBlack text-center px-30 py-1.5" id="cancelButton"
+                               onclick="openCancelModal()">Back</a>
+                            <a href="#" class="buttonGreen px-30 py-1.5 text-center" id="submitButton"
+                               onclick="openSubmitModal()">Submit
+                            </a>
                             
-                            {# supposedly should have the modal popup. IS NOT WORKING #}
-{#                            <a href="" class="buttonBlack text-center px-30 py-1.5" id="cancelButton">Back</a>#}
-{#                            <button class="buttonGreen px-30 py-1.5" type="submit" id="submitButton">Submit</button>#}
+                            <button class="buttonGreen px-30 py-1.5 text-center" type="submit"
+                               >Submit2
+                            </button>
+                            
+                            {# SUBMIT MODAL need inside <form> to work #}
+                            <div id="submitModal"
+                                 class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+                                <div class="bg-white p-2.5 rounded-lg shadow-lg text-center relative pop-up">
+                                    <p class="mb-2 mt-2">Are you sure you want to submit?</p>
+                                    <button type="submit"
+                                            class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer">
+                                        Submit
+                                    </button>
+                                    <a onclick="closeSubmitModal()"
+                                       class="buttonModal bg-gray-500 text-white px-4 py-2.5 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">
+                                        Cancel
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </form>
                 </div>
@@ -99,25 +135,15 @@
         </div>
     </div>
 
-
-    
-    {# not working for some reason DOULBLE CHECK #}
-    
-    {# SUBMIT MODAL #}
-    <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
-            <p class="mb-4">Are you sure you want to submit?</p>
-            <button id="submitConfirmBtn" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
-            <button onclick="closeSubmitModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
-        </div>
-    </div>
-
     {# CANCEL MODAL #}
     <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
             <p class="mb-4">Are you sure you want to cancel?</p>
-            <a id="cancelConfirmBtn" href="{% url 'UserLogin' %}" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Confirm</a>
-            <button onclick="closeCancelModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Close</button>
+            <a id="cancelConfirmBtn" href="{% url 'UserLogin' %}"
+               class="buttonModal mb-2 bg-blue-500 text-white px-4 py-2 hover:bg-blue-700 hover:cursor-pointer">Confirm</a>
+            <a onclick="closeCancelModal()"
+               class="buttonModal bg-gray-500 text-white px-5 py-2 hover:bg-gray-700 hover:cursor-pointer hover:ani ml-1">Close</a>
         </div>
     </div>
+
 {% endblock %}

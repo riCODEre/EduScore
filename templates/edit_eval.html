@@ -107,13 +107,13 @@
                             <div class="flex justify-between">
                                 <label for="Term">2. &nbsp&nbsp Term Taught: </label>
                                 <select class="buttonDropdown border w-56" id="Term" name="Term">
-                                    <option value="1" {% if EvalRec.Term == "1st Term" %} selected {% endif %}>1st
+                                    <option value="1" {% if EvalRec.Term == 1 %} selected {% endif %}>1st
                                         Term
                                     </option>
-                                    <option value="2" {% if EvalRec.Term == "2nd Term" %} selected {% endif %}>2nd
+                                    <option value="2" {% if EvalRec.Term == 2 %} selected {% endif %}>2nd
                                         Term
                                     </option>
-                                    <option value="3" {% if EvalRec.Term == "3rd Term" %} selected {% endif %}>3rd
+                                    <option value="3" {% if EvalRec.Term == 3 %} selected {% endif %}>3rd
                                         Term
                                     </option>
                                 </select>
@@ -251,10 +251,10 @@
 
     {# SUBMIT MODAL #}
     <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
             <p class="mb-4">Are you sure you want to submit?</p>
-            <button id="submitConfirmBtn" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
-            <button onclick="closeSubmitModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
+            <a id="submitConfirmBtn" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer ">Submit</a>
+            <a onclick="closeSubmitModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">Cancel</a>
         </div>
     </div>
 
@@ -262,19 +262,19 @@
     
     {# DELETE MODAL #}
     <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
             <p class="mb-4">Are you sure you want to delete?</p>
-            <a id="deleteConfirmBtn" href="{% url 'DeleteEval' EvalRec.id %}" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Delete</a>
-            <button onclick="closeDeleteModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
+            <a id="deleteConfirmBtn" href="{% url 'DeleteEval' EvalRec.id %}" class="buttonModal mb-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800">Delete</a>
+            <a onclick="closeDeleteModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 hover:bg-gray-700 hover:cursor-pointer ml-1">Cancel</a>
         </div>
     </div>
 
     {# CANCEL MODAL #}
     <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative">
+        <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
             <p class="mb-4">Are you sure you want to cancel?</p>
-            <a id="cancelConfirmBtn" href="{% url 'TeacherInfo' EvalRec.TeacherID.id %}" class="btn btn-primary mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Confirm</a>
-            <button onclick="closeCancelModal()" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">Close</button>
+            <a id="cancelConfirmBtn" href="{% url 'TeacherInfo' EvalRec.TeacherID.id %}" class="buttonModal mb-2 bg-blue-500 text-white px-4 py-2 hover:bg-blue-700">Confirm</a>
+            <a onclick="closeCancelModal()" class="buttonModal bg-gray-500 text-white px-5 py-2 hover:bg-gray-700 hover:cursor-pointer hover:ani ml-1">Close</a>
         </div>
     </div>
 
