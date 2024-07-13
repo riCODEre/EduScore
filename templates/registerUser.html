@@ -17,11 +17,12 @@
                 <div>
                     <form action="{% url 'registerUser' %}" method="POST" class="space-y-3">
                         {% csrf_token %}
-                        {% if forms.errors %}
+                        {% if forms %}
                             <div class="bg-red-700 text-white p-3 rounded-md mb-4">
-                                {{ forms.errors }}
+                                {{ forms }}
                             </div>
                         {% endif %}
+                    
                         {% if exists is not None %}
                             <div class="bg-red-700 text-white p-3 rounded-md mb-4">
                                 {# shows when user already exists - an error #}
@@ -47,7 +48,7 @@
                             <div class="">
                                 <label for="Department" class="block text-gray-700 text-xs font-medium">SCHOOL/DEPARTMENT</label>
                                 <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar"
-                                        id="Department" name="Department" required>
+                                        id="Department" name="Department" >
                                     <option value="SACP" {% if dept == "SACP" %} selected {% endif %}>SACP</option>
                                     <option value="SED" {% if dept == "SED" %} selected {% endif %}>SED</option>
                                     <option value="SNMA" {% if dept == "SNMA" %} selected {% endif %}>SNMA</option>
@@ -66,12 +67,12 @@
                                 <label for="BatchNumber" class="block text-gray-700 text-xs font-medium">BATCH
                                     NUMBER</label>
                                 <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="number"
-                                       value="{{ batch }}" name="BatchNumber" id="BatchNumber" required>
+                                       value="{{ batch }}" name="BatchNumber" id="BatchNumber" >
                             </div>
                             <div class="">
                                 <label for="Gender" class="block text-gray-700 text-xs font-medium">GENDER: </label>
                                 <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" id="Gender"
-                                        name="Gender" required>
+                                        name="Gender" >
                                     <option value="female" {% if gender == "female" %} selected {% endif %}>Female
                                     </option>
                                     <option value="male" {% if gender == "male" %} selected {% endif %}>Male</option>
@@ -87,12 +88,12 @@
                             <div class="">
                                 <label for="username" class="block text-gray-700 text-xs font-medium">USERNAME</label>
                                 <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="email"
-                                       value="{{ uname }}" name="username" id="username" required>
+                                       value="{{ uname }}" name="username" id="username" >
                             </div>
                             <div class="">
                                 <label for="password" class="block text-gray-700 text-xs font-medium">PASSWORD</label>
                                 <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar"
-                                       type="password" value="{{ pword }}" name="password" id="password" required>
+                                       type="password" value="{{ pword }}" name="password" id="password" >
                             </div>
                         </div>
 
@@ -104,7 +105,11 @@
                             <a href="#" class="buttonGreen px-30 py-1.5 text-center" id="submitButton"
                                onclick="openSubmitModal()">Submit
                             </a>
-
+                            
+                            <button class="buttonGreen px-30 py-1.5 text-center" type="submit"
+                               >Submit2
+                            </button>
+                            
                             {# SUBMIT MODAL need inside <form> to work #}
                             <div id="submitModal"
                                  class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">

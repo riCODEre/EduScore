@@ -21,13 +21,26 @@ def registerUser(request):
         if form.is_valid():
             userCheck = authenticate(request, username=username, password=password)
             if userCheck is None:
-                user = User.objects.create_user(
-                    first_name=first_name,
-                    last_name=last_name,
-                    username=username,
-                    password=password,
-                    email=username
-                )
+                try:
+                    user = User.objects.create_user(
+                        first_name=first_name,
+                        last_name=last_name,
+                        username=username,
+                        password=password,
+                        email=username
+                    )
+                except Exception as e:
+                    return render(request, 'registerUser.html', {
+                        'forms': e,
+                        'fname': first_name,
+                        'lname': last_name,
+                        'uname': username,
+                        'pword': password,
+                        'dept': Department,
+                        'batch': BatchNumber,
+                        'gender': Gender
+                    })
+
                 user.save()
 
                 addUser = AddUserTB.objects.create(
