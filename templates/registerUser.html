@@ -46,8 +46,12 @@
                                 <label for="Department" class="block text-gray-700 text-xs font-medium">SCHOOL/DEPARTMENT</label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar"
                                         id="Department" name="Department" >
+=======
+                                <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" id="Department" name="Department" required>
+>>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
 =======
                                 <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" id="Department" name="Department" required>
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
@@ -68,6 +72,7 @@
 
 
                             <div class="">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                                 <label for="BatchNumber" class="block text-gray-700 text-xs font-medium">BATCH
@@ -99,12 +104,22 @@
                             <div class="">
                                 <label for="Gender" class="block text-gray-700 text-xs font-medium">GENDER: </label>
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
+=======
+                                <label for="BatchNumber" class="block text-gray-700 text-xs font-medium">BATCH NUMBER</label>
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="number" value="{{ batch }}" name="BatchNumber" id="BatchNumber" required>
+                            </div>
+                            <div class="">
+                                <label for="Gender" class="block text-gray-700 text-xs font-medium">GENDER: </label>
+>>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
                                 <select class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" id="Gender" name="Gender" required>
                                   <option value="female" {% if gender == "female" %} selected {% endif %}>Female</option>
                                   <option value="male" {% if gender == "male" %} selected {% endif %}>Male</option>
                                   <option value="other" {% if gender == "other" %} selected {% endif %}>Other</option>
                                   <option value="anonymous" {% if gender == "anonymous" %} selected {% endif %}>Prefer Not To Say</option>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
+=======
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
 =======
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
@@ -115,6 +130,7 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="">
                                 <label for="username" class="block text-gray-700 text-xs font-medium">USERNAME</label>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                                 <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="email"
@@ -138,12 +154,20 @@
                                 <label for="password" class="block text-gray-700 text-xs font-medium">PASSWORD</label>
                                 <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="password" value="{{ pword }}" name="password" id="password" required>
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
+=======
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="email" value="{{ uname }}" name="username" id="username" required>
+                            </div>
+                            <div class="">
+                                <label for="password" class="block text-gray-700 text-xs font-medium">PASSWORD</label>
+                                <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="password" value="{{ pword }}" name="password" id="password" required>
+>>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
 
                             {# ORIGINAL #}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                             <a href="#" class="buttonBlack text-center px-30 py-1.5" id="cancelButton"
@@ -175,6 +199,8 @@
 =======
 =======
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
+=======
+>>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
                             <a href="{% url 'UserLogin' %}" class="buttonBlack text-center px-30 py-1.5" id="cancelButton">Back</a>
                             <button class="buttonGreen px-30 py-1.5" type="submit" >Submit</button>
                             
@@ -182,6 +208,9 @@
 {#                            <a href="" class="buttonBlack text-center px-30 py-1.5" id="cancelButton">Back</a>#}
 {#                            <button class="buttonGreen px-30 py-1.5" type="submit" id="submitButton">Submit</button>#}
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
+=======
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
 =======
 >>>>>>> parent of ad9487d (register form with confirmation buttons sheesh)
