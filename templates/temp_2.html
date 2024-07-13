@@ -285,28 +285,28 @@
     }
 
     {# FORM REGISTER #}
-    document.getElementById('registerButton').addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent the default form submit
+    function registerConfirm() {
 
-                // Assuming you want to check if all fields are filled in
-                var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
-                var department = document.getElementById('department').value;
-                var batchNumber = document.getElementById('batchNumber').value;
-                var gender = document.getElementById('gender').value;
 
-                // ...add other fields as needed
+        // Assuming you want to check if all fields are filled in
+        var test = "test";
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var department = document.getElementById('Department').value;
+        var batchNumber = document.getElementById('BatchNumber').value;
+        var gender = document.getElementById('Gender').value;
+        
 
-                // Check if the required fields are filled in
-                if (lastName && firstName && email && username) {
-                    // Logic for when all fields are filled
-                    
-                } else {
-                    // If not all fields are filled, show an error modal
-
-                }
-
-            });
+        // Check if the required fields are filled in
+        {#if (username && password && department && batchNumber && gender) {#}
+        {#    // Logic for when all fields are filled#}
+        {#    openSubmitModal()#}
+        {##}
+        {#} else {#}
+        {#    // If not all fields are filled, show an error modal#}
+        {#    alert("This is an alert message box.");#}
+        {#}#}
+    }
 </script>
 </body>
 </html>
