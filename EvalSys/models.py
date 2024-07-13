@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 
 class AddUserTB(models.Model):
     eval_user = models.OneToOneField(User, on_delete=models.CASCADE)
-    Department = models.CharField(max_length=100, null=False, blank=False)
-    BatchNumber = models.IntegerField(null=False, blank=False)
+    Department = models.CharField(max_length=100, null=True, blank=True)
+    BatchNumber = models.IntegerField(null=True, blank=True)
     Gender = models.CharField(max_length=50, null=False, blank=False)
 
     def __str__(self):
