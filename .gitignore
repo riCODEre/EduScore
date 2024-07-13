@@ -2,8 +2,6 @@ venv/
 requirements.txt
 __pycache__/
 *.pyc
-requirements.txt
-*.pyc
 /EduScore/__pycache__
 /EvalSys/migrations/__pycache__
 .idea/EduScore.iml
