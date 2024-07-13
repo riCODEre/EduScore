@@ -283,6 +283,30 @@
     function closeDeleteModal() {
         document.getElementById('deleteModal').classList.add('hidden');
     }
+
+    {# FORM REGISTER #}
+    document.getElementById('registerButton').addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent the default form submit
+
+                // Assuming you want to check if all fields are filled in
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                var department = document.getElementById('department').value;
+                var batchNumber = document.getElementById('batchNumber').value;
+                var gender = document.getElementById('gender').value;
+
+                // ...add other fields as needed
+
+                // Check if the required fields are filled in
+                if (lastName && firstName && email && username) {
+                    // Logic for when all fields are filled
+                    
+                } else {
+                    // If not all fields are filled, show an error modal
+
+                }
+
+            });
 </script>
 </body>
 </html>
