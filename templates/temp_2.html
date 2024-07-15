@@ -295,17 +295,33 @@
         var department = document.getElementById('Department').value;
         var batchNumber = document.getElementById('BatchNumber').value;
         var gender = document.getElementById('Gender').value;
-        
+
+        {#alert(gender);#}
+        var errors = [];
 
         // Check if the required fields are filled in
-        {#if (username && password && department && batchNumber && gender) {#}
-        {#    // Logic for when all fields are filled#}
-        {#    openSubmitModal()#}
-        {##}
-        {#} else {#}
-        {#    // If not all fields are filled, show an error modal#}
-        {#    alert("This is an alert message box.");#}
-        {#}#}
+        if (!username) {
+            errors.push("Username is required.");
+        }
+        if (!password) {
+            errors.push("Password is required.");
+        }
+        if (!department) {
+            errors.push("Department is required.");
+        }
+        if (!batchNumber) {
+            errors.push("Batch Number is required.");
+        }
+        if (!gender) {
+            errors.push("Gender is required.");
+        }
+
+        if (errors.length > 0) {
+            alert(errors.join("\n"));
+        } else {
+            // If no errors, open the submit modal
+            openSubmitModal();
+        }
     }
 </script>
 </body>
