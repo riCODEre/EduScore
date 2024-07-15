@@ -20,6 +20,10 @@
                 @apply transition-all duration-300 hover:text-lg hover:text-green-300 px-4 py-1.5;
             }
 
+             .headerFooter2 {
+                @apply transition-all duration-300 hover:text-green-300 px-4 py-1.5;
+            }
+
 
             .transitionGreen500 {
                 @apply transition duration-300 hover:text-green-500;
@@ -86,11 +90,6 @@
                 @apply bg-white rounded-full text-green-900 transition duration-300 hover:bg-black hover:text-white;
             }
 
-            .buttonWhite {
-                @apply text-[15px] transition-all duration-300 hover:text-[17px]
-            }
-
-
             .searchBar {
                 @apply transition-all duration-200 outline outline-gray-100 hover:outline-black
             }
@@ -152,13 +151,13 @@
 <footer class="bg-green-800 text-white p-3">
     <div class="container mx-auto text-center">
         <div class="mb-2">
-            <a href="{% url 'SearchProf' %}" class="headerFooter">Home</a>
+            <a href="{% url 'SearchProf' %}" class="headerFooter2">Home</a>
             {% if user.is_authenticated %}
-                <a href="{% url 'Bookmark' %}" class="headerFooter">Bookmarks</a>
+                <a href="{% url 'Bookmark' %}" class="headerFooter2">Bookmarks</a>
             {% endif %}
-            <a href="{% url 'about' %}" class="headerFooter">About</a>
-            <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
-            <a href="{% url 'PPolicy' %}" class="headerFooter">Privacy Policy</a>
+            <a href="{% url 'about' %}" class="headerFooter2">About</a>
+            <a href="{% url 'contact' %}" class="headerFooter2">Contact</a>
+            <a href="{% url 'PPolicy' %}" class="headerFooter2">Privacy Policy</a>
         </div>
         <div class="mb-2">
             <div>Contact us: info@eduscore.com</div>
