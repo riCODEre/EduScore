@@ -119,6 +119,15 @@
                                 </div>
                             </div>
 
+                            {# ERROR MODAL #}
+                            <div id="errorModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+                                <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
+                                    <div class="mb-4">The following fields are required:</div>
+{#                                    errorList from temp-2.html#}
+                                    <ul id="errorList" class="mb-4 text-red-600 text-left list-disc list-inside"></ul>
+                                    <a onclick="closeErrorModal()" class="buttonModal bg-gray-500 text-white px-5 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">Close</a>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

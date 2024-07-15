@@ -302,6 +302,10 @@
         // Check if the required fields are filled in
         if (!username) {
             errors.push("Username is required.");
+            
+            {#check if username ends with @benilde.edu.ph#}
+        } else if (!username.endsWith('@benilde.edu.ph')) {
+            errors.push("Username must end with '@benilde.edu.ph'.");
         }
         if (!password) {
             errors.push("Password is required.");
@@ -317,11 +321,27 @@
         }
 
         if (errors.length > 0) {
-            alert(errors.join("\n"));
+            // if there is more than one error being pushed, puts them in "li" then shows them in ErrorModal as a list
+            var errorList = document.getElementById('errorList');
+            errorList.innerHTML = '';
+            errors.forEach(function(error) {
+                var li = document.createElement('li');
+                li.textContent = error;
+                errorList.appendChild(li);
+            });
+            openErrorModal();
         } else {
             // If no errors, open the submit modal
             openSubmitModal();
         }
+    }
+    
+    function openErrorModal() {
+        document.getElementById('errorModal').classList.remove('hidden');
+    }
+    
+    function closeErrorModal() {
+        document.getElementById('errorModal').classList.add('hidden');
     }
 </script>
 </body>
