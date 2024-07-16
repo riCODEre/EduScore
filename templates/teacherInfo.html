@@ -5,138 +5,299 @@
 {% endblock %}
 
 {% block content %}
-    <div>
+    <div class="mt-5 flex justify-center">
+        <div class="p-10 w-full max-w-5xl">
+            <div class="grid grid-cols-6 gap-4 w-full">
+                <div class="col-span-4 flex flex-col">
+                    <div class="">
+                        <div>
+                            <h1 class="text-6xl font-bold text-green-900 mb-2">{{ prof.FirstName }} {{ prof.LastName }}</h1>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6 mt-5">
+                        <div class="flex">
+                            <b>GENDER:</b> <span class="ml-2">{{ prof.Gender }}</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6">
+                        <div class="mb-2 col-span-3">
+                            <b>DEPARTMENT:</b> <span class="ml-2">{{ prof.Department }}</span>
+                        </div>
+                        <div class="col-span-2 flex">
+                            <b>STATUS:</b> <span class="ml-2">{{ prof.EmpStatus }}</span>
+                        </div>
+                    </div>
 
-        <div class="grid grid-cols-6 gap-4 w-full mt-5">
-            <div class="col-span-5 flex flex-col">
-                <div class="">
-                    <div>
-                        <h1 class="text-6xl font-bold text-green-900 mb-2">{{ prof.FirstName }} {{ prof.LastName }}</h1>
-                    </div>
-                </div>
-                <div class="grid grid-cols-6 mt-5">
+{#                    <div class="grid grid-cols-6 mt-5">#}
+{##}
+{#                        <div class="mb-2 col-span-3">#}
+{#                            <b>DIFFICULTY: </b>#}
+{#                            <span#}
+{#                                class="#}
+{#                                    ml-2 px-1 py-1 rounded-sm#}
+{#                                    {% if AllEvalRecs.Average_Difficulty < 1 %}bg-red-600 text-white#}
+{#                                    {% elif AllEvalRecs.Average_Difficulty >= 1 and AllEvalRecs.Average_Difficulty < 2 %}bg-orange-500 text-white#}
+{#                                    {% elif AllEvalRecs.Average_Difficulty >= 2 and AllEvalRecs.Average_Difficulty < 3 %}bg-yellow-500#}
+{#                                    {% elif AllEvalRecs.Average_Difficulty >= 3 and AllEvalRecs.Average_Difficulty < 4 %}bg-green-300#}
+{#                                    {% elif AllEvalRecs.Average_Difficulty >= 4 %}bg-emerald-700 text-white#}
+{#                                    {% endif %}#}
+{#                            ">{{ AllEvalRecs.Average_Difficulty }}</span>#}
+{#                        </div>#}
+{#                        <div class="col-span-2">#}
+{#                            <b>BIGSKY USAGE:</b>#}
+{#                            <span#}
+{#                                class="#}
+{#                                    ml-2 px-1 py-1 rounded-sm#}
+{#                                    {% if AllEvalRecs.Average_BSUsage < 1 %}bg-red-600 text-white#}
+{#                                    {% elif AllEvalRecs.Average_BSUsage >= 1 and AllEvalRecs.Average_BSUsage < 2 %}bg-orange-500 text-white#}
+{#                                    {% elif AllEvalRecs.Average_BSUsage >= 2 and AllEvalRecs.Average_BSUsage < 3 %}bg-yellow-500#}
+{#                                    {% elif AllEvalRecs.Average_BSUsage >= 3 and AllEvalRecs.Average_BSUsage < 4 %}bg-green-300#}
+{#                                    {% elif AllEvalRecs.Average_BSUsage >= 4 %}bg-emerald-700 text-white#}
+{#                                    {% endif %}#}
+{#                                ">{{ AllEvalRecs.Average_BSUsage }}#}
+{#                            </span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="grid grid-cols-6">#}
+{#                        <div class="mb-2 col-span-3">#}
+{#                            <b>ATTENDANCE: </b>#}
+{#                            <span#}
+{#                                class="#}
+{#                                    ml-2 px-1 py-1 rounded-sm#}
+{#                                    {% if AllEvalRecs.Average_Attendance < 1 %}bg-red-600 text-white#}
+{#                                    {% elif AllEvalRecs.Average_Attendance >= 1 and AllEvalRecs.Average_Attendance < 2 %}bg-orange-500 text-white#}
+{#                                    {% elif AllEvalRecs.Average_Attendance >= 2 and AllEvalRecs.Average_Attendance < 3 %}bg-yellow-500#}
+{#                                    {% elif AllEvalRecs.Average_Attendance >= 3 and AllEvalRecs.Average_Attendance < 4 %}bg-green-300#}
+{#                                    {% elif AllEvalRecs.Average_Attendance >= 4 %}bg-emerald-700 text-white#}
+{#                                    {% endif %}#}
+{#                                ">{{ AllEvalRecs.Average_Attendance }}</span>#}
+{#                        </div>#}
+{#                        <div class="col-span-2">#}
+{#                            <b>GRADE GIVEN:</b>#}
+{#                            <span#}
+{#                                class="#}
+{#                                    ml-2 px-1 py-1 rounded-sm#}
+{#                                    {% if AllEvalRecs.Average_Grades < 1 %}bg-red-600 text-white#}
+{#                                    {% elif AllEvalRecs.Average_Grades >= 1 and AllEvalRecs.Average_Grades < 2 %}bg-orange-500 text-white#}
+{#                                    {% elif AllEvalRecs.Average_Grades >= 2 and AllEvalRecs.Average_Grades < 3 %}bg-yellow-500#}
+{#                                    {% elif AllEvalRecs.Average_Grades >= 3 and AllEvalRecs.Average_Grades < 4 %}bg-green-300#}
+{#                                    {% elif AllEvalRecs.Average_Grades >= 4 %}bg-emerald-700 text-white#}
+{#                                    {% endif %}#}
+{#                                ">{{ AllEvalRecs.Average_Grades }}#}
+{#                            </span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="grid grid-cols-6">#}
+{#                        <div class="mb-2 col-span-3">#}
+{#                            <b>RETAKE AVERAGE:</b> <span class="ml-2">{{ Average_Retake }}</span>#}
+{#                        </div>#}
+{#                        <div class="col-span-3">#}
+{#                            <b>TOTAL EVALS RECEIVED:</b> <span class="ml-2">{{ TotalNumEvals }}</span>#}
+{#                        </div>#}
+{#                    </div>#}
 
-                    <div class="mb-2 col-span-3">
-                        <b>DIFFICULTY: </b> <span class="ml-2">{{ AllEvalRecs.Average_Difficulty }}</span>
-                    </div>
-                    <div class="col-span-2 flex">
-                        <b>BIGSKY USAGE:</b> <span class="ml-2">{{ AllEvalRecs.Average_BSUsage }}</span>
-                    </div>
+
+                {# bookmark turn to font awesome icon #}
+                <div class="col-span-2 mt-3">
+                    {% if Mark == False %}
+                        <div>
+                            <a href="{% url 'AddBM' prof.id %}" class="buttonGreen text-white px-8 py-2 x-2 rounded-xl x-2">Bookmark Me!</a>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a href="{% url 'DelBM' prof.id %}" class="buttonGreen text-white px-8 py-2 rounded-xl x-2">Remove Bookmark</a>
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="grid grid-cols-6">
-                    <div class="mb-2 col-span-3">
-                        <b>ATTENDANCE: </b> <span class="ml-2">{{ AllEvalRecs.Average_Attendance }}</span>
-                    </div>
-                    <div class="col-span-2 flex">
-                        <b>GRADE GIVEN:</b> <span class="ml-2">{{ AllEvalRecs.Average_Grades }}</span>
-                    </div>
                 </div>
-                <div class="grid grid-cols-6">
-                    <div class="mb-2 col-span-3">
-                        <b>RETAKE AVERAGE:</b> <span class="ml-2">{{ Average_Retake }}</span>
-                    </div>
-                    <div class="col-span-2 flex">
-                        <b>TOTAL EVALS RECEIVED:</b> <span class="ml-2">{{ TotalNumEvals }}</span>
+
+{#                <div class="flex justify-center items-center col-span-2">#}
+                <div class="flex justify-end items-start">
+                    <div class="grid grid-rows-2">
+                        <div class="
+                            px-6 py-6 rounded-sm text-7xl
+                            {% if AllEvalRecs.Average_Rate < 1 %}bg-red-600 text-white
+                            {% elif AllEvalRecs.Average_Rate >= 1 and AllEvalRecs.Average_Rate < 2 %}bg-orange-500 text-white
+                            {% elif AllEvalRecs.Average_Rate >= 2 and AllEvalRecs.Average_Rate < 3 %}bg-yellow-500
+                            {% elif AllEvalRecs.Average_Rate >= 3 and AllEvalRecs.Average_Rate < 4 %}bg-green-300
+                            {% elif AllEvalRecs.Average_Rate >= 4 %}bg-emerald-700 text-white
+                            {% endif %}
+                        ">
+                            {{ AllEvalRecs.Average_Rate }}
+                        </div>
+                        <div class="text-center"><b>Overall Rating</b></div>
                     </div>
                 </div>
             </div>
-            <div class="flex items-start">
-                <div class="bg-green-800 px-5 py-5 rounded-sm text-white text-3xl">{{ AllEvalRecs.Average_Rate }}</div>
-            </div>
-        </div>
 
 
-        {# bookmark turn to font awesome icon #}
-        <div class="flex justify-between space-x-3">
-            {% if Mark == False %}
-                <div>
-                    <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
-                </div>
-            {% else %}
-                <div>
-                    <a href="{% url 'DelBM' prof.id %}">Remove Bookmark</a>
-                </div>
-            {% endif %}
-        </div>
-    
-        {# INDVIDUAL EVALUATIONS #}
-        <div class="space-y-[50px]">
-            {% for item in TopTagRecs %}
-                <p>{{ item.TagID__TagName }}</p>
-            {% endfor %}
-        </div>
-
-
-        {# INDIVIDUAL EVALUATIONS #}
-        {% if showAdd == True or showAdd == None %}
-            <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
-        {% endif %}
-        {% if showEdit == True %}
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Course</th>
-                    <th>Edit</th>
-                </tr>
-                {% for record in Evals %}
-                    <tr>
-                        <td>{{ record.id }}</td>
-                        <td>{{ record.CourseID.CourseCode }}</td>
-                        <td>
-                            <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
-
-    </div>
-    <div>
-        <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
-            {% csrf_token %}
-            <select name="Type" id="Type">
-                <option value="Year" {% if type == "Year" %} selected {% endif %}>Year</option>
-                <option value="Term" {% if type == "Term" %} selected {% endif %}>Term</option>
-                <option value="ClassModality" {% if type == "ClassModality" %} selected {% endif %}>Class Modality</option>
-                <option value="OverallProfRate" {% if type == "OverallProfRate" %} selected {% endif %}>Overall Prof Rate</option>
-                <option value="ProfDifficulty" {% if type == "ProfDifficulty" %} selected {% endif %}>Prof Difficulty</option>
-                <option value="RetakeProf" {% if type == "RetakeProf" %} selected {% endif %}>Retake Prof</option>
-                <option value="BigSkyUsageRate" {% if type == "BigSkyUsageRate" %} selected {% endif %}>Big Sky Usage Rate</option>
-                <option value="ProfAttendance" {% if type == "ProfAttendance" %} selected {% endif %}>Prof Attendance</option>
-                <option value="GradeReceived" {% if type == "GradeReceived" %} selected {% endif %}>Grade Received</option>
-                <option value="DateAdded" {% if type == "DateAdded" %} selected {% endif %}>Date Added</option>
-            </select>
-            <select name="Arrange" id="Arrange">
-                <option value="Asc" {% if arrange == "Asc" %} selected {% endif %}>Ascending</option>
-                <option value="Desc" {% if arrange == "Desc" %} selected {% endif %}>Descending</option>
-            </select>
-            <button type="submit" class="bg-green-700 text-white">Submit</button>
-        </form>
-    </div>
-    <div class="">
-        {% for eval in AllStudentEvals %}
-            <div class="bg-white shadow-md m-3">
-                <p>Date Added: {{ eval.DateAdded }}</p>
-                <p class="font-bold">{{ eval.id }}</p>
-                <p>Overall Rate: {{ eval.OverallProfRate }}</p>
-                <p>Prof Difficulty: {{ eval.ProfDifficulty }}</p>
-                <p>Grade Received: {{ eval.GradeReceived }}</p>
-                <p>Course Code: {{ eval.CourseID.CourseCode }}</p>
-                <p>Year: {{eval.Year }}</p>
-                <p>Term: {{ eval.Term }}</p>
-                <p>Class Modality: {{ eval.ClassModality }}</p>
-                <p>Big Sky Usage Rate: {{ eval.BigSkyUsageRate }}</p>
-                <p>Prof Attendance: {{ eval.ProfAttendance }}</p>
-                <p>Retake Prof: {{ eval.RetakeProf }}</p>
+            {# STATS BOIIII #}
+            <div class="p-8 bg-gray-50 rounded-md border shadow-lg">
                 <div class="flex justify-center">
-                   {% for tag in AllEvalTags %}
-                        {% if tag.EvaluationID.id == eval.id %}
-                            <p>{{ tag.TagID.TagName }}</p>
-                        {% endif %}
-                    {% endfor %}
+                    <h1 class="text-4xl font-bold text-green-900 mb-2">STATS</h1>
                 </div>
+                <div>
+                    <div class="mb-2">
+                        <div class="flex justify-between items-center">
+                            <b>DIFFICULTY: </b>
+                            <span
+                                class="
+                                    ml-2 px-1 py-1 rounded-sm
+                                    {% if AllEvalRecs.Average_Difficulty < 1 %}bg-red-600 text-white
+                                    {% elif AllEvalRecs.Average_Difficulty >= 1 and AllEvalRecs.Average_Difficulty < 2 %}bg-orange-500 text-white
+                                    {% elif AllEvalRecs.Average_Difficulty >= 2 and AllEvalRecs.Average_Difficulty < 3 %}bg-yellow-500
+                                    {% elif AllEvalRecs.Average_Difficulty >= 3 and AllEvalRecs.Average_Difficulty < 4 %}bg-green-300
+                                    {% elif AllEvalRecs.Average_Difficulty >= 4 %}bg-emerald-700 text-white
+                                    {% endif %}
+                            ">{{ AllEvalRecs.Average_Difficulty }}</span>
+                        </div>
+                    </div>
 
+                    <div class="mb-2">
+                        <div class="flex justify-between items-center bg-green-100">
+                            <b>BIGSKY USAGE:</b>
+                            <span
+                                class="
+                                    ml-2 px-1 py-1 rounded-sm
+                                    {% if AllEvalRecs.Average_BSUsage < 1 %}bg-red-600 text-white
+                                    {% elif AllEvalRecs.Average_BSUsage >= 1 and AllEvalRecs.Average_BSUsage < 2 %}bg-orange-500 text-white
+                                    {% elif AllEvalRecs.Average_BSUsage >= 2 and AllEvalRecs.Average_BSUsage < 3 %}bg-yellow-500
+                                    {% elif AllEvalRecs.Average_BSUsage >= 3 and AllEvalRecs.Average_BSUsage < 4 %}bg-green-300
+                                    {% elif AllEvalRecs.Average_BSUsage >= 4 %}bg-emerald-700 text-white
+                                    {% endif %}
+                                ">{{ AllEvalRecs.Average_BSUsage }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="flex justify-between items-center">
+                            <b>ATTENDANCE: </b>
+                            <span
+                                class="
+                                    ml-2 px-1 py-1 rounded-sm
+                                    {% if AllEvalRecs.Average_Attendance < 1 %}bg-red-600 text-white
+                                    {% elif AllEvalRecs.Average_Attendance >= 1 and AllEvalRecs.Average_Attendance < 2 %}bg-orange-500 text-white
+                                    {% elif AllEvalRecs.Average_Attendance >= 2 and AllEvalRecs.Average_Attendance < 3 %}bg-yellow-500
+                                    {% elif AllEvalRecs.Average_Attendance >= 3 and AllEvalRecs.Average_Attendance < 4 %}bg-green-300
+                                    {% elif AllEvalRecs.Average_Attendance >= 4 %}bg-emerald-700 text-white
+                                    {% endif %}
+                                ">{{ AllEvalRecs.Average_Attendance }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="flex justify-between items-center bg-green-100">
+                            <b>GRADE GIVEN: </b>
+                            <span
+                                class="
+                                    ml-2 px-1 py-1 rounded-sm
+                                    {% if AllEvalRecs.Average_Grades < 1 %}bg-red-600 text-white
+                                    {% elif AllEvalRecs.Average_Grades >= 1 and AllEvalRecs.Average_Grades < 2 %}bg-orange-500 text-white
+                                    {% elif AllEvalRecs.Average_Grades >= 2 and AllEvalRecs.Average_Grades < 3 %}bg-yellow-500
+                                    {% elif AllEvalRecs.Average_Grades >= 3 and AllEvalRecs.Average_Grades < 4 %}bg-green-300
+                                    {% elif AllEvalRecs.Average_Grades >= 4 %}bg-emerald-700 text-white
+                                    {% endif %}
+                                ">{{ AllEvalRecs.Average_Grades }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="flex justify-between items-center">
+                            <b>RETAKE AVERAGE:</b> <span class="ml-2">{{ Average_Retake }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="flex justify-between items-center bg-green-100">
+                            <b>TOTAL EVALS RECEIVED:</b> <span class="ml-2">{{ TotalNumEvals }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
+            {# INDIVIDUAL TAGS #}
+            <div class="space-y-4 mb-5">
+                {% for item in TopTagRecs %}
+                    <div class="inline-block text-xs bg-emerald-800 text-white font-semibold px-3 py-1 rounded-full shadow-md">
+                        {{ item.TagID__TagName }}
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            {# INDIVIDUAL EVALUATIONS #}
+            {% if showAdd == True or showAdd == None %}
+                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
+            {% endif %}
+            {% if showEdit == True %}
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Course</th>
+                        <th>Edit</th>
+                    </tr>
+                    {% for record in Evals %}
+                        <tr>
+                            <td>{{ record.id }}</td>
+                            <td>{{ record.CourseID.CourseCode }}</td>
+                            <td>
+                                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+
+            <div>
+                <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
+                    {% csrf_token %}
+                    <select name="Type" id="Type">
+                        <option value="Year" {% if type == "Year" %} selected {% endif %}>Year</option>
+                        <option value="Term" {% if type == "Term" %} selected {% endif %}>Term</option>
+                        <option value="ClassModality" {% if type == "ClassModality" %} selected {% endif %}>Class Modality</option>
+                        <option value="OverallProfRate" {% if type == "OverallProfRate" %} selected {% endif %}>Overall Prof Rate</option>
+                        <option value="ProfDifficulty" {% if type == "ProfDifficulty" %} selected {% endif %}>Prof Difficulty</option>
+                        <option value="RetakeProf" {% if type == "RetakeProf" %} selected {% endif %}>Retake Prof</option>
+                        <option value="BigSkyUsageRate" {% if type == "BigSkyUsageRate" %} selected {% endif %}>Big Sky Usage Rate</option>
+                        <option value="ProfAttendance" {% if type == "ProfAttendance" %} selected {% endif %}>Prof Attendance</option>
+                        <option value="GradeReceived" {% if type == "GradeReceived" %} selected {% endif %}>Grade Received</option>
+                        <option value="DateAdded" {% if type == "DateAdded" %} selected {% endif %}>Date Added</option>
+                    </select>
+                    <select name="Arrange" id="Arrange">
+                        <option value="Asc" {% if arrange == "Asc" %} selected {% endif %}>Ascending</option>
+                        <option value="Desc" {% if arrange == "Desc" %} selected {% endif %}>Descending</option>
+                    </select>
+                    <button type="submit" class="bg-green-700 text-white">Submit</button>
+                </form>
+            </div>
+            <div class="">
+                {% for eval in AllStudentEvals %}
+                    <div class="bg-white shadow-md m-3">
+                        <p>Date Added: {{ eval.DateAdded }}</p>
+                        <p class="font-bold">{{ eval.id }}</p>
+                        <p>Overall Rate: {{ eval.OverallProfRate }}</p>
+                        <p>Prof Difficulty: {{ eval.ProfDifficulty }}</p>
+                        <p>Grade Received: {{ eval.GradeReceived }}</p>
+                        <p>Course Code: {{ eval.CourseID.CourseCode }}</p>
+                        <p>Year: {{eval.Year }}</p>
+                        <p>Term: {{ eval.Term }}</p>
+                        <p>Class Modality: {{ eval.ClassModality }}</p>
+                        <p>Big Sky Usage Rate: {{ eval.BigSkyUsageRate }}</p>
+                        <p>Prof Attendance: {{ eval.ProfAttendance }}</p>
+                        <p>Retake Prof: {{ eval.RetakeProf }}</p>
+                        <div class="flex justify-center">
+                           {% for tag in AllEvalTags %}
+                                {% if tag.EvaluationID.id == eval.id %}
+                                    <p>{{ tag.TagID.TagName }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}
