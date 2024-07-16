@@ -6,8 +6,48 @@
 
 {% block content %}
     <div>
+
+        <div class="grid grid-cols-6 gap-4 w-full mt-5">
+            <div class="col-span-5 flex flex-col">
+                <div class="">
+                    <div>
+                        <h1 class="text-6xl font-bold text-green-900 mb-2">{{ prof.FirstName }} {{ prof.LastName }}</h1>
+                    </div>
+                </div>
+                <div class="grid grid-cols-6 mt-5">
+
+                    <div class="mb-2 col-span-3">
+                        <b>DIFFICULTY: </b> <span class="ml-2">{{ AllEvalRecs.Average_Difficulty }}</span>
+                    </div>
+                    <div class="col-span-2 flex">
+                        <b>BIGSKY USAGE:</b> <span class="ml-2">{{ AllEvalRecs.Average_BSUsage }}</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-6">
+                    <div class="mb-2 col-span-3">
+                        <b>ATTENDANCE: </b> <span class="ml-2">{{ AllEvalRecs.Average_Attendance }}</span>
+                    </div>
+                    <div class="col-span-2 flex">
+                        <b>GRADE GIVEN:</b> <span class="ml-2">{{ AllEvalRecs.Average_Grades }}</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-6">
+                    <div class="mb-2 col-span-3">
+                        <b>RETAKE AVERAGE:</b> <span class="ml-2">{{ Average_Retake }}</span>
+                    </div>
+                    <div class="col-span-2 flex">
+                        <b>TOTAL EVALS RECEIVED:</b> <span class="ml-2">{{ TotalNumEvals }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <div class="bg-green-800 px-5 py-5 rounded-sm text-white text-3xl">{{ AllEvalRecs.Average_Rate }}</div>
+            </div>
+        </div>
+
+
+        {# bookmark turn to font awesome icon #}
         <div class="flex justify-between space-x-3">
-            <p>{{ prof.FirstName }} {{ prof.LastName }}</p>
             {% if Mark == False %}
                 <div>
                     <a href="{% url 'AddBM' prof.id %}">Bookmark Me!</a>
@@ -18,22 +58,16 @@
                 </div>
             {% endif %}
         </div>
+    
+        {# INDVIDUAL EVALUATIONS #}
         <div class="space-y-[50px]">
-            {# Put here all the overall rating #}
-            <p>Overall: {{ AllEvalRecs.Average_Rate }}</p>
-            <p>Difficulty: {{ AllEvalRecs.Average_Difficulty }}</p>
-            <p>BigSky Usage: {{ AllEvalRecs.Average_BSUsage }}</p>
-            <p>Attendance: {{ AllEvalRecs.Average_Attendance }}</p>
-            <p>Grade Given: {{ AllEvalRecs.Average_Grades }}</p>
-            <p>Retake: {{ Average_Retake }}%</p>
-            <p>Total Evals Received: {{ TotalNumEvals }}</p>
             {% for item in TopTagRecs %}
                 <p>{{ item.TagID__TagName }}</p>
-
             {% endfor %}
-
-
         </div>
+
+
+        {# INDIVIDUAL EVALUATIONS #}
         {% if showAdd == True or showAdd == None %}
             <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
         {% endif %}
