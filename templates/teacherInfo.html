@@ -14,148 +14,219 @@
                             <h1 class="text-6xl font-bold text-green-900 mb-2">{{ prof.FirstName }} {{ prof.LastName }}</h1>
                         </div>
                     </div>
-                    <div class="grid grid-cols-6 mt-5">
-                        <div class="flex">
+                    <div class="grid grid-cols-6 mt-5 mb-1">
+                        <div class="flex col-span-3">
                             <b>GENDER:</b> <span class="ml-2">{{ prof.Gender }}</span>
+                        </div>
+                        <div class=" col-span-2 flex">
+                            <b>STATUS:</b> <span class="ml-2">{{ prof.EmpStatus }}</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-6">
                         <div class="mb-2 col-span-3">
                             <b>DEPARTMENT:</b> <span class="ml-2">{{ prof.Department }}</span>
                         </div>
-                        <div class="col-span-2 flex">
-                            <b>STATUS:</b> <span class="ml-2">{{ prof.EmpStatus }}</span>
-                        </div>
-                    </div>
-
-
-
-                {# bookmark turn to font awesome icon #}
-                <div class="col-span-2 mt-3">
-                    {% if Mark == False %}
-                        <div>
-                            <a href="{% url 'AddBM' prof.id %}" class="buttonGreen text-white px-8 py-2 x-2 rounded-xl x-2">Bookmark Me!</a>
-                        </div>
-                    {% else %}
-                        <div>
-                            <a href="{% url 'DelBM' prof.id %}" class="buttonGreen text-white px-8 py-2 rounded-xl x-2">Remove Bookmark</a>
-                        </div>
-                    {% endif %}
-                </div>
-                </div>
-
-{#                <div class="flex justify-center items-center col-span-2">#}
-                <div class="flex justify-end items-start">
-                    <div class="grid grid-rows-2">
-                        <div class="
-                            px-6 py-6 rounded-sm text-7xl
-                            {% if AllEvalRecs.Average_Rate < 1 %}bg-red-600 text-white
-                            {% elif AllEvalRecs.Average_Rate >= 1 and AllEvalRecs.Average_Rate < 2 %}bg-orange-500 text-white
-                            {% elif AllEvalRecs.Average_Rate >= 2 and AllEvalRecs.Average_Rate < 3 %}bg-yellow-500
-                            {% elif AllEvalRecs.Average_Rate >= 3 and AllEvalRecs.Average_Rate < 4 %}bg-green-300
-                            {% elif AllEvalRecs.Average_Rate >= 4 %}bg-emerald-700 text-white
+                        <div class="col-span-3">
+                            {% if Mark == False %}
+                                <div>
+                                    <a href="{% url 'AddBM' prof.id %}" class="text-[10px] text-center buttonBlue text-white px-8 py-2 x-2 rounded-xl x-2">Bookmark Me!</a>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <a href="{% url 'DelBM' prof.id %}" class="text-[10px] buttonBlue text-white px-8 py-2 rounded-xl x-2">Remove Bookmark</a>
+                                </div>
                             {% endif %}
-                        ">
-                            {{ AllEvalRecs.Average_Rate }}
                         </div>
-                        <div class="text-center"><b>Overall Rating</b></div>
                     </div>
+                </div>
+                <div class="col-span-2 flex justify-center mr-16">
+                    <img src="https://via.placeholder.com/150" class="w-36 h-36 rounded mt-2" alt="Placeholder Image">
                 </div>
             </div>
-
+            <div class="space-y-2 mt-1.5">
+                <div class="">Tags:</div>
+                <div class="inline-grid grid-cols-4 gap-3">
+                    {% for item in TopTagRecs %}
+                        <div class="text-center text-xs bg-emerald-800 text-white font-semibold px-1 py-1 rounded-full shadow-md">
+                            {{ item.TagID__TagName }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
             {# STATS BOIIII #}
-            <div class="p-8 bg-gray-50 rounded-md border shadow-lg">
-                <div class="flex justify-center">
-                    <h1 class="text-4xl font-bold text-green-900 mb-2">STATS</h1>
-                </div>
-                <div>
-                    <div class="mb-2">
-                        <div class="flex justify-between items-center">
-                            <b>DIFFICULTY: </b>
-                            <span
-                                class="
-                                    ml-2 px-1 py-1 rounded-sm
-                                    {% if AllEvalRecs.Average_Difficulty < 1 %}bg-red-600 text-white
-                                    {% elif AllEvalRecs.Average_Difficulty >= 1 and AllEvalRecs.Average_Difficulty < 2 %}bg-orange-500 text-white
-                                    {% elif AllEvalRecs.Average_Difficulty >= 2 and AllEvalRecs.Average_Difficulty < 3 %}bg-yellow-500
-                                    {% elif AllEvalRecs.Average_Difficulty >= 3 and AllEvalRecs.Average_Difficulty < 4 %}bg-green-300
-                                    {% elif AllEvalRecs.Average_Difficulty >= 4 %}bg-emerald-700 text-white
-                                    {% endif %}
-                            ">{{ AllEvalRecs.Average_Difficulty }}</span>
+            <div class="grid grid-cols-6 mt-5">
+                <div class="col-span-4">
+                    <div class=" p-8 bg-gray-50 rounded-md border shadow-lg max-w-xl mb-8">
+                        <div class="flex justify-center">
+                            <h1 class="text-4xl font-bold text-green-900 mb-2">STATS</h1>
                         </div>
-                    </div>
 
-                    <div class="mb-2">
-                        <div class="flex justify-between items-center bg-green-100">
-                            <b>BIGSKY USAGE:</b>
+                        <!-- Difficulty -->
+                        <div class="mb-2 flex justify-start items-center">
+                            <b class="w-32 mt-5">DIFFICULTY:</b>
                             <span
-                                class="
-                                    ml-2 px-1 py-1 rounded-sm
-                                    {% if AllEvalRecs.Average_BSUsage < 1 %}bg-red-600 text-white
-                                    {% elif AllEvalRecs.Average_BSUsage >= 1 and AllEvalRecs.Average_BSUsage < 2 %}bg-orange-500 text-white
-                                    {% elif AllEvalRecs.Average_BSUsage >= 2 and AllEvalRecs.Average_BSUsage < 3 %}bg-yellow-500
-                                    {% elif AllEvalRecs.Average_BSUsage >= 3 and AllEvalRecs.Average_BSUsage < 4 %}bg-green-300
-                                    {% elif AllEvalRecs.Average_BSUsage >= 4 %}bg-emerald-700 text-white
-                                    {% endif %}
-                                ">{{ AllEvalRecs.Average_BSUsage }}
+                                    class="
+                                            text-xs font-bold mt-5 px-1 py-1 rounded-sm
+                                            {% if AllEvalRecs.Average_Difficulty < 1 %}bg-red-600 text-white
+                                            {% elif AllEvalRecs.Average_Difficulty >= 1 and AllEvalRecs.Average_Difficulty < 2 %}bg-orange-500 text-white
+                                            {% elif AllEvalRecs.Average_Difficulty >= 2 and AllEvalRecs.Average_Difficulty < 3 %}bg-yellow-500
+                                            {% elif AllEvalRecs.Average_Difficulty >= 3 and AllEvalRecs.Average_Difficulty < 4 %}bg-green-300
+                                            {% elif AllEvalRecs.Average_Difficulty >= 4 %}bg-emerald-700 text-white
+                                            {% endif %}
+                                    ">{{ AllEvalRecs.Average_Difficulty }}</span>
+                            <div class="ml-4 flex-grow">
+                                <div class="relative pt-1">
+                                    <div class="flex mb-2 items-center justify-between">
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-900">
+                                0.0
                             </span>
-                        </div>
-                    </div>
-
-                    <div class="mb-2">
-                        <div class="flex justify-between items-center">
-                            <b>ATTENDANCE: </b>
-                            <span
-                                class="
-                                    ml-2 px-1 py-1 rounded-sm
-                                    {% if AllEvalRecs.Average_Attendance < 1 %}bg-red-600 text-white
-                                    {% elif AllEvalRecs.Average_Attendance >= 1 and AllEvalRecs.Average_Attendance < 2 %}bg-orange-500 text-white
-                                    {% elif AllEvalRecs.Average_Attendance >= 2 and AllEvalRecs.Average_Attendance < 3 %}bg-yellow-500
-                                    {% elif AllEvalRecs.Average_Attendance >= 3 and AllEvalRecs.Average_Attendance < 4 %}bg-green-300
-                                    {% elif AllEvalRecs.Average_Attendance >= 4 %}bg-emerald-700 text-white
-                                    {% endif %}
-                                ">{{ AllEvalRecs.Average_Attendance }}</span>
-                        </div>
-                    </div>
-
-                    <div class="mb-2">
-                        <div class="flex justify-between items-center bg-green-100">
-                            <b>GRADE GIVEN: </b>
-                            <span
-                                class="
-                                    ml-2 px-1 py-1 rounded-sm
-                                    {% if AllEvalRecs.Average_Grades < 1 %}bg-red-600 text-white
-                                    {% elif AllEvalRecs.Average_Grades >= 1 and AllEvalRecs.Average_Grades < 2 %}bg-orange-500 text-white
-                                    {% elif AllEvalRecs.Average_Grades >= 2 and AllEvalRecs.Average_Grades < 3 %}bg-yellow-500
-                                    {% elif AllEvalRecs.Average_Grades >= 3 and AllEvalRecs.Average_Grades < 4 %}bg-green-300
-                                    {% elif AllEvalRecs.Average_Grades >= 4 %}bg-emerald-700 text-white
-                                    {% endif %}
-                                ">{{ AllEvalRecs.Average_Grades }}
+                                        <span class="text-xs font-semibold inline-block text-green-900">
+                                4.0
                             </span>
+                                    </div>
+                                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                        <div class="relative flex-grow overflow-hidden h-2 text-xs bg-gray-200 rounded">
+                                            <div class="absolute inset-0 bg-green-500"
+                                                 style="width: {% widthratio AllEvalRecs.Average_Difficulty 4 100 %}%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mb-2">
-                        <div class="flex justify-between items-center">
-                            <b>RETAKE AVERAGE:</b> <span class="ml-2">{{ Average_Retake }}</span>
+                        <!-- Bigsky Usage -->
+                        <div class="mb-2 flex justify-start items-center">
+                            <b class="w-32 text-nowrap mt-5">BIGSKY USE:</b>
+                            <span
+                                    class="
+                                            text-xs font-bold mt-5 px-1 py-1 rounded-sm
+                                            {% if AllEvalRecs.Average_BSUsage < 1 %}bg-red-600 text-white
+                                            {% elif AllEvalRecs.Average_BSUsage >= 1 and AllEvalRecs.Average_BSUsage < 2 %}bg-orange-500 text-white
+                                            {% elif AllEvalRecs.Average_BSUsage >= 2 and AllEvalRecs.Average_BSUsage < 3 %}bg-yellow-500
+                                            {% elif AllEvalRecs.Average_BSUsage >= 3 and AllEvalRecs.Average_BSUsage < 4 %}bg-green-300
+                                            {% elif AllEvalRecs.Average_BSUsage >= 4 %}bg-emerald-700 text-white
+                                            {% endif %}
+                                        ">{{ AllEvalRecs.Average_BSUsage }}
+                                    </span>
+                            <div class="ml-4 flex-grow">
+                                <div class="relative pt-1">
+                                    <div class="flex mb-2 items-center justify-between">
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-900">
+                                0.0
+                            </span>
+                                        <span class="text-xs font-semibold inline-block text-green-900">
+                                4.0
+                            </span>
+                                    </div>
+                                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                        <div class="relative flex-grow overflow-hidden h-2 text-xs bg-gray-200 rounded">
+                                            <div class="absolute inset-0 bg-green-500"
+                                                 style="width: {% widthratio AllEvalRecs.Average_BSUsage 4 100 %}%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mb-2">
-                        <div class="flex justify-between items-center bg-green-100">
-                            <b>TOTAL EVALS RECEIVED:</b> <span class="ml-2">{{ TotalNumEvals }}</span>
+                        <!-- Attendance -->
+                        <div class="mb-2 flex justify-start items-center">
+                            <b class="w-32 mt-5">ATTENDANCE:</b>
+                            <span
+                                    class="
+                                            text-xs font-bold mt-5 px-1 py-1 rounded-sm
+                                            {% if AllEvalRecs.Average_Attendance < 1 %}bg-red-600 text-white
+                                            {% elif AllEvalRecs.Average_Attendance >= 1 and AllEvalRecs.Average_Attendance < 2 %}bg-orange-500 text-white
+                                            {% elif AllEvalRecs.Average_Attendance >= 2 and AllEvalRecs.Average_Attendance < 3 %}bg-yellow-500
+                                            {% elif AllEvalRecs.Average_Attendance >= 3 and AllEvalRecs.Average_Attendance < 4 %}bg-green-300
+                                            {% elif AllEvalRecs.Average_Attendance >= 4 %}bg-emerald-700 text-white
+                                            {% endif %}
+                                        ">{{ AllEvalRecs.Average_Attendance }}</span>
+                            <div class="ml-4 flex-grow">
+                                <div class="relative pt-1">
+                                    <div class="flex mb-2 items-center justify-between">
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-900">
+                                0.0
+                            </span>
+                                        <span class="text-xs font-semibold inline-block text-green-900">
+                                4.0
+                            </span>
+                                    </div>
+                                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                        <div class="relative flex-grow overflow-hidden h-2 text-xs bg-gray-200 rounded">
+                                            <div class="absolute inset-0 bg-green-500"
+                                                 style="width: {% widthratio AllEvalRecs.Average_Attendance 4 100 %}%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grade Given -->
+                        <div class="mb-2 flex justify-start items-center">
+                            <b class="w-32 text-nowrap mt-5">GRADE GIVEN:</b>
+                            <span
+                                    class="
+                                            text-xs font-bold mt-5 px-1 py-1 rounded-sm
+                                            {% if AllEvalRecs.Average_Grades < 1 %}bg-red-600 text-white
+                                            {% elif AllEvalRecs.Average_Grades >= 1 and AllEvalRecs.Average_Grades < 2 %}bg-orange-500 text-white
+                                            {% elif AllEvalRecs.Average_Grades >= 2 and AllEvalRecs.Average_Grades < 3 %}bg-yellow-500
+                                            {% elif AllEvalRecs.Average_Grades >= 3 and AllEvalRecs.Average_Grades < 4 %}bg-green-300
+                                            {% elif AllEvalRecs.Average_Grades >= 4 %}bg-emerald-700 text-white
+                                            {% endif %}
+                                        ">{{ AllEvalRecs.Average_Grades }}
+                                    </span>
+                            <div class="ml-4 flex-grow">
+                                <div class="relative pt-1">
+                                    <div class="flex mb-2 items-center justify-between">
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-900">
+                                0.0
+                            </span>
+                                        <span class="text-xs font-semibold inline-block text-green-900">
+                                4.0
+                            </span>
+                                    </div>
+                                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                        <div class="relative flex-grow overflow-hidden h-2 text-xs bg-gray-200 rounded">
+                                            <div class="absolute inset-0 bg-green-500"
+                                                 style="width: {% widthratio AllEvalRecs.Average_Grades 4 100 %}%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <div class="flex justify-start items-center">
+                                <b class="ml-9">RETAKE AVERAGE:</b> <span class="ml-2">{{ Average_Retake }}</span>
+                                <b class="ml-9">TOTAL EVALS RECEIVED:</b> <span class="ml-2">{{ TotalNumEvals }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            {# INDIVIDUAL TAGS #}
-            <div class="space-y-4 mb-5">
-                {% for item in TopTagRecs %}
-                    <div class="inline-block text-xs bg-emerald-800 text-white font-semibold px-3 py-1 rounded-full shadow-md">
-                        {{ item.TagID__TagName }}
+                <div class="col-span-2">
+                    <div class="flex justify-center mt-32">
+                        <div class="">
+                            <div class="
+                                px-5 py-10 mr-16 rounded-lg text-center
+                                {% if AllEvalRecs.Average_Rate < 1 %}bg-red-600 text-white
+                                {% elif AllEvalRecs.Average_Rate >= 1 and AllEvalRecs.Average_Rate < 2 %}bg-orange-500 text-white
+                                {% elif AllEvalRecs.Average_Rate >= 2 and AllEvalRecs.Average_Rate < 3 %}bg-yellow-500
+                                {% elif AllEvalRecs.Average_Rate >= 3 and AllEvalRecs.Average_Rate < 4 %}bg-green-300
+                                {% elif AllEvalRecs.Average_Rate >= 4 %}bg-emerald-700 text-white
+                                {% endif %}
+                            ">
+                                <span class="text-5xl">{{ AllEvalRecs.Average_Rate }}</span>
+                                <div class="font-bold">Overall Rating</div>
+                            </div>
+
+                        </div>
                     </div>
-                {% endfor %}
+                </div>
             </div>
 
             {# YOUR EVALUATIONS #}
