@@ -20,6 +20,10 @@
                 @apply transition-all duration-300 hover:text-lg hover:text-green-300 px-4 py-1.5;
             }
 
+             .headerFooter2 {
+                @apply transition-all duration-300 hover:text-green-300 px-4 py-1.5;
+            }
+
 
             .transitionGreen500 {
                 @apply transition duration-300 hover:text-green-500;
@@ -86,11 +90,6 @@
                 @apply bg-white rounded-full text-green-900 transition duration-300 hover:bg-black hover:text-white;
             }
 
-            .buttonWhite {
-                @apply text-[15px] transition-all duration-300 hover:text-[17px]
-            }
-
-
             .searchBar {
                 @apply transition-all duration-200 outline outline-gray-100 hover:outline-black
             }
@@ -152,13 +151,13 @@
 <footer class="bg-green-800 text-white p-3">
     <div class="container mx-auto text-center">
         <div class="mb-2">
-            <a href="{% url 'SearchProf' %}" class="headerFooter">Home</a>
+            <a href="{% url 'SearchProf' %}" class="headerFooter2">Home</a>
             {% if user.is_authenticated %}
-                <a href="{% url 'Bookmark' %}" class="headerFooter">Bookmarks</a>
+                <a href="{% url 'Bookmark' %}" class="headerFooter2">Bookmarks</a>
             {% endif %}
-            <a href="{% url 'about' %}" class="headerFooter">About</a>
-            <a href="{% url 'contact' %}" class="headerFooter">Contact</a>
-            <a href="{% url 'PPolicy' %}" class="headerFooter">Privacy Policy</a>
+            <a href="{% url 'about' %}" class="headerFooter2">About</a>
+            <a href="{% url 'contact' %}" class="headerFooter2">Contact</a>
+            <a href="{% url 'PPolicy' %}" class="headerFooter2">Privacy Policy</a>
         </div>
         <div class="mb-2">
             <div>Contact us: info@eduscore.com</div>
@@ -175,9 +174,10 @@
 {# logout modal popup #}
 <div id="logoutModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
     <div class="bg-white p-5 rounded-lg shadow-lg text-center pop-up">
+        <h1 class="text-3xl mb-2 font-bold">Logout</h1>
         <p class="mb-4">Are you sure you want to logout?</p>
         <a id="logoutConfirmBtn"
-           class="buttonModal bg-blue-500 text-white rounded hover:bg-blue-700 hover:cursor-pointer mb-2 px-4 py-2">Logout</a>
+           class="buttonModal bg-blue-500 text-white rounded hover:bg-blue-700 hover:cursor-pointer mb-2 px-4 py-2">Confirm</a>
         <a onclick="closeLogoutModal()"
            class="buttonModal bg-gray-500 text-white rounded hover:bg-gray-700 hover:cursor-pointer px-4 py-2 ml-1">Cancel</a>
     </div>
@@ -295,17 +295,53 @@
         var department = document.getElementById('Department').value;
         var batchNumber = document.getElementById('BatchNumber').value;
         var gender = document.getElementById('Gender').value;
-        
+
+        {#alert(gender);#}
+        var errors = [];
 
         // Check if the required fields are filled in
-        {#if (username && password && department && batchNumber && gender) {#}
-        {#    // Logic for when all fields are filled#}
-        {#    openSubmitModal()#}
-        {##}
-        {#} else {#}
-        {#    // If not all fields are filled, show an error modal#}
-        {#    alert("This is an alert message box.");#}
-        {#}#}
+        if (!username) {
+            errors.push("Username is required.");
+            
+            {#check if username ends with @benilde.edu.ph#}
+        } else if (!username.endsWith('@benilde.edu.ph')) {
+            errors.push("Username must end with '@benilde.edu.ph'.");
+        }
+        if (!password) {
+            errors.push("Password is required.");
+        }
+        if (!department) {
+            errors.push("Department is required.");
+        }
+        if (!batchNumber) {
+            errors.push("Batch Number is required.");
+        }
+        if (!gender) {
+            errors.push("Gender is required.");
+        }
+
+        if (errors.length > 0) {
+            // if there is more than one error being pushed, puts them in "li" then shows them in ErrorModal as a list
+            var errorList = document.getElementById('errorList');
+            errorList.innerHTML = '';
+            errors.forEach(function(error) {
+                var li = document.createElement('li');
+                li.textContent = error;
+                errorList.appendChild(li);
+            });
+            openErrorModal();
+        } else {
+            // If no errors, open the submit modal
+            openSubmitModal();
+        }
+    }
+    
+    function openErrorModal() {
+        document.getElementById('errorModal').classList.remove('hidden');
+    }
+    
+    function closeErrorModal() {
+        document.getElementById('errorModal').classList.add('hidden');
     }
 </script>
 </body>

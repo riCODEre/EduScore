@@ -49,6 +49,7 @@
     {# SUBMIT MODAL #}
     <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
+            <h1 class="text-3xl mb-2 font-bold">Tags</h1>
             <p class="mb-4">Are you sure you want to submit?</p>
             <a href="{% url 'TeacherInfo' TeacherID %}" class="buttonModal mb-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 hover:cursor-pointer">Confirm</a>
             <a onclick="closeSubmitModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">Cancel</a>

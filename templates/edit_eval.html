@@ -252,6 +252,7 @@
     {# SUBMIT MODAL #}
     <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
+            <h1 class="text-3xl mb-2 font-bold">Submit</h1>
             <p class="mb-4">Are you sure you want to submit?</p>
             <a id="submitConfirmBtn" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer ">Submit</a>
             <a onclick="closeSubmitModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">Cancel</a>
@@ -263,6 +264,7 @@
     {# DELETE MODAL #}
     <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
+            <h1 class="text-3xl mb-2 font-bold">Delete</h1>
             <p class="mb-4">Are you sure you want to delete?</p>
             <a id="deleteConfirmBtn" href="{% url 'DeleteEval' EvalRec.id %}" class="buttonModal mb-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800">Delete</a>
             <a onclick="closeDeleteModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 hover:bg-gray-700 hover:cursor-pointer ml-1">Cancel</a>
@@ -272,6 +274,7 @@
     {# CANCEL MODAL #}
     <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
+            <h1 class="text-3xl mb-2 font-bold">Cancel</h1>
             <p class="mb-4">Are you sure you want to cancel?</p>
             <a id="cancelConfirmBtn" href="{% url 'TeacherInfo' EvalRec.TeacherID.id %}" class="buttonModal mb-2 bg-blue-500 text-white px-4 py-2 hover:bg-blue-700">Confirm</a>
             <a onclick="closeCancelModal()" class="buttonModal bg-gray-500 text-white px-5 py-2 hover:bg-gray-700 hover:cursor-pointer hover:ani ml-1">Close</a>
