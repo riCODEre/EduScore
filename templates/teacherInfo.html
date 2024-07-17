@@ -29,11 +29,15 @@
                         <div class="col-span-3">
                             {% if Mark == False %}
                                 <div>
-                                    <a href="{% url 'AddBM' prof.id %}" class="text-[10px] text-center buttonBlue text-white px-8 py-2 x-2 rounded-xl x-2">Bookmark Me!</a>
+                                    <a href="{% url 'AddBM' prof.id %}" class="text-[10px] text-center buttonBlue text-white px-8 py-2 x-2 rounded-xl x-2">
+                                    <i class="far fa-bookmark fa-lg mr-1"></i> Bookmark Me!
+                                    </a>
                                 </div>
                             {% else %}
                                 <div>
-                                    <a href="{% url 'DelBM' prof.id %}" class="text-[10px] buttonBlue text-white px-8 py-2 rounded-xl x-2">Remove Bookmark</a>
+                                    <a href="{% url 'DelBM' prof.id %}" class="text-[10px] buttonBlue text-white px-8 py-2 rounded-xl x-2">
+                                     <i class="fas fa-bookmark fa-lg mr-1"></i> Remove Bookmark
+                                    </a>
                                 </div>
                             {% endif %}
                         </div>

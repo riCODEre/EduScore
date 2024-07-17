@@ -9,9 +9,11 @@
     <!-- Sync Tailwind in static, test, and remove before deploy -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- FontAwesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
 
     <!-- Place unique classes here -->
     <style type="text/tailwindcss">
@@ -20,7 +22,7 @@
                 @apply transition-all duration-300 hover:text-lg hover:text-green-300 px-4 py-1.5;
             }
 
-             .headerFooter2 {
+            .headerFooter2 {
                 @apply transition-all duration-300 hover:text-green-300 px-4 py-1.5;
             }
 
@@ -49,7 +51,7 @@
             .buttonGreen2 {
                 outline-width: 1px;
             }
-            
+
             .buttonBlue {
                 @apply bg-blue-800 text-white font-semibold rounded-xl transition duration-300 hover:bg-blue-600;
             }
@@ -117,6 +119,23 @@
                 animation: pop-up 0.25s ease-out forwards;
             }
 
+            .fa-check-outline1 {
+                position: relative;
+                display: inline-block;
+                color: darkgreen;
+                -webkit-text-stroke-width: 1px;
+                -webkit-text-stroke-color: white;
+            }
+
+            .fa-check-outline2 {
+                position: relative;
+                display: inline-block;
+                color: white;
+                -webkit-text-stroke-width: 2px;
+                -webkit-text-stroke-color: black;
+            }
+            
+
 
         }
     </style>
@@ -124,8 +143,10 @@
 <body class="bg-gray-50 min-h-screen flex flex-col" style="font-family: 'Montserrat', sans-serif;">
 <header class="bg-green-800 text-white p-3">
     <div class="container mx-auto flex justify-between items-center">
-        <div class="text-xl font-bold">
-            <a href="{% url 'landing' %}">EduScore Logo</a>
+        <div class="text-4xl font-bold">
+            <a href="{% url 'landing' %}">
+                Edu <i class="fas fa-check fa-lg fa-check-outline1 -ml-5"></i>
+            </a>
         </div>
         <div class="flex space-x-4">
             <a href="{% url 'SearchProf' %}" class="headerFooter">Home</a>
@@ -285,6 +306,7 @@
     }
 
     {# FORM REGISTER #}
+
     function registerConfirm() {
 
 
@@ -302,7 +324,7 @@
         // Check if the required fields are filled in
         if (!username) {
             errors.push("Username is required.");
-            
+
             {#check if username ends with @benilde.edu.ph#}
         } else if (!username.endsWith('@benilde.edu.ph')) {
             errors.push("Username must end with '@benilde.edu.ph'.");
@@ -324,7 +346,7 @@
             // if there is more than one error being pushed, puts them in "li" then shows them in ErrorModal as a list
             var errorList = document.getElementById('errorList');
             errorList.innerHTML = '';
-            errors.forEach(function(error) {
+            errors.forEach(function (error) {
                 var li = document.createElement('li');
                 li.textContent = error;
                 errorList.appendChild(li);
@@ -335,11 +357,11 @@
             openSubmitModal();
         }
     }
-    
+
     function openErrorModal() {
         document.getElementById('errorModal').classList.remove('hidden');
     }
-    
+
     function closeErrorModal() {
         document.getElementById('errorModal').classList.add('hidden');
     }
