@@ -28,73 +28,6 @@
                         </div>
                     </div>
 
-{#                    <div class="grid grid-cols-6 mt-5">#}
-{##}
-{#                        <div class="mb-2 col-span-3">#}
-{#                            <b>DIFFICULTY: </b>#}
-{#                            <span#}
-{#                                class="#}
-{#                                    ml-2 px-1 py-1 rounded-sm#}
-{#                                    {% if AllEvalRecs.Average_Difficulty < 1 %}bg-red-600 text-white#}
-{#                                    {% elif AllEvalRecs.Average_Difficulty >= 1 and AllEvalRecs.Average_Difficulty < 2 %}bg-orange-500 text-white#}
-{#                                    {% elif AllEvalRecs.Average_Difficulty >= 2 and AllEvalRecs.Average_Difficulty < 3 %}bg-yellow-500#}
-{#                                    {% elif AllEvalRecs.Average_Difficulty >= 3 and AllEvalRecs.Average_Difficulty < 4 %}bg-green-300#}
-{#                                    {% elif AllEvalRecs.Average_Difficulty >= 4 %}bg-emerald-700 text-white#}
-{#                                    {% endif %}#}
-{#                            ">{{ AllEvalRecs.Average_Difficulty }}</span>#}
-{#                        </div>#}
-{#                        <div class="col-span-2">#}
-{#                            <b>BIGSKY USAGE:</b>#}
-{#                            <span#}
-{#                                class="#}
-{#                                    ml-2 px-1 py-1 rounded-sm#}
-{#                                    {% if AllEvalRecs.Average_BSUsage < 1 %}bg-red-600 text-white#}
-{#                                    {% elif AllEvalRecs.Average_BSUsage >= 1 and AllEvalRecs.Average_BSUsage < 2 %}bg-orange-500 text-white#}
-{#                                    {% elif AllEvalRecs.Average_BSUsage >= 2 and AllEvalRecs.Average_BSUsage < 3 %}bg-yellow-500#}
-{#                                    {% elif AllEvalRecs.Average_BSUsage >= 3 and AllEvalRecs.Average_BSUsage < 4 %}bg-green-300#}
-{#                                    {% elif AllEvalRecs.Average_BSUsage >= 4 %}bg-emerald-700 text-white#}
-{#                                    {% endif %}#}
-{#                                ">{{ AllEvalRecs.Average_BSUsage }}#}
-{#                            </span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="grid grid-cols-6">#}
-{#                        <div class="mb-2 col-span-3">#}
-{#                            <b>ATTENDANCE: </b>#}
-{#                            <span#}
-{#                                class="#}
-{#                                    ml-2 px-1 py-1 rounded-sm#}
-{#                                    {% if AllEvalRecs.Average_Attendance < 1 %}bg-red-600 text-white#}
-{#                                    {% elif AllEvalRecs.Average_Attendance >= 1 and AllEvalRecs.Average_Attendance < 2 %}bg-orange-500 text-white#}
-{#                                    {% elif AllEvalRecs.Average_Attendance >= 2 and AllEvalRecs.Average_Attendance < 3 %}bg-yellow-500#}
-{#                                    {% elif AllEvalRecs.Average_Attendance >= 3 and AllEvalRecs.Average_Attendance < 4 %}bg-green-300#}
-{#                                    {% elif AllEvalRecs.Average_Attendance >= 4 %}bg-emerald-700 text-white#}
-{#                                    {% endif %}#}
-{#                                ">{{ AllEvalRecs.Average_Attendance }}</span>#}
-{#                        </div>#}
-{#                        <div class="col-span-2">#}
-{#                            <b>GRADE GIVEN:</b>#}
-{#                            <span#}
-{#                                class="#}
-{#                                    ml-2 px-1 py-1 rounded-sm#}
-{#                                    {% if AllEvalRecs.Average_Grades < 1 %}bg-red-600 text-white#}
-{#                                    {% elif AllEvalRecs.Average_Grades >= 1 and AllEvalRecs.Average_Grades < 2 %}bg-orange-500 text-white#}
-{#                                    {% elif AllEvalRecs.Average_Grades >= 2 and AllEvalRecs.Average_Grades < 3 %}bg-yellow-500#}
-{#                                    {% elif AllEvalRecs.Average_Grades >= 3 and AllEvalRecs.Average_Grades < 4 %}bg-green-300#}
-{#                                    {% elif AllEvalRecs.Average_Grades >= 4 %}bg-emerald-700 text-white#}
-{#                                    {% endif %}#}
-{#                                ">{{ AllEvalRecs.Average_Grades }}#}
-{#                            </span>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="grid grid-cols-6">#}
-{#                        <div class="mb-2 col-span-3">#}
-{#                            <b>RETAKE AVERAGE:</b> <span class="ml-2">{{ Average_Retake }}</span>#}
-{#                        </div>#}
-{#                        <div class="col-span-3">#}
-{#                            <b>TOTAL EVALS RECEIVED:</b> <span class="ml-2">{{ TotalNumEvals }}</span>#}
-{#                        </div>#}
-{#                    </div>#}
 
 
                 {# bookmark turn to font awesome icon #}
@@ -250,7 +183,7 @@
             {% endif %}
 
 
-            <div>
+            <div class="">
                 <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
                     {% csrf_token %}
                     <select name="Type" id="Type">
@@ -272,32 +205,81 @@
                     <button type="submit" class="bg-green-700 text-white">Submit</button>
                 </form>
             </div>
-            <div class="">
-                {% for eval in AllStudentEvals %}
-                    <div class="bg-white shadow-md m-3">
-                        <p>Date Added: {{ eval.DateAdded }}</p>
-                        <p class="font-bold">{{ eval.id }}</p>
-                        <p>Overall Rate: {{ eval.OverallProfRate }}</p>
-                        <p>Prof Difficulty: {{ eval.ProfDifficulty }}</p>
-                        <p>Grade Received: {{ eval.GradeReceived }}</p>
-                        <p>Course Code: {{ eval.CourseID.CourseCode }}</p>
-                        <p>Year: {{eval.Year }}</p>
-                        <p>Term: {{ eval.Term }}</p>
-                        <p>Class Modality: {{ eval.ClassModality }}</p>
-                        <p>Big Sky Usage Rate: {{ eval.BigSkyUsageRate }}</p>
-                        <p>Prof Attendance: {{ eval.ProfAttendance }}</p>
-                        <p>Retake Prof: {{ eval.RetakeProf }}</p>
-                        <div class="flex justify-center">
-                           {% for tag in AllEvalTags %}
-                                {% if tag.EvaluationID.id == eval.id %}
-                                    <p>{{ tag.TagID.TagName }}</p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
 
-                    </div>
-                {% endfor %}
+
+            <div class="overflow-x-scroll mt-3 scrollbar-color: transparent ">
+                <div class="flex space-x-4 bg-gray-100">
+                    {% for eval in AllStudentEvals %}
+                        <div class="bg-gray-200 shadow-md m-3 min-w-[370px] p-5 rounded">
+                            <div class="grid grid-cols-2">
+                                <div>Overall Rating:</div>
+                                <div class="flex justify-end items-start">{{ eval.OverallProfRate }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Prof Difficulty:</div>
+                                <div class="flex justify-end items-start">{{ eval.ProfDifficulty }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Grade Received:</div>
+                                <div class="flex justify-end items-start">{{ eval.GradeReceived }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Course Code:</div>
+                                <div class="flex justify-end items-start">{{ eval.CourseID.CourseCode }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Year:</div>
+                                <div class="flex justify-end items-start">{{ eval.Year }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Term:</div>
+                                <div class="flex justify-end items-start">{{ eval.Term }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Class Modality:</div>
+                                <div class="flex justify-end items-start">{{ eval.ClassModality }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Big Sky Usage Rate:</div>
+                                <div class="flex justify-end items-start">{{ eval.BigSkyUsageRate }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Prof Attendance:</div>
+                                <div class="flex justify-end items-start">{{ eval.ProfAttendance }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-2">
+                                <div>Would Retake:</div>
+                                <div class="flex justify-end items-start">
+                                    {% if eval.RetakeProf %}
+                                        <span>Yes</span>
+                                    {% else %}
+                                        <span>No</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="overflow-y-scroll mt-3 mb-2 bg-gray-200 max-h-14">
+                                    {% for tag in AllEvalTags %}
+                                        {% if tag.EvaluationID.id == eval.id %}
+                                            <div class="inline-block text-[8px] bg-emerald-800 text-white font-semibold px-3 py-1 rounded-full shadow-md">{{ tag.TagID.TagName }}</div>
+                                        {% endif %}
+                                    {% endfor %}
+                            </div>
+                            <div class="text-green-800">Date Added: {{ eval.DateAdded }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
+
         </div>
     </div>
 {% endblock %}
