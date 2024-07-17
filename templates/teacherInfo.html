@@ -168,18 +168,25 @@
                 <div class="col-span-2 text-green-700 font-semibold">course name</div>
                 <div class="col-span-1 text-green-700 font-semibold ml-2">action</div>
             </div>
-            {% if showEdit == True %}
-                <div class="grid grid-cols-10">
-                    {% for record in Evals %}
-                        <div class="col-span-2">{{ record.CourseID.CourseCode }}</div>
-                        <div class="col-span-2">{{ record.CourseID.CourseName }}</div>
-                        <div class="col-span-1 ml-2">
-                            <a class="text-sm ml-1 px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+            <div class="grid grid-cols-10">
+                {% for AddRec in AddRec %}
+                    <div class="col-span-2">{{ AddRec.CourseID.CourseCode }}</div>
+                    <div class="col-span-2">{{ AddRec.CourseID.CourseName }}</div>
+                    <div class="col-span-1 ml-2">
+                        <a class="text-sm ml-1 px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add</a>
+                    </div>
+                {% endfor %}
+                {% for EditRec in EditRec %}
+                    <div class="col-span-2">{{ EditRec.CourseID.CourseCode }}</div>
+                    <div class="col-span-2">{{ EditRec.CourseID.CourseName }}</div>
+                    <div>{{ EditRec.UserID.last_name }}, {{ EditRec.UserID.first_name }}</div>
+                    <div class="col-span-1 ml-2">
+                        <a class="text-sm ml-1 px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' EditRec.id %}">Edit</a>
+                    </div>
+                {% endfor %}
 
+
+            </div>
 
             {# SORTING #}
             <div class="mt-8">

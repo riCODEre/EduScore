@@ -208,18 +208,18 @@ def SearchProf(request):
 def TeacherInfo(request, teacher_id):
     user = request.user
     TeacherRec = TeacherTB.objects.get(pk=teacher_id)
-    TCourseRecs = Teacher_CourseTB.objects.filter(TeacherID=teacher_id)
+    EditCourse = EvaluationTB.objects.filter(UserID=user.id, TeacherID=teacher_id)
+    EditCourseList = EvaluationTB.objects.filter(UserID=user.id, TeacherID=teacher_id).values_list('CourseID')
+    AddCourse = Teacher_CourseTB.objects.filter(TeacherID=teacher_id).exclude(CourseID__in=EditCourseList)
+
     EvalRecs = EvaluationTB.objects.filter(TeacherID=teacher_id, UserID=user.id)
     try:
         Teacher_BookmarkTB.objects.get(TeacherID=teacher_id, UserID=user.id)
         isMark = True
     except:
         isMark = False
-    showAdd = False
-    showEdit = False
 
-    if len(EvalRecs) > 0: showEdit = True
-    if len(TCourseRecs) != len(EvalRecs): showAdd = True
+
 
     # Evaluation Rates
     AllEvalRecs = EvaluationTB.objects.filter(TeacherID=teacher_id).aggregate(
@@ -313,10 +313,10 @@ def TeacherInfo(request, teacher_id):
 
     return render(request, 'teacherInfo.html', {
         'prof': TeacherRec,
-        'Courses': TCourseRecs,
         'Evals': EvalRecs,
-        'showAdd': showAdd,
-        'showEdit': showEdit,
+        'user': user,
+        'EditRec': EditCourse,
+        'AddRec': AddCourse,
         'Mark': isMark,
         'AllEvalRecs': AllEvalRecs,
         'TotalNumEvals': TotalNumEvals,
