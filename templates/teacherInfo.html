@@ -158,35 +158,36 @@
                 {% endfor %}
             </div>
 
-
-            {# INDIVIDUAL EVALUATIONS #}
+            {# YOUR EVALUATIONS #}
+            <h1 class="text-4xl font-bold text-green-900 mb-3">Your Evaluations</h1>
             {% if showAdd == True or showAdd == None %}
-                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
+                <a class="px-2 py-1 buttonGreen" href="{% url 'EvaluateTeacher' prof.id %}">Add Evaluation</a>
             {% endif %}
+            <div class="grid grid-cols-10 mt-3">
+                <div class="col-span-2 text-green-700 font-semibold">course code</div>
+                <div class="col-span-2 text-green-700 font-semibold">course name</div>
+                <div class="col-span-1 text-green-700 font-semibold ml-2">action</div>
+            </div>
             {% if showEdit == True %}
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Course</th>
-                        <th>Edit</th>
-                    </tr>
+                <div class="grid grid-cols-10">
                     {% for record in Evals %}
-                        <tr>
-                            <td>{{ record.id }}</td>
-                            <td>{{ record.CourseID.CourseCode }}</td>
-                            <td>
-                                <a class="px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
-                            </td>
-                        </tr>
+                        <div class="col-span-2">{{ record.CourseID.CourseCode }}</div>
+                        <div class="col-span-2">{{ record.CourseID.CourseName }}</div>
+                        <div class="col-span-1 ml-2">
+                            <a class="text-sm ml-1 px-2 py-1 rounded-md bg-green-700 text-white" href="{% url 'EditEval' record.id %}">Edit</a>
+                        </div>
                     {% endfor %}
-                </table>
+                </div>
             {% endif %}
 
 
-            <div class="">
+            {# SORTING #}
+            <div class="mt-8">
+                <h1 class="text-4xl font-bold text-green-900 mb-3">Other Ratings</h1>
                 <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
                     {% csrf_token %}
-                    <select name="Type" id="Type">
+                    <span class="font-semibold text-lg mr-1">Year posted</span>
+                    <select class="border-black border-[0.5px] rounded mr-2.5" name="Type" id="Type">
                         <option value="Year" {% if type == "Year" %} selected {% endif %}>Year</option>
                         <option value="Term" {% if type == "Term" %} selected {% endif %}>Term</option>
                         <option value="ClassModality" {% if type == "ClassModality" %} selected {% endif %}>Class Modality</option>
@@ -198,15 +199,18 @@
                         <option value="GradeReceived" {% if type == "GradeReceived" %} selected {% endif %}>Grade Received</option>
                         <option value="DateAdded" {% if type == "DateAdded" %} selected {% endif %}>Date Added</option>
                     </select>
-                    <select name="Arrange" id="Arrange">
+
+                    <span class="font-semibold text-lg mr-1">Arrange</span>
+                    <select class="border-black border-[0.5px] rounded mr-2.5" name="Arrange" id="Arrange">
                         <option value="Asc" {% if arrange == "Asc" %} selected {% endif %}>Ascending</option>
                         <option value="Desc" {% if arrange == "Desc" %} selected {% endif %}>Descending</option>
                     </select>
-                    <button type="submit" class="bg-green-700 text-white">Submit</button>
+                    <button type="submit" class="buttonGreen px-2 py-1 text-white text-sm">Submit</button>
                 </form>
             </div>
 
 
+            {# OTHER RATINGS #}
             <div class="overflow-x-scroll mt-3 scrollbar-color: transparent ">
                 <div class="flex space-x-4 bg-gray-100">
                     {% for eval in AllStudentEvals %}
