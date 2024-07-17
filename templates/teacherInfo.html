@@ -272,13 +272,13 @@
                             </div>
 
                             <div class="overflow-y-scroll mt-3 mb-2 bg-gray-200 max-h-14">
-                                    {% for tag in AllEvalTags %}
-                                        {% if tag.EvaluationID.id == eval.id %}
-                                            <div class="inline-block text-[8px] bg-emerald-800 text-white font-semibold px-3 py-1 rounded-full shadow-md">{{ tag.TagID.TagName }}</div>
-                                        {% endif %}
-                                    {% endfor %}
+                                {% for tag in AllEvalTags %}
+                                    {% if tag.EvaluationID.id == eval.id %}
+                                        <div class="inline-block text-[8px] bg-emerald-800 text-white font-semibold px-3 py-1 rounded-full shadow-md">{{ tag.TagID.TagName }}</div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
-                            <div class="text-green-800">Date Added: {{ eval.DateAdded }}</div>
+                            <div class="text-green-800 mt-3">Date Added: {{ eval.DateAdded }}</div>
                         </div>
                     {% endfor %}
                 </div>
