@@ -7,16 +7,6 @@
 {% block content %}
     <div class="mt-5 flex justify-center">
         <div class="p-10 w-full max-w-5xl">
-{#            <div class="flex items-center mb-10">#}
-{#                <img class="w-24 h-24 rounded-full mr-6" src="#" alt="Placeholder Image">#}
-{#                <div>#}
-{#                    <h1 class="text-2xl font-semibold">{{ t.FirstName }} {{ t.LastName }}</h1>#}
-{#                    <p class="text-gray-700">{{ t.Gender }}</p>#}
-{#                    <p class="text-gray-700">{{ t.Department }}</p>#}
-{#                    <p class="text-gray-700">{{ t.EmpStatus }}</p>#}
-{#                </div>#}
-{#            </div>#}
-
             <div class="grid grid-cols-6 gap-4 w-full">
                 <div class="col-span-5 flex flex-col">
                     <div class="">
@@ -203,6 +193,7 @@
     {# SUBMIT MODAL #}
     <div id="submitModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
+            <h1 class="text-3xl mb-2 font-bold">Submit</h1>
             <p class="mb-4">Are you sure you want to submit?</p>
             <a id="submitConfirmBtn" class="buttonModal mb-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer">Submit</a>
             <a onclick="closeSubmitModal()" class="buttonModal bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">Cancel</a>
@@ -213,6 +204,7 @@
     {# CANCEL MODAL #}
     <div id="cancelModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="bg-white p-5 rounded-lg shadow-lg text-center relative pop-up">
+            <h1 class="text-3xl mb-2 font-bold">Cancel</h1>
             <p class="mb-4">Are you sure you want to cancel?</p>
             <a id="cancelConfirmBtn" href="{% url 'TeacherInfo' t.id %}" class="buttonModal mb-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Confirm</a>
             <a onclick="closeCancelModal()" class="buttonModal bg-gray-500 text-white px-5 py-2 rounded hover:bg-gray-700 hover:cursor-pointer ml-1">Close</a>
