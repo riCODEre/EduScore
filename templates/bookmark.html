@@ -20,7 +20,7 @@
                         {{ item.TeacherID.LastName }}, {{ item.TeacherID.FirstName }} | {{ item.TeacherID.Department }}
                     </div>
                     <div class="text-right pr-1.5">
-                        <a href="{% url 'TeacherInfo' item.TeacherID.id %}" class="text-gray-600 transitionGreen500">
+                        <a href="{% url 'TeacherInfo' item.TeacherID.id %}" class="transition-all duration-300 text-gray-600 hover:text-green-500 hover:text-[15px]">
                             View Info
                         </a>
                     </div>
