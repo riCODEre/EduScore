@@ -34,25 +34,25 @@
                         {% if Mark == False %}
                                 <div>
                                     <a href="{% url 'AddBM' prof.id %}"
-                                       class="text-[10px] text-center buttonGreen text-white px-8 py-2 x-2 x-2">
+                                       class="text-[12px] text-center buttonGreen text-white px-8 py-2 x-2 x-2">
                                         <i class="far fa-bookmark fa-lg mr-1"></i> Bookmark Me!
                                     </a>
                                 </div>
                             {% else %}
                                 <div>
                                     <a href="{% url 'DelBM' prof.id %}"
-                                       class="text-[10px] buttonGreen text-white px-8 py-2 x-2">
+                                       class="text-[12px] buttonGreen text-white px-8 py-2 x-2">
                                         <i class="fas fa-bookmark fa-lg mr-1"></i> Remove Bookmark
                                     </a>
                                 </div>
                             {% endif %}
                     </div>
                 </div>
-                <div class="col-span-2 mt-3">
+                <div class="col-span-2 mt-3 -mr-20">
                     <div class="flex justify-end">
                         <div class="">
                             <div class="
-                                px-10 py-14 mr-16 rounded-full text-center
+                                px-10 py-16 mr-16 rounded-full text-center
                                 {% if AllEvalRecs.Average_Rate < 1 %}bg-red-600 text-white
                                 {% elif AllEvalRecs.Average_Rate >= 1 and AllEvalRecs.Average_Rate < 2 %}bg-orange-500 text-white
                                 {% elif AllEvalRecs.Average_Rate >= 2 and AllEvalRecs.Average_Rate < 3 %}bg-yellow-500
@@ -60,8 +60,8 @@
                                 {% elif AllEvalRecs.Average_Rate >= 4 %}bg-emerald-600 text-white
                                 {% endif %}
                             ">
-                                <span class="text-6xl">{{ AllEvalRecs.Average_Rate }}</span>
-                                <div class="font-bold">Overall Rating</div>
+                                <span class="text-7xl">{{ AllEvalRecs.Average_Rate }}</span>
+                                <div class="font-bold text-[11px]">OVERALL RATING</div>
                             </div>
                         </div>
                     </div>
