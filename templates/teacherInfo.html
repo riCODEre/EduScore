@@ -52,7 +52,7 @@
                     <div class="flex justify-end">
                         <div class="">
                             <div class="
-                                px-10 py-16 mr-16 rounded-full text-center
+                                size-64 mr-16 rounded-full text-center py-20
                                 {% if AllEvalRecs.Average_Rate < 1 %}bg-red-600 text-white
                                 {% elif AllEvalRecs.Average_Rate >= 1 and AllEvalRecs.Average_Rate < 2 %}bg-orange-500 text-white
                                 {% elif AllEvalRecs.Average_Rate >= 2 and AllEvalRecs.Average_Rate < 3 %}bg-yellow-500
@@ -60,7 +60,7 @@
                                 {% elif AllEvalRecs.Average_Rate >= 4 %}bg-emerald-600 text-white
                                 {% endif %}
                             ">
-                                <span class="text-7xl">{{ AllEvalRecs.Average_Rate }}</span>
+                                <span class="text-7xl -mb-32">{{ AllEvalRecs.Average_Rate }}</span>
                                 <div class="font-bold text-[11px]">OVERALL RATING</div>
                             </div>
                         </div>
