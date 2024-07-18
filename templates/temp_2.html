@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>
         {% block title %}
@@ -144,8 +145,11 @@
 <header class="bg-green-800 text-white p-3">
     <div class="container mx-auto flex justify-between items-center">
         <div class="text-4xl font-bold">
+{#            <a href="{% url 'landing' %}">#}
+{#                Edu <i class="fas fa-check fa-lg fa-check-outline1 -ml-5"></i>#}
+{#            </a>#}
             <a href="{% url 'landing' %}">
-                Edu <i class="fas fa-check fa-lg fa-check-outline1 -ml-5"></i>
+                <img src="{% static 'images/White_Logo.png' %}" class="max-w-28" alt="Edu">
             </a>
         </div>
         <div class="flex space-x-4">

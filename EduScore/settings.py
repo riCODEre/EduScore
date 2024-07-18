@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,3 +132,12 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 Minutes = 20
 SESSION_COOKIE_AGE = Minutes * 60  # converted to seconds.
 SESSION_TIMEOUT_REDIRECT = '/login'
+
+STATIC_URL = '/static/'
+
+# Directory where static files will be collected
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
