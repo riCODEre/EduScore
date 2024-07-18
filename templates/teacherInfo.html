@@ -7,6 +7,9 @@
 {% block content %}
     <div class="mt-5 flex justify-center">
         <div class="p-10 w-full max-w-5xl">
+            <div>
+                <h1 class="text-3xl font-bold text-green-900 mb-2">Professor Profile</h1>
+            </div>
             <div class="grid grid-cols-6 gap-4 w-full">
                 <div class="col-span-4 flex flex-col">
                     <div class="">
@@ -18,38 +21,38 @@
                         <div class="flex col-span-3">
                             <b>GENDER:</b> <span class="ml-2">{{ prof.Gender }}</span>
                         </div>
-                        <div class=" col-span-2 flex">
-                            <b>STATUS:</b> <span class="ml-2">{{ prof.EmpStatus }}</span>
-                        </div>
                     </div>
                     <div class="grid grid-cols-6">
                         <div class="mb-2 col-span-3">
                             <b>DEPARTMENT:</b> <span class="ml-2">{{ prof.Department }}</span>
                         </div>
-                        <div class="col-span-3">
-                            {% if Mark == False %}
+                        <div class=" col-span-2 flex">
+                            <b>STATUS:</b> <span class="ml-2">{{ prof.EmpStatus }}</span>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        {% if Mark == False %}
                                 <div>
                                     <a href="{% url 'AddBM' prof.id %}"
-                                       class="text-[10px] text-center buttonBlue text-white px-8 py-2 x-2 rounded-xl x-2">
+                                       class="text-[10px] text-center buttonGreen text-white px-8 py-2 x-2 x-2">
                                         <i class="far fa-bookmark fa-lg mr-1"></i> Bookmark Me!
                                     </a>
                                 </div>
                             {% else %}
                                 <div>
                                     <a href="{% url 'DelBM' prof.id %}"
-                                       class="text-[10px] buttonBlue text-white px-8 py-2 rounded-xl x-2">
+                                       class="text-[10px] buttonGreen text-white px-8 py-2 x-2">
                                         <i class="fas fa-bookmark fa-lg mr-1"></i> Remove Bookmark
                                     </a>
                                 </div>
                             {% endif %}
-                        </div>
                     </div>
                 </div>
-                <div class="col-span-2 -mt-20">
-                    <div class="flex justify-center mt-32">
+                <div class="col-span-2 mt-3">
+                    <div class="flex justify-end">
                         <div class="">
                             <div class="
-                                px-5 py-10 mr-16 rounded-lg text-center
+                                px-10 py-14 mr-16 rounded-full text-center
                                 {% if AllEvalRecs.Average_Rate < 1 %}bg-red-600 text-white
                                 {% elif AllEvalRecs.Average_Rate >= 1 and AllEvalRecs.Average_Rate < 2 %}bg-orange-500 text-white
                                 {% elif AllEvalRecs.Average_Rate >= 2 and AllEvalRecs.Average_Rate < 3 %}bg-yellow-500
