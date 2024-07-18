@@ -18,15 +18,15 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-6 mt-5 mb-1">
-                        <div class="flex col-span-3">
+                        <div class="flex col-span-3 text-[17.5px]">
                             <b>GENDER:</b> <span class="ml-2">{{ prof.Gender }}</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-6">
-                        <div class="mb-2 col-span-3">
+                        <div class="mb-2 col-span-3 text-[17.5px]">
                             <b>DEPARTMENT:</b> <span class="ml-2">{{ prof.Department }}</span>
                         </div>
-                        <div class=" col-span-2 flex">
+                        <div class=" col-span-2 flex text-[17.5px]">
                             <b>STATUS:</b> <span class="ml-2">{{ prof.EmpStatus }}</span>
                         </div>
                     </div>
@@ -47,6 +47,16 @@
                                 </div>
                             {% endif %}
                     </div>
+                    <div class="space-y-2 mt-5">
+                        <div class="">Top Tags:</div>
+                        <div class="inline-grid grid-cols-4 gap-3">
+                            {% for item in TopTagRecs %}
+                                <div class="text-center text-xs bg-emerald-800 text-white font-semibold px-1 py-1 rounded-full shadow-md">
+                                    {{ item.TagID__TagName }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
                 <div class="col-span-2 mt-3 -mr-20">
                     <div class="flex justify-end">
@@ -61,23 +71,14 @@
                                 {% endif %}
                             ">
                                 <span class="text-7xl -mb-32">{{ AllEvalRecs.Average_Rate }}</span>
-                                <div class="font-bold text-[11px]">OVERALL RATING</div>
+                                <div class="font-bold text-[18px]">OVERALL RATING</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-2 mt-1.5">
-                <div class="">Tags:</div>
-                <div class="inline-grid grid-cols-4 gap-3">
-                    {% for item in TopTagRecs %}
-                        <div class="text-center text-xs bg-emerald-800 text-white font-semibold px-1 py-1 rounded-full shadow-md">
-                            {{ item.TagID__TagName }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+
 
             {# STATS BOIIII #}
             <div class="mt-5">

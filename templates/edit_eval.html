@@ -7,17 +7,7 @@
 {% block content %}
     <div class="mt-5 flex justify-center">
         <div class="p-10 w-full max-w-5xl">
-            {#            <div class="flex items-center mb-10">#}
-            {#                <img class="w-24 h-24 rounded-full mr-6" src="#" alt="Placeholder Image">#}
-            {#                <div>#}
-            {#                    <h1 class="text-2xl font-semibold">{{ t.FirstName }} {{ t.LastName }}</h1>#}
-            {#                    <p class="text-gray-700">{{ t.Gender }}</p>#}
-            {#                    <p class="text-gray-700">{{ t.Department }}</p>#}
-            {#                    <p class="text-gray-700">{{ t.EmpStatus }}</p>#}
-            {#                </div>#}
-            {#            </div>#}
-
-            <div class="grid grid-cols-6 gap-4 w-full">
+            <div class="grid grid-cols-6 w-full">
                 <div class="col-span-5 flex flex-col">
                     <div class="">
                         <div>
@@ -26,29 +16,29 @@
                     </div>
                     <div class="grid grid-cols-6 mt-5">
 
-                        <div class="mb-2 col-span-3">
+                        <div class="mb-2 col-span-3 text-[17.5px]">
                             <b>FACULTY NAME:</b> <span
                                 class="ml-2">{{ EvalRec.TeacherID.FirstName }} {{ EvalRec.TeacherID.LastName }}</span>
                         </div>
-                        <div class="col-span-2 flex">
+                        <div class="col-span-2 text-[17.5px] ml-4 flex">
                             <b>GENDER:</b> <span class="ml-2">{{ EvalRec.TeacherID.Gender }}</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-6">
-                        <div class="mb-2 col-span-3">
+                        <div class="mb-2 col-span-3 text-[17.5px]">
                             <b>DEPARTMENT:</b> <span class="ml-2">{{ EvalRec.TeacherID.Department }}</span>
                         </div>
-                        <div class="col-span-2 flex">
+                        <div class="col-span-2 text-[17.5px] ml-4 flex">
                             <b>STATUS:</b> <span class="ml-2">{{ EvalRec.TeacherID.EmpStatus }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-end items-start">
-                    <img src="https://via.placeholder.com/150" class="w-36 h-36 rounded mt-2" alt="Placeholder Image">
+                    <img src="https://via.placeholder.com/150" class="w-40 h-40 rounded mt-2" alt="Placeholder Image">
                 </div>
             </div>
 
-            <div class="mt-[80px]">
+            <div class="mt-[30px]">
                 <div class="p-8 bg-gray-50 rounded-md border shadow-lg">
                     <div class="flex justify-center">
                         <h1 class="text-4xl font-bold text-green-900 mb-2">Edit Evaluation</h1>

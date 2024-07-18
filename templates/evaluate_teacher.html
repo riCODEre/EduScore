@@ -7,8 +7,8 @@
 {% block content %}
     <div class="mt-5 flex justify-center">
         <div class="p-10 w-full max-w-5xl">
-            <div class="grid grid-cols-6 gap-4 w-full">
-                <div class="col-span-4 flex flex-col">
+            <div class="grid grid-cols-6 w-full">
+                <div class="col-span-5 flex flex-col">
                     <div class="">
                         <div>
                             <h1 class="text-6xl font-bold text-green-900 mb-2">Rate Your Prof</h1>
@@ -16,29 +16,32 @@
                     </div>
                     <div class="grid grid-cols-6 mt-5">
 
-                        <div class="mb-2 col-span-3">
+                        <div class="mb-2 col-span-3 text-[17.5px]">
                             <b>FACULTY NAME:</b> <span class="ml-2">{{ t.FirstName }} {{ t.LastName }}</span>
                         </div>
-                        <div class="col-span-2 flex">
+                        <div class="col-span-2 text-[17.5px] ml-4 flex">
                             <b>GENDER:</b> <span class="ml-2">{{ t.Gender }}</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-6">
-                        <div class="mb-2 col-span-3">
+                        <div class="mb-2 col-span-3 text-[17.5px]">
                             <b>DEPARTMENT:</b> <span class="ml-2">{{ t.Department }}</span>
                         </div>
-                        <div class="col-span-2 flex">
+                        <div class="col-span-2 text-[17.5px] ml-4 flex">
                             <b>STATUS:</b> <span class="ml-2">{{ t.EmpStatus }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-span-2 flex justify-center mr-16">
-                    <img src="https://via.placeholder.com/150" class="w-36 h-36 rounded mt-2" alt="Placeholder Image">
+{#                <div class="col-span-2 flex justify-center mr-16">#}
+{#                    <img src="https://via.placeholder.com/150" class="w-36 h-36 rounded mt-2" alt="Placeholder Image">#}
+{#                </div>#}
+                <div class="col-span-1 flex justify-center">
+                    <img src="https://via.placeholder.com/150" class="w-40 h-40 rounded mt-2" alt="Placeholder Image">
                 </div>
             </div>
 
 
-            <div class="mt-[80px]">
+            <div class="mt-[30px]">
                 <div class="p-8 bg-gray-50 rounded-md border shadow-lg">
                     <div class="flex justify-center">
                         <h1 class="text-4xl font-bold text-green-900 mb-2">Evaluate</h1>
