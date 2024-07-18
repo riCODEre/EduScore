@@ -272,7 +272,7 @@
                 <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
                     {% csrf_token %}
                     <span class="font-semibold text-lg mr-1">Year posted</span>
-                    <select class="border-black border-[0.5px] rounded mr-2.5" name="Type" id="Type">
+                    <select class="buttonDropdown shadow-sm border border-gray-200 rounded mr-2.5" name="Type" id="Type">
                         <option value="Year" {% if type == "Year" %} selected {% endif %}>Year</option>
                         <option value="Term" {% if type == "Term" %} selected {% endif %}>Term</option>
                         <option value="ClassModality" {% if type == "ClassModality" %} selected {% endif %}>Class
@@ -299,7 +299,7 @@
                     </select>
 
                     <span class="font-semibold text-lg mr-1">Arrange</span>
-                    <select class="border-black border-[0.5px] rounded mr-2.5" name="Arrange" id="Arrange">
+                    <select class="buttonDropdown shadow-sm border border-gray-200 rounded mr-2.5" name="Arrange" id="Arrange">
                         <option value="Asc" {% if arrange == "Asc" %} selected {% endif %}>Ascending</option>
                         <option value="Desc" {% if arrange == "Desc" %} selected {% endif %}>Descending</option>
                     </select>
