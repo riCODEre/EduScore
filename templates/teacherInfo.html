@@ -241,9 +241,9 @@
             <h1 class="text-4xl font-bold text-green-900 mb-3">Your Evaluations</h1>
             <div>
                 <div class="grid grid-cols-10 mt-3">
-                    <div class="col-span-2 text-green-700 font-semibold">course code</div>
-                    <div class="col-span-3 text-green-700 font-semibold">course name</div>
-                    <div class="col-span-2 text-green-700 font-semibold ml-2">action</div>
+                    <div class="col-span-2 text-green-700 font-semibold">Course code</div>
+                    <div class="col-span-3 text-green-700 font-semibold">Course name</div>
+                    <div class="col-span-2 text-green-700 font-semibold ml-2">Action</div>
                 </div>
                 <div class="grid grid-cols-10 mt-3">
                     {% for AddRec in AddRec %}
@@ -272,7 +272,7 @@
                 <h1 class="text-4xl font-bold text-green-900 mb-3">Other Ratings</h1>
                 <form action="{% url 'TeacherInfo' prof.id %}" method="POST">
                     {% csrf_token %}
-                    <span class="font-semibold text-lg mr-1">Year posted</span>
+                    <span class="font-semibold text-lg mr-1">Sort by: </span>
                     <select class="buttonDropdown shadow-sm border border-gray-200 rounded mr-2.5" name="Type" id="Type">
                         <option value="Year" {% if type == "Year" %} selected {% endif %}>Year</option>
                         <option value="Term" {% if type == "Term" %} selected {% endif %}>Term</option>
@@ -299,7 +299,7 @@
                         <option value="DateAdded" {% if type == "DateAdded" %} selected {% endif %}>Date Added</option>
                     </select>
 
-                    <span class="font-semibold text-lg mr-1">Arrange</span>
+                    <span class="font-semibold text-lg mr-1">Arrange by:</span>
                     <select class="buttonDropdown shadow-sm border border-gray-200 rounded mr-2.5" name="Arrange" id="Arrange">
                         <option value="Asc" {% if arrange == "Asc" %} selected {% endif %}>Ascending</option>
                         <option value="Desc" {% if arrange == "Desc" %} selected {% endif %}>Descending</option>
