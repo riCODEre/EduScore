@@ -136,8 +136,5 @@ SESSION_TIMEOUT_REDIRECT = '/login'
 STATIC_URL = '/static/'
 
 # Directory where static files will be collected
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]

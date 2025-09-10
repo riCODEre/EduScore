@@ -33,11 +33,11 @@
                         {% csrf_token %}
                         {% if request.GET.next %}
                         	<input type="text" name="next" class="hidden" value="{{ request.GET.next }}">
-                        {% endif %} 
+                        {% endif %}
 
                         <div class="">
                             <label for="username" class="block text-gray-700 text-xs font-medium">EMAIL</label>
-                            <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="email" name="username" id="username" required>
+                            <input class="border border-gray-300 p-2 mt-1 w-full rounded-md searchBar" type="email" name="username" id="username" pattern="[a-zA-Z]+\.[a-zA-Z]+@benilde\.edu\.ph" required>
                         </div>
                         <div class="">
                             <label for="password" class="block text-gray-700 text-xs font-medium">PASSWORD</label>
